@@ -3,8 +3,8 @@
 internal class WaterQuality
 {
     public DateTime? Date { get; set; }
-    public float? Nitrate { get; set; }
-    public float? Nitrite { get; set; }
-    public float? Phosphate { get; set; }
-    public float? EC { get; set; }
+    public double? Nitrate { get; set; }
+    public double? Nitrite { get; set; }
+    public double? Phosphate { get; set; }
+    public double? EC { get; set; }
 }
