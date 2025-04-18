@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace SftEngGP.ViewModels;
 
-internal class AdminViewModel : ObservableObject
+internal class AdminDashboardViewModel : ObservableObject
 {
     
 }

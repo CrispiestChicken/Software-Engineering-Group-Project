@@ -7,11 +7,11 @@ using SftEngGP.ViewModels;
 
 namespace SftEngGP.Views;
 
-public partial class AdminPage : ContentPage
+public partial class AdminDashboard : ContentPage
 {
-    public AdminPage()
+    public AdminDashboard()
     {
-        this.BindingContext = new AdminViewModel();
+        this.BindingContext = new AdminDashboardViewModel();
         InitializeComponent();
     }
 }

@@ -2,8 +2,12 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SftEngGP.Views.AdminPage">
+             x:Class="SftEngGP.Views.AdminDashboard">
     <ContentPage.Content>
-        
+        <VerticalStackLayout>
+
+            <Rectangle WidthRequest="100"></Rectangle>
+            
+        </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

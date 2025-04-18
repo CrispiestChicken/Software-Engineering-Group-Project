@@ -70,6 +70,9 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="appsettings.json" />
+		<Compile Update="Views\AdminDashboard.xaml.cs">
+		  <DependentUpon>AdminDashboard.xaml</DependentUpon>
+		</Compile>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

@@ -29,8 +29,8 @@ namespace SftEngGP
             var connectionString = builder.Configuration.GetConnectionString("DevelopmentConnection");
             builder.Services.AddDbContext<GpDbContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddSingleton<AdminViewModel>();
-            builder.Services.AddSingleton<AdminPage>();
+            builder.Services.AddSingleton<AdminDashboardViewModel>();
+            builder.Services.AddSingleton<AdminDashboard>();
 
             builder.Services.AddSingleton<EnvScientistViewModel>();
             builder.Services.AddSingleton<EnvScientistPage>();
