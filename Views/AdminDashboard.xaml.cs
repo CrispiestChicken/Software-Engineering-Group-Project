@@ -14,4 +14,9 @@ public partial class AdminDashboard : ContentPage
         this.BindingContext = new AdminDashboardViewModel();
         InitializeComponent();
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
