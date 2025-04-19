@@ -14,5 +14,5 @@ internal partial class AdminDashboardViewModel : ObservableObject
 
     [RelayCommand]
     private async void SensorsButtonClicked() =>
-    await App.Current.MainPage.Navigation.PushAsync(new SensorsOverviewPage());
+        await App.Current.MainPage.Navigation.PushAsync(new SensorsOverviewPage());
 }
