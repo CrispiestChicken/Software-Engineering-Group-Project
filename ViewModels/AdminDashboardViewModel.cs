@@ -6,7 +6,6 @@ namespace SftEngGP.ViewModels;
 
 internal partial class AdminDashboardViewModel : ObservableObject
 {
-
     [RelayCommand]
     private async void AccountsButtonClicked() =>
         await App.Current.MainPage.Navigation.PushAsync(new AccountsOverviewPage());

@@ -21,11 +21,11 @@
             Icon="dotnet_bot.png">
             <ShellContent ContentTemplate="{DataTemplate views:OpManagerPage}" />
         </Tab>
+        <Tab Title="Temporary"
+            Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+        </Tab>
     </TabBar>
-    
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+   
 
 </Shell>
