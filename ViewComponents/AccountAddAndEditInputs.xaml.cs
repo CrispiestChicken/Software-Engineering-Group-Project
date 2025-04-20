@@ -11,8 +11,8 @@ public partial class AccountAddAndEditInputs : ContentView
     public static readonly BindableProperty CreatingAccountProperty =
     BindableProperty.Create(nameof(CreatingAccount), typeof(bool), typeof(AccountAddAndEditInputs), true, propertyChanged: OnCreatingAccountChanged);
 
-    public static readonly BindableProperty CreateOrEditProperty =
-    BindableProperty.Create(nameof(CreateOrEdit), typeof(string), typeof(AccountAddAndEditInputs), String.Empty, propertyChanged: OnCreateOrEditChanged);
+    public static readonly BindableProperty CreateOrUpdateProperty =
+    BindableProperty.Create(nameof(CreateOrUpdate), typeof(string), typeof(AccountAddAndEditInputs), String.Empty, propertyChanged: OnCreateOrUpdateChanged);
 
 
     public bool CreatingAccount
@@ -21,10 +21,10 @@ public partial class AccountAddAndEditInputs : ContentView
         set => SetValue(CreatingAccountProperty, value);
     }
 
-    public string CreateOrEdit
+    public string CreateOrUpdate
     {
-        get => (string)GetValue(CreateOrEditProperty);
-        set => SetValue(CreateOrEditProperty, value);
+        get => (string)GetValue(CreateOrUpdateProperty);
+        set => SetValue(CreateOrUpdateProperty, value);
     }
 
 
@@ -37,7 +37,7 @@ public partial class AccountAddAndEditInputs : ContentView
 
     }
 
-    private static void OnCreateOrEditChanged(BindableObject bindable, object oldValue, object newValue)
+    private static void OnCreateOrUpdateChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (AccountAddAndEditInputs)bindable;
         var newData = (string)newValue;

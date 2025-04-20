@@ -32,7 +32,7 @@
 
         <HorizontalStackLayout HorizontalOptions="Fill" Margin="20,20,0,0">
             <Label Text="" FontSize="Body" WidthRequest="210" TextColor="Red"/>
-            <Button x:Name="SubmitButton" Text="{Binding CreateOrEdit}" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
+            <Button x:Name="SubmitButton" Text="{Binding CreateOrUpdate}" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
         </HorizontalStackLayout>
 
     </VerticalStackLayout>

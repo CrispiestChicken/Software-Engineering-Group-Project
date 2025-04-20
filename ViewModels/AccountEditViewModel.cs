@@ -6,5 +6,9 @@ namespace SftEngGP.ViewModels;
 
 internal partial class AccountEditViewModel : ObservableObject
 {
+    [ObservableProperty]
+    public bool creatingAccount = false;
 
+    [ObservableProperty]
+    public string createOrUpdate = "Update";
 }

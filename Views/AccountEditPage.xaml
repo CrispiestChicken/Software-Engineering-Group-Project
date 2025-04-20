@@ -11,6 +11,6 @@
         <viewModels:AccountEditViewModel/>
     </ContentPage.BindingContext>
 
-    <custom_components:AccountAddAndEditInputs CreatingAccount="False" CreateOrEdit='Update'/>
+    <custom_components:AccountAddAndEditInputs CreatingAccount="{Binding CreatingAccount}" CreateOrUpdate="{Binding CreateOrUpdate}"/>
 
 </ContentPage>

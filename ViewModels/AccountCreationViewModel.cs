@@ -6,5 +6,9 @@ namespace SftEngGP.ViewModels;
 
 internal partial class AccountCreationViewModel : ObservableObject
 {
+    [ObservableProperty]
+    public bool creatingAccount = true;
 
+    [ObservableProperty]
+    public string createOrUpdate = "Create";
 }
