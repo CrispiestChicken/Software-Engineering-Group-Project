@@ -79,10 +79,10 @@
 		<MauiXaml Update="Views\AccountCreationPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\AccountsOverviewPage.xaml">
+		<MauiXaml Update="Views\AccountEditPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\IndividualAccountPage.xaml">
+		<MauiXaml Update="Views\AccountsOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\SensorsOverviewPage.xaml">
