@@ -76,6 +76,9 @@
 		<MauiXaml Update="Views\AccountsOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\IndividualAccountPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\SensorsOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
