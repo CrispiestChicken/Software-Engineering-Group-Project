@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SftEngGP.Views.AccountEditPage"
-             Title="AccountEditPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
+             xmlns:custom_components="clr-namespace:SftEngGP.ViewComponents"
+             x:DataType="viewModels:AccountEditViewModel"
+             Title="Editing Account">
+
+    <ContentPage.BindingContext>
+        <viewModels:AccountEditViewModel/>
+    </ContentPage.BindingContext>
+
+    <custom_components:AccountAddAndEditInputs CreatingAccount="False" CreateOrEdit='Update'/>
+
 </ContentPage>

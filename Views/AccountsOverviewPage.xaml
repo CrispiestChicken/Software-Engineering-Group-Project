@@ -42,14 +42,14 @@
             <Label Text="1" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
             <Label Text="Bob" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
             <Label Text="Env Sci" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="1"/>
-            <ImageButton Command="{Binding IndividualAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="1"/>
+            <ImageButton Command="{Binding EditAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="1"/>
 
 
             <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="2" Margin="10,5" CornerRadius="5"/>
             <Label Text="2" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2"/>
             <Label Text="Bob" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2"/>
             <Label Text="Env Sci" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="2"/>
-            <ImageButton Command="{Binding IndividualAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="2"/>
+            <ImageButton Command="{Binding EditAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="2"/>
 
 
         </Grid>

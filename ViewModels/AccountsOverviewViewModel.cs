@@ -7,8 +7,8 @@ namespace SftEngGP.ViewModels;
 internal partial class AccountsOverviewViewModel : ObservableObject
 {
     [RelayCommand]
-    private async void IndividualAccountButtonClicked() =>
-        await App.Current.MainPage.Navigation.PushAsync(new IndividualAccountPage());
+    private async void EditAccountButtonClicked() =>
+        await App.Current.MainPage.Navigation.PushAsync(new AccountEditPage());
 
     [RelayCommand]
     private async void NewAccountButtonClicked() =>
