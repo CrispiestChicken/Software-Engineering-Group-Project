@@ -73,6 +73,9 @@
 		<Compile Update="Views\AdminDashboard.xaml.cs">
 		  <DependentUpon>AdminDashboard.xaml</DependentUpon>
 		</Compile>
+		<MauiXaml Update="ViewComponents\AccountAddAndEditInputs.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\AccountCreationPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
