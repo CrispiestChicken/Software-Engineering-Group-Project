@@ -35,7 +35,7 @@
             <Label Text="ID" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0"/>
             <Label Text="Name" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
             <Label Text="Role" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0"/>
-            <ImageButton Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
+            <ImageButton Command="{Binding NewAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
             
             <!-- Need database to link up so I can add the data as its comes -->
             <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,5" CornerRadius="5"/>
