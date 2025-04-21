@@ -12,5 +12,5 @@ internal partial class AccountsOverviewViewModel : ObservableObject
 
     [RelayCommand]
     private async void NewAccountButtonClicked() =>
-    await App.Current.MainPage.Navigation.PushAsync(new AccountCreationPage());
+        await App.Current.MainPage.Navigation.PushAsync(new AccountCreationPage());
 }
