@@ -37,5 +37,11 @@ public class GpDbContext : DbContext
 
     public DbSet<SensorReading> Readings { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Configuration> Configurations { get; set; }
+    public DbSet<Incidence> Incidences { get; set; }
+    public DbSet<Measurand> Measurands { get; set; }
+    public DbSet<Sensor> Sensors { get; set; }
+    public DbSet<Update> Updates { get; set; }
+    public DbSet<User> Users { get; set; }
 
 }
