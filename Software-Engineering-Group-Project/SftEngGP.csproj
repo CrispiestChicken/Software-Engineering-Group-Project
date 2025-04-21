@@ -99,6 +99,9 @@
 		<MauiXaml Update="Views\MaintenanceOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\MapPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\SensorsOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
