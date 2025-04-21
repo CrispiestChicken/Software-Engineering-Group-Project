@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
-using SftEngGP.Data;
+using SftEngGP.Database.Data;
 
 namespace SftEngGP.ViewModels;
 
