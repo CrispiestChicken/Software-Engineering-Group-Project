@@ -2,7 +2,8 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using SftEngGP.Data;
+using SftEngGP.Database;
+using SftEngGP.Database.Data;
 using SftEngGP.ViewModels;
 using SftEngGP.Views;
 
@@ -15,19 +16,8 @@ namespace SftEngGP
         {
             var builder = MauiApp.CreateBuilder();
             var a = Assembly.GetExecutingAssembly();
-            using var stream = a.GetManifestResourceStream("sftEngGP.appsettings.json");
 
-            if (stream != null)
-            {
-                var config = new ConfigurationBuilder()
-                    .AddJsonStream(stream)
-                    .Build();
-    
-                builder.Configuration.AddConfiguration(config);
-            }
-            
-            var connectionString = builder.Configuration.GetConnectionString("DevelopmentConnection");
-            builder.Services.AddDbContext<GpDbContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<GpDbContext>();
 
             builder.Services.AddSingleton<AdminDashboardViewModel>();
             builder.Services.AddSingleton<AdminDashboard>();
