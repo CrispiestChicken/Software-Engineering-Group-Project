@@ -90,6 +90,9 @@
 		<MauiXaml Update="Views\MaintenanceCreationPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\MaintenanceEditPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\SensorsOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

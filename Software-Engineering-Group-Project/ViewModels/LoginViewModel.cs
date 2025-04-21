@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using SftEngGP.Views;
 
 namespace SftEngGP.ViewModels
 {
-    internal class LoginViewModel
+    internal partial class LoginViewModel : ObservableObject
     {
     }
 }
