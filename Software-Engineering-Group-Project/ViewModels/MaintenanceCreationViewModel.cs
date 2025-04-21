@@ -6,5 +6,7 @@ namespace SftEngGP.ViewModels
 {
     internal partial class MaintenanceCreationViewModel : ObservableObject
     {
+        [ObservableProperty]
+        public string createOrUpdate = "Create";
     }
 }

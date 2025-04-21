@@ -19,7 +19,7 @@
         </Tab>
         <Tab Title="Maintenance"
             Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:OpManagerPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:MaintenanceEditPage}" />
         </Tab>
         <Tab Title="Temporary"
             Icon="dotnet_bot.png">

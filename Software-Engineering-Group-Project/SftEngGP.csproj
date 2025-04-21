@@ -75,6 +75,9 @@
 		<MauiXaml Update="ViewComponents\AccountAddAndEditInputs.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="ViewComponents\MaintenanceAddAndEditInputs.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\AccountCreationPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

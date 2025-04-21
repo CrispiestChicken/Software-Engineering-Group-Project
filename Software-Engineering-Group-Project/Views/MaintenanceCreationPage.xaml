@@ -5,17 +5,12 @@
              xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
              xmlns:custom_components="clr-namespace:SftEngGP.ViewComponents"
              x:DataType="viewModels:MaintenanceCreationViewModel"
-             Title="Creating Maintenance">
+             Title="Creating Maintenance Report">
 
     <ContentPage.BindingContext>
         <viewModels:MaintenanceCreationViewModel/>
     </ContentPage.BindingContext>
-    
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <custom_components:MaintenanceAddAndEditInputs CreateOrUpdate="{Binding CreateOrUpdate}"/>
+
 </ContentPage>
