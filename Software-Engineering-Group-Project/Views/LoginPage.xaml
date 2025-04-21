@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SftEngGP.Views.LoginPage"
+             xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
+             x:DataType="viewModels:LoginViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid Margin="20,150,20,150" BackgroundColor="SlateBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        
+        <Label Text="Login" TextColor="White" FontSize="32" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1" Grid.Row="0"/>
+
+        <VerticalStackLayout Grid.Column="1" Grid.Row="1">
+            <Label Text="Email:" TextColor="White" FontSize="Body"/>
+            <Entry x:Name="EmailInput" Keyboard="Email" Placeholder="Email" FontSize="Body" TextColor="White"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Column="1" Grid.Row="2">
+            <Label Text="Password:" TextColor="White" FontSize="Body"/>
+            <Entry x:Name="PasswordInput" IsPassword="True" Placeholder="Password" FontSize="Body" TextColor="White"/>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Column="1" Grid.Row="3">
+            <Label Text="" FontSize="Body" WidthRequest="210" TextColor="Red"/>
+            <Button x:Name="LoginButton" Text="Login" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
+        </HorizontalStackLayout>
+
+    </Grid>
+    
+</ContentPage>
