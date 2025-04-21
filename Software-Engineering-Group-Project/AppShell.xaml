@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SftEngGP.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SftEngGP"
+    xmlns:views="clr-namespace:SftEngGP.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="SftEngGP">
+
+    <TabBar>
+        <Tab Title="Admin"
+            Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AdminDashboard}" />
+        </Tab>
+        <Tab Title="Map"
+            Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:EnvScientistPage}" />
+        </Tab>
+        <Tab Title="Maintenance"
+            Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:OpManagerPage}" />
+        </Tab>
+    </TabBar>
+    
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>
