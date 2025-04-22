@@ -6,6 +6,7 @@ using SftEngGP.Database;
 using SftEngGP.Database.Data;
 using SftEngGP.ViewModels;
 using SftEngGP.Views;
+using Syncfusion.Maui.Core.Hosting;
 
 
 namespace SftEngGP
@@ -28,9 +29,12 @@ namespace SftEngGP
             builder.Services.AddSingleton<OpManagerViewModel>();
             builder.Services.AddSingleton<OpManagerPage>();
 
+            builder.Services.AddTransient<TrendsViewModel>();
+            builder.Services.AddSingleton<TrendsPage>();
+
 
             builder
-                .UseMauiApp<App>()
+                .UseMauiApp<App>().ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
