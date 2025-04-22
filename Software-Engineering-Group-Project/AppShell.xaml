@@ -9,8 +9,12 @@
     Title="SftEngGP">
 
     <TabBar>
+        <Tab Title="Trends"
+             Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:TrendsPage}" />
+        </Tab>
         <Tab Title="Admin"
-            Icon="dotnet_bot.png">
+             Icon="dotnet_bot.png">
             <ShellContent ContentTemplate="{DataTemplate views:AdminDashboard}" />
         </Tab>
         <Tab Title="Map"

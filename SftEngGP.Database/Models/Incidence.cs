@@ -7,8 +7,8 @@ namespace SftEngGP.Database.Models;
 [PrimaryKey(nameof(IncidenceId))]
 public class Incidence
 {
-    public int IncidenceId;
-    public string IncidenceType;
-    public DateOnly DateOfEvent;
-    public string Alert;
+    public int IncidenceId { get; set; }
+    public string IncidenceType { get; set; }
+    public DateOnly DateOfEvent { get; set; }
+    public string Alert { get; set; }
 }

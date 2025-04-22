@@ -7,7 +7,7 @@ namespace SftEngGP.Database.Models;
 [PrimaryKey(nameof(UpdateId))]
 public class Update
 {
-    public int UpdateId;
-    public string UpdateType;
-    public DateOnly DateOfLastUpdate;
+    public int UpdateId { get; set; }
+    public string UpdateType { get; set; }
+    public DateOnly DateOfLastUpdate { get; set; }
 }

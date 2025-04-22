@@ -9,8 +9,8 @@ namespace SftEngGP.Database.Models;
 public class Sensor
 {
     [Required]
-    public int SensorId;
-    public float Latitude;
-    public string Longitude;
-    public string SensorType;
+    public int SensorId { get; set; }
+    public float Latitude { get; set; }
+    public string Longitude { get; set; }
+    public string SensorType { get; set; }
 }

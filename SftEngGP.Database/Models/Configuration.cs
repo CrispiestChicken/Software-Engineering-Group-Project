@@ -7,10 +7,10 @@ namespace SftEngGP.Database.Models;
 [PrimaryKey(nameof(ConfigId))]
 public class Configuration
 {
-    public int ConfigId;
-    public string ReadingInterval;
-    public string ReadingFormat;
-    public float MinThreshold;
-    public float MaxThreshold;
-    public int SensorId;
+    public int ConfigId { get; set; }
+    public string ReadingInterval { get; set; }
+    public string ReadingFormat { get; set; }
+    public float MinThreshold { get; set; }
+    public float MaxThreshold { get; set; }
+    public int SensorId { get; set; }
 }

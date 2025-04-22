@@ -30,6 +30,23 @@ namespace SftEngGP.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConfigId"));
 
+                    b.Property<float>("MaxThreshold")
+                        .HasColumnType("real");
+
+                    b.Property<float>("MinThreshold")
+                        .HasColumnType("real");
+
+                    b.Property<string>("ReadingFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReadingInterval")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SensorId")
+                        .HasColumnType("int");
+
                     b.HasKey("ConfigId");
 
                     b.ToTable("Configuration");
@@ -42,6 +59,17 @@ namespace SftEngGP.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncidenceId"));
+
+                    b.Property<string>("Alert")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("DateOfEvent")
+                        .HasColumnType("date");
+
+                    b.Property<string>("IncidenceType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IncidenceId");
 
@@ -56,6 +84,30 @@ namespace SftEngGP.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MeasurandId"));
 
+                    b.Property<string>("MeasurmentFrequency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuantityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SensorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MeasurandId");
 
                     b.ToTable("Measurand");
@@ -69,6 +121,10 @@ namespace SftEngGP.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
 
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RoleId");
 
                     b.ToTable("Role");
@@ -81,6 +137,17 @@ namespace SftEngGP.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SensorId"));
+
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SensorType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SensorId");
 
@@ -120,6 +187,13 @@ namespace SftEngGP.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UpdateId"));
 
+                    b.Property<DateOnly>("DateOfLastUpdate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("UpdateType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UpdateId");
 
                     b.ToTable("Update");
@@ -132,6 +206,32 @@ namespace SftEngGP.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IncidenceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 

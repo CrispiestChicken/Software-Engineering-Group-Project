@@ -9,8 +9,8 @@ namespace SftEngGP.Database.Models;
 public class Role
 {
     [Required] 
-    public int RoleId;
+    public int RoleId { get; set; }
 
-    public string RoleName;
+    public string RoleName { get; set; }
 
 }

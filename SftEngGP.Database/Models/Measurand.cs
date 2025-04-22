@@ -7,11 +7,11 @@ namespace SftEngGP.Database.Models;
 [PrimaryKey(nameof(MeasurandId))]
 public class Measurand
 {
-    public int MeasurandId;
-    public string QuantityType;
-    public string Quantity;
-    public string Symbol;
-    public string Unit;
-    public string MeasurmentFrequency;
-    public string SensorId;
+    public int MeasurandId { get; set; }
+    public string QuantityType { get; set; }
+    public string Quantity { get; set; }
+    public string Symbol { get; set; }
+    public string Unit { get; set; }
+    public string MeasurmentFrequency { get; set; }
+    public string SensorId { get; set; }
 }
