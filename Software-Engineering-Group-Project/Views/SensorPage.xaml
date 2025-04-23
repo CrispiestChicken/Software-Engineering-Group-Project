@@ -6,37 +6,48 @@
              x:Class="SftEngGP.Views.SensorPage">
     
     <ContentPage.Content>
-        <Grid>
-            <StackLayout>
-            <Label Text="{Binding QuantityType}" FontSize="24"/>
-            <HorizontalStackLayout>
-                <Label FontSize="16">Latitude: </Label>
-                <Label Text="{Binding Latitude}" FontSize="16"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label FontSize="16">Longitude: </Label>
-                <Label Text="{Binding Longitude}" FontSize="16"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label FontSize="16">Sensor Type: </Label>
-                <Label Text="{Binding SensorType}" FontSize="16"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label FontSize="16">Quantity: </Label>
-                <Label Text="{Binding Quantity}" FontSize="16"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label FontSize="16">Symbol: </Label>
-                <Label Text="{Binding Symbol}" FontSize="16"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label FontSize="16">Unit: </Label>
-                <Label Text="{Binding Unit}" FontSize="16"/>
-            </HorizontalStackLayout>
-            <Label FontSize="24" Text="Trends"/>
-            
-            <ContentView x:Name="Trends"></ContentView>
-            </StackLayout>
-        </Grid>
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <HorizontalStackLayout>
+                    <Label Text="{Binding QuantityType}" FontSize="24"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                    <Label FontSize="16">Latitude: </Label>
+                    <Label Text="{Binding Latitude}" FontSize="16"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label FontSize="16">Longitude: </Label>
+                    <Label Text="{Binding Longitude}" FontSize="16"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label FontSize="16">Sensor Type: </Label>
+                    <Label Text="{Binding SensorType}" FontSize="16"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label FontSize="16">Quantity: </Label>
+                    <Label Text="{Binding Quantity}" FontSize="16"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label FontSize="16">Symbol: </Label>
+                    <Label Text="{Binding Symbol}" FontSize="16"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label FontSize="16">Unit: </Label>
+                    <Label Text="{Binding Unit}" FontSize="16"/>
+                </HorizontalStackLayout>
+                <Label FontSize="24" Text="Trends"/>
+                
+                <ContentView x:Name="Trends"></ContentView>
+                <Label FontSize="24" Text="Data Accuracy"/>
+                <HorizontalStackLayout>
+                    <Label FontSize="18" Text="{Binding MissingReadingCount}" />
+                    <Label FontSize="18" Text=" missing reading(s) detected." /> 
+                </HorizontalStackLayout>
+                </StackLayout>
+                
+                
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

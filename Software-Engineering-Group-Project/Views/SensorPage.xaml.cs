@@ -11,6 +11,7 @@ public partial class SensorPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
         Trends.Content = new TrendsPage(viewModel);
+        viewModel.GetMissingReadingCount();
 
     }
 }
