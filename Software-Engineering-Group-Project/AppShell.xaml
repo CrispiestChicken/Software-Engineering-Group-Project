@@ -9,10 +9,6 @@
     Title="SftEngGP">
 
     <TabBar>
-        <Tab Title="Trends"
-             Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:TrendsPage}" />
-        </Tab>
         <Tab Title="Admin"
              Icon="dotnet_bot.png">
             <ShellContent ContentTemplate="{DataTemplate views:AdminDashboard}" />
@@ -28,6 +24,10 @@
         <Tab Title="Temporary"
             Icon="dotnet_bot.png">
             <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+        </Tab>
+        <Tab Title="Sensors"
+             Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AllSensorsPage}"></ShellContent>
         </Tab>
     </TabBar>
    

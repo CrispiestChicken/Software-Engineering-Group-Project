@@ -15,10 +15,10 @@ using Syncfusion.Maui.Charts;
 
 namespace SftEngGP.Views;
 
-public partial class TrendsPage : ContentPage
+public partial class TrendsPage : ContentView
 {
     
-    public TrendsPage(TrendsViewModel viewModel)
+    public TrendsPage(SensorViewModel viewModel)
     {
         SfCartesianChart chart = new SfCartesianChart();
         
@@ -54,6 +54,6 @@ public partial class TrendsPage : ContentPage
         grid.Children.Add(chart);
 
         this.Content = grid;
-    } 
-    
+    }
+
 }
