@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+			 x:Class="SftEngGP.Views.MapPage"
+			 xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
+			 x:DataType="viewModels:MapViewModel">
+
+
+  <ContentPage.BindingContext>
+	<viewModels:MapViewModel/>
+  </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="SlateBlue" Margin="10,50">
+            <maps:Map x:Name="map" HorizontalOptions="Center" HeightRequest="500" Margin="10,10,10,0">
+                <maps:Map.Pins>
+                    <maps:Pin Label="Test Hello" Type="Generic">
+                        <maps:Pin.Location>
+                            <sensors:Location>
+                                <x:Arguments>
+                                    <x:Double>55.933672</x:Double>
+                                    <x:Double>-3.213037</x:Double>
+                                </x:Arguments>
+                            </sensors:Location>
+                        </maps:Pin.Location>
+                    </maps:Pin>
+
+                    <maps:Pin Label="Test 2" Type="Generic">
+                        <maps:Pin.Location>
+                            <sensors:Location>
+                                <x:Arguments>
+                                    <x:Double>55.936303</x:Double>
+                                    <x:Double>-3.214413</x:Double>
+                                </x:Arguments>
+                            </sensors:Location>
+                        </maps:Pin.Location>
+                    </maps:Pin>
+                </maps:Map.Pins>
+            </maps:Map>
+
+            <Rectangle HorizontalOptions="Fill" HeightRequest="4" BackgroundColor="Black"/>
+
+            <Label Text="Threshold Breaches" TextColor="White" FontSize="30" HorizontalTextAlignment="Center"/>
+
+
+            <Grid BackgroundColor="SlateBlue" ColumnSpacing="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+
+                </Grid.RowDefinitions>
+
+                <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="0" Margin="10,5" CornerRadius="5"/>
+                <Label Text="Location" FontSize="20" HorizontalOptions="Center" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+                <Label Text="Type" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+                <Label Text="Date" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0"/>
+
+                <!-- Need database to link up so I can add the data as its comes -->
+                <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,5" CornerRadius="5"/>
+                <Label Text="55.933672,        -3.213037" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="15,0"/>
+                <Label Text="Rain" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+                <Label Text="10/10/10" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="0,0,10,0"/>
+
+
+                <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="2" Margin="10,5" CornerRadius="5"/>
+                <Label Text="55.933672,        -3.213037" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2" Margin="15,0"/>
+                <Label Text="Temp" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+                <Label Text="10/10/10" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="2" Margin="0,0,10,0"/>
+
+
+            </Grid>
+        </VerticalStackLayout>
+        
+        
+    </ScrollView>
+    
+</ContentPage>

@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="Secrets.props" Condition="Exists('Secrets.props')" />
+
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))"> net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
@@ -20,6 +22,8 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+
+		<AndroidManifestPlaceholders>MAPS_API_KEY=$(MapsAPIKey)</AndroidManifestPlaceholders>
 
 		<!-- Display name -->
 		<ApplicationTitle>SftEngGP</ApplicationTitle>
@@ -67,6 +71,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 		<PackageReference Include="Syncfusion.Maui.Charts" Version="29.1.39" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.100" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -98,6 +103,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\MaintenanceOverviewPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\MapPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\SensorsOverviewPage.xaml">

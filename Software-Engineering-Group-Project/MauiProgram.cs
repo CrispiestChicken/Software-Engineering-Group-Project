@@ -39,6 +39,8 @@ namespace SftEngGP
 
             builder
                 .UseMauiApp<App>().ConfigureSyncfusionCore()
+                .UseMauiApp<App>()
+                .UseMauiMaps()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -15,7 +15,7 @@
         </Tab>
         <Tab Title="Map"
             Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:EnvScientistPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:MapPage}" />
         </Tab>
         <Tab Title="Maintenance"
             Icon="dotnet_bot.png">
