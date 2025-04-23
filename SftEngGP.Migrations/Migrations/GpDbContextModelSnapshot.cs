@@ -96,9 +96,8 @@ namespace SftEngGP.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SensorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SensorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Symbol")
                         .IsRequired()

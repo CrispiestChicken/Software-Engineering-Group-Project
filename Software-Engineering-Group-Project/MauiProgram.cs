@@ -29,8 +29,12 @@ namespace SftEngGP
             builder.Services.AddSingleton<OpManagerViewModel>();
             builder.Services.AddSingleton<OpManagerPage>();
 
-            builder.Services.AddTransient<TrendsViewModel>();
-            builder.Services.AddSingleton<TrendsPage>();
+            builder.Services.AddSingleton<SensorsOverviewPage>();
+            builder.Services.AddSingleton<AllSensorsViewModel>();
+            builder.Services.AddSingleton<AllSensorsPage>();
+            builder.Services.AddTransient<SensorViewModel>();
+            builder.Services.AddTransient<TrendsPage>();
+            builder.Services.AddTransient<SensorPage>();
 
 
             builder
