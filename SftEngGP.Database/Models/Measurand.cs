@@ -13,5 +13,5 @@ public class Measurand
     public string Symbol { get; set; }
     public string Unit { get; set; }
     public string MeasurmentFrequency { get; set; }
-    public string SensorId { get; set; }
+    public int SensorId { get; set; }
 }
