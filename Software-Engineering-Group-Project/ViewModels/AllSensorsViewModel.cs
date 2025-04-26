@@ -22,8 +22,7 @@ public class AllSensorsViewModel
     public AllSensorsViewModel(GpDbContext context)
     {
         _context = context;
-        AllSensors = new ObservableCollection<SensorViewModel>(_context.Sensors.ToList()
-            .Select(s => new SensorViewModel(_context, s)));
+        AllSensors = new ObservableCollection<SensorViewModel>(_context.Sensors.ToList().Select(s => new SensorViewModel(_context, s)));
         SelectSensorCommand = new AsyncRelayCommand<SensorViewModel>(SelectSensorAsync);
     }
 

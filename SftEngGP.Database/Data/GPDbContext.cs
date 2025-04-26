@@ -43,5 +43,6 @@ public class GpDbContext : DbContext
     public DbSet<Sensor> Sensors { get; set; }
     public DbSet<Update> Updates { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<FrequencyOffset> FrequencyOffsets { get; set; }
 
 }
