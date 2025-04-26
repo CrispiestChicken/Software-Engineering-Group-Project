@@ -52,6 +52,29 @@ namespace SftEngGP.Database.Migrations
                     b.ToTable("Configuration");
                 });
 
+            modelBuilder.Entity("SftEngGP.Database.Models.FrequencyOffset", b =>
+                {
+                    b.Property<int>("FrequencyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FrequencyId"));
+
+                    b.Property<int>("DateDifference")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Frequency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("TimeDifference")
+                        .HasColumnType("time");
+
+                    b.HasKey("FrequencyId");
+
+                    b.ToTable("FrequencyOffset");
+                });
+
             modelBuilder.Entity("SftEngGP.Database.Models.Incidence", b =>
                 {
                     b.Property<int>("IncidenceId")
@@ -84,7 +107,7 @@ namespace SftEngGP.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MeasurandId"));
 
-                    b.Property<string>("MeasurmentFrequency")
+                    b.Property<string>("Frequency")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
