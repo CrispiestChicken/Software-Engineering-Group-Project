@@ -1,12 +1,13 @@
 using SftEngGP.ViewModels;
+using SftEngGP.Database.Models;
 
 namespace SftEngGP.Views;
 
 public partial class AccountEditPage : ContentPage
 {
-	public AccountEditPage(int userID)
+	public AccountEditPage(User account)
 	{
-		this.BindingContext = new AccountEditViewModel();
+		this.BindingContext = new AccountEditViewModel(account);
 		InitializeComponent();
 	}
 }

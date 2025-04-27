@@ -6,22 +6,22 @@
     <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="SlateBlue" Margin="20,50">
 
         <Label Text="Email:" FontSize="Body" TextColor="White" Margin="50,40,0,0"/>
-        <Entry x:Name="EmailInput" Keyboard="Email" Placeholder="Email" FontSize="Body" TextColor="White" Margin="50,0,50,0" IsEnabled="{Binding CreatingAccount}"/>
+        <Entry x:Name="EmailInput" Text="{Binding Account.Email}" Keyboard="Email" Placeholder="Email" FontSize="Body" TextColor="White" Margin="50,0,50,0" IsEnabled="{Binding CreatingAccount}"/>
 
         <Label Text="Password" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
         <Entry x:Name="PasswordInput" IsPassword="True" Placeholder="Password" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="First Name:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Entry x:Name="FNameInput" Placeholder="First Name" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <Entry x:Name="FNameInput" Text="{Binding Account.FName}" Placeholder="First Name" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Surname:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Entry x:Name="SNameInput" Placeholder="Surname" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <Entry x:Name="SNameInput" Text="{Binding Account.LName}" Placeholder="Surname" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Address:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Entry x:Name="AddressInput" Placeholder="Address" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <Entry x:Name="AddressInput" Text="{Binding Account.Address}" Placeholder="Address" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Role:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Picker x:Name="RoleInput" Title="Select Role" FontSize="Body" TextColor="White" Margin="50,0,50,0">
+        <Picker x:Name="RoleInput" SelectedIndex="{Binding Account.RoleId}" Title="Select Role" FontSize="Body" TextColor="White" Margin="50,0,50,0">
             <Picker.Items>
                 <x:String>Admin</x:String>
                 <x:String>Environmental Scientist</x:String>

@@ -54,7 +54,7 @@
                         <!--Have to do all the stuff in command because the binding in this part is linked to AllAccounts not the view model.-->
                         <ImageButton 
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AccountsOverviewViewModel}}, Path=EditAccountButtonClickedCommand}"
-                            CommandParameter="{Binding UserId}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
+                            CommandParameter="{Binding .}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
                         
                     </Grid>
                 </DataTemplate>

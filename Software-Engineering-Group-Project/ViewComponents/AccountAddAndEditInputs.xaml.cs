@@ -1,10 +1,10 @@
+using SftEngGP.Database.Models;
+
 namespace SftEngGP.ViewComponents;
 
 public partial class AccountAddAndEditInputs : ContentView
 {
 
-
-    //Chat Gpt'd
 
     // All of this code is databinding for the component.
 
@@ -13,6 +13,9 @@ public partial class AccountAddAndEditInputs : ContentView
 
     public static readonly BindableProperty CreateOrUpdateProperty =
     BindableProperty.Create(nameof(CreateOrUpdate), typeof(string), typeof(AccountAddAndEditInputs), String.Empty, propertyChanged: OnCreateOrUpdateChanged);
+
+    public static readonly BindableProperty AccountProperty =
+BindableProperty.Create(nameof(Account), typeof(User), typeof(AccountAddAndEditInputs), null, propertyChanged: OnAccountChanged);
 
 
     public bool CreatingAccount
@@ -25,6 +28,12 @@ public partial class AccountAddAndEditInputs : ContentView
     {
         get => (string)GetValue(CreateOrUpdateProperty);
         set => SetValue(CreateOrUpdateProperty, value);
+    }
+
+    public User Account
+    {
+        get => (User)GetValue(AccountProperty);
+        set => SetValue(AccountProperty, value);
     }
 
 
@@ -43,6 +52,19 @@ public partial class AccountAddAndEditInputs : ContentView
         var newData = (string)newValue;
 
         control.SubmitButton.Text = newData;
+
+    }
+
+    private static void OnAccountChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (AccountAddAndEditInputs)bindable;
+        var newData = (User)newValue;
+
+        control.EmailInput.Text = newData.Email;
+        control.FNameInput.Text = newData.Password;
+        control.SNameInput.Text = newData.LName;
+        control.AddressInput.Text = newData.Address;
+        control.RoleInput.SelectedIndex = newData.RoleId;
 
     }
 

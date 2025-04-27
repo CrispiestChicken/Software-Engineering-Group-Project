@@ -28,10 +28,10 @@ internal partial class AccountsOverviewViewModel : ObservableObject
 
 
     [RelayCommand]
-    private static async void EditAccountButtonClicked(int userID) =>
-        await App.Current.MainPage.Navigation.PushAsync(new AccountEditPage(userID));
+    private static async Task EditAccountButtonClicked(User account) =>
+        await App.Current.MainPage.Navigation.PushAsync(new AccountEditPage(account));
 
     [RelayCommand]
-    private static async void NewAccountButtonClicked() =>
+    private static async Task NewAccountButtonClicked() =>
         await App.Current.MainPage.Navigation.PushAsync(new AccountCreationPage());
 }

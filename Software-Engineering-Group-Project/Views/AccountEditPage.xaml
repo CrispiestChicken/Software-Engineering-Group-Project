@@ -7,10 +7,7 @@
              x:DataType="viewModels:AccountEditViewModel"
              Title="Editing Account">
 
-    <ContentPage.BindingContext>
-        <viewModels:AccountEditViewModel/>
-    </ContentPage.BindingContext>
 
-    <custom_components:AccountAddAndEditInputs CreatingAccount="{Binding CreatingAccount}" CreateOrUpdate="{Binding CreateOrUpdate}"/>
+    <custom_components:AccountAddAndEditInputs Account="{Binding Account, Mode=TwoWay}" CreatingAccount="{Binding CreatingAccount}" CreateOrUpdate="{Binding CreateOrUpdate}"/>
 
 </ContentPage>
