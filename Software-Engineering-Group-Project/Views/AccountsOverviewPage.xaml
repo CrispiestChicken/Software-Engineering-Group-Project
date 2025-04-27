@@ -11,6 +11,60 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
+
+        <Grid BackgroundColor="SlateBlue" ColumnSpacing="15" Margin="20,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="29*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="0" Margin="10,5" CornerRadius="5"/>
+            <Label Text="ID" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <Label Text="Name" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+            <Label Text="Role" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0"/>
+            <ImageButton Command="{Binding NewAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
+
+
+
+
+        <CollectionView x:Name="AccountOverview" BackgroundColor="SlateBlue" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllAccounts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="14*"/>
+                            <ColumnDefinition Width="29*"/>
+                            <ColumnDefinition Width="29*"/>
+                            <ColumnDefinition Width="29*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="0" Margin="10,5" CornerRadius="5"/>
+                        <Label Text="{Binding UserId}" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+                        <Label Text="{Binding FName}" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+                        <Label Text="{Binding RoleId}" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0"/>
+                        <!--Have to do all the stuff in command because the binding in this part is linked to AllAccounts not the view model.-->
+                        <ImageButton 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AccountsOverviewViewModel}}, Path=EditAccountButtonClickedCommand}"
+                            CommandParameter="{Binding UserId}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        </Grid>
+    </ScrollView>
+
+    <!--
         <Grid BackgroundColor="SlateBlue" ColumnSpacing="15" Margin="20,50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="14*"/>
@@ -37,7 +91,7 @@
             <Label Text="Role" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0"/>
             <ImageButton Command="{Binding NewAccountButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
             
-            <!-- Need database to link up so I can add the data as its comes -->
+            Need database to link up so I can add the data as its comes
             <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,5" CornerRadius="5"/>
             <Label Text="1" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
             <Label Text="Bob" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
@@ -53,6 +107,5 @@
 
 
         </Grid>
-
-    </ScrollView>
+                -->
 </ContentPage>
