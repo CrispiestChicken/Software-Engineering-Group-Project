@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AndroidX.Lifecycle;
-using Java.Util;
 using SftEngGP.Database.Models;
 using SftEngGP.ViewModels;
 using Microsoft.Maui.Graphics;

@@ -1,7 +1,5 @@
 using System.Collections.ObjectModel;
-using Android.Health.Connect.DataTypes.Units;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Java.Sql;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 
@@ -11,13 +9,13 @@ namespace SftEngGP.ViewModels;
 /// </summary>
 public class SensorViewModel
 {
-    private GpDbContext _context;
+    private GenericGPDbContext _context;
     private Sensor _sensor;
     private Measurand _measurand;
     
     public int SensorId => _sensor.SensorId;
     public float Latitude => _sensor.Latitude;
-    public string Longitude => _sensor.Longitude;
+    public float Longitude => _sensor.Longitude;
     public string SensorType => _sensor.SensorType;
     public int MeasurandId => _measurand.MeasurandId;
     public string QuantityType => _measurand.QuantityType;
@@ -31,9 +29,9 @@ public class SensorViewModel
 
     public List<DateTime> MissingReadings => GetMissingReadings();
 
-    public int MissingReadingCount => MissingReadings.Count();
+    public int MissingReadingCount => GetMissingReadings().Count();
 
-    public SensorViewModel(GpDbContext gpDbContext)
+    public SensorViewModel(GenericGPDbContext gpDbContext)
     {
         _context = gpDbContext;
         _sensor = new Sensor();
@@ -42,7 +40,7 @@ public class SensorViewModel
         SensorReadings = new ObservableCollection<SensorReading>();
     }
     
-    public SensorViewModel(GpDbContext gpDbContext, Sensor sensor)
+    public SensorViewModel(GenericGPDbContext gpDbContext, Sensor sensor)
     {
         _context = gpDbContext;
         _sensor = sensor;

@@ -11,6 +11,6 @@ public class Sensor
     [Required]
     public int SensorId { get; set; }
     public float Latitude { get; set; }
-    public string Longitude { get; set; }
+    public float Longitude { get; set; }
     public string SensorType { get; set; }
 }

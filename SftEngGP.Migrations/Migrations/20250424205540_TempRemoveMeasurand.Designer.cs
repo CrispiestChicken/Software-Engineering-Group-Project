@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SftEngGP.Database.Data;
 
@@ -11,9 +12,11 @@ using SftEngGP.Database.Data;
 namespace SftEngGP.Database.Migrations
 {
     [DbContext(typeof(GpDbContext))]
-    partial class GpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424205540_TempRemoveMeasurand")]
+    partial class TempRemoveMeasurand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,29 +55,6 @@ namespace SftEngGP.Database.Migrations
                     b.ToTable("Configuration");
                 });
 
-            modelBuilder.Entity("SftEngGP.Database.Models.FrequencyOffset", b =>
-                {
-                    b.Property<int>("FrequencyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FrequencyId"));
-
-                    b.Property<int>("DateDifference")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Frequency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("TimeDifference")
-                        .HasColumnType("time");
-
-                    b.HasKey("FrequencyId");
-
-                    b.ToTable("FrequencyOffset");
-                });
-
             modelBuilder.Entity("SftEngGP.Database.Models.Incidence", b =>
                 {
                     b.Property<int>("IncidenceId")
@@ -97,42 +77,6 @@ namespace SftEngGP.Database.Migrations
                     b.HasKey("IncidenceId");
 
                     b.ToTable("Incidence");
-                });
-
-            modelBuilder.Entity("SftEngGP.Database.Models.Measurand", b =>
-                {
-                    b.Property<int>("MeasurandId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MeasurandId"));
-
-                    b.Property<string>("Frequency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QuantityType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SensorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Symbol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MeasurandId");
-
-                    b.ToTable("Measurand");
                 });
 
             modelBuilder.Entity("SftEngGP.Database.Models.Role", b =>
@@ -163,8 +107,9 @@ namespace SftEngGP.Database.Migrations
                     b.Property<float>("Latitude")
                         .HasColumnType("real");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SensorType")
                         .IsRequired()

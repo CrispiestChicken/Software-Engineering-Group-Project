@@ -1,19 +1,20 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SftEngGP.Database.Models;
 
 namespace SftEngGP.Database.Data;
 
-public class GpDbContext : DbContext
-{
-
-    public GpDbContext()
+public abstract class GenericGPDbContext: DbContext {
+    
+    internal abstract string connectionName { get; set; }
+    
+    public GenericGPDbContext()
     {
 
     }
 
-    public GpDbContext(DbContextOptions<GpDbContext> options) : base(options)
+    public GenericGPDbContext(DbContextOptions<GpDbContext> options) : base(options)
     {
         
     }
@@ -44,5 +45,4 @@ public class GpDbContext : DbContext
     public DbSet<Update> Updates { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<FrequencyOffset> FrequencyOffsets { get; set; }
-
 }
