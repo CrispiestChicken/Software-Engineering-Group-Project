@@ -8,6 +8,6 @@
              Title="Editing Account">
 
 
-    <custom_components:AccountAddAndEditInputs Account="{Binding Account, Mode=TwoWay}" CreatingAccount="{Binding CreatingAccount}" CreateOrUpdate="{Binding CreateOrUpdate}"/>
+    <custom_components:AccountAddAndEditInputs Account="{Binding Account, Mode=TwoWay}" CreatingAccount="{Binding CreatingAccount}" CreateOrUpdate="{Binding CreateOrUpdate}" CreateOrUpdateCommand="{Binding UpdateCommand}" ErrorMessage="{Binding ErrorMessage}"/>
 
 </ContentPage>

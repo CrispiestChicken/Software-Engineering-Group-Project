@@ -7,6 +7,7 @@ using SftEngGP.Database.Data;
 using SftEngGP.ViewModels;
 using SftEngGP.Views;
 using Syncfusion.Maui.Core.Hosting;
+using CommunityToolkit.Maui;
 
 
 namespace SftEngGP
@@ -38,7 +39,9 @@ namespace SftEngGP
 
 
             builder
-                .UseMauiApp<App>().ConfigureSyncfusionCore()
+                .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .ConfigureSyncfusionCore()
                 .UseMauiApp<App>()
                 .UseMauiMaps()
                 .ConfigureFonts(fonts =>
