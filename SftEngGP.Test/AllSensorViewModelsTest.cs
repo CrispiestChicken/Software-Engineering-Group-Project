@@ -1,0 +1,24 @@
+using SftEngGP.Database.Models;
+using SftEngGP.ViewModels;
+
+namespace SftEngGP.Test;
+
+public class AllSensorViewModelsTest: IClassFixture<DatabaseFixture>
+{
+    DatabaseFixture _fixture;
+    private AllSensorsViewModel _viewModel;
+    private Sensor _selectedSensor;
+    
+    public AllSensorViewModelsTest(DatabaseFixture fixture)
+    {
+        _fixture = fixture;
+        _fixture.Seed();
+        _selectedSensor = fixture._testDbContext.Sensors.First();
+    }
+
+    [Fact]
+    public void SelectSensorAsync_ShouldExecuteWithoutFailure()
+    {
+        _viewModel.SelectSensorCommand.Execute(_selectedSensor);
+    }
+}

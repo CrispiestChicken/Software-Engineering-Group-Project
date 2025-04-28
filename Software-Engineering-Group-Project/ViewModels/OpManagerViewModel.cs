@@ -7,9 +7,9 @@ namespace SftEngGP.ViewModels;
 
 public class OpManagerViewModel : ObservableObject
 {
-    private GpDbContext _context;
+    private GenericGPDbContext _context;
 
-    public OpManagerViewModel(GpDbContext gpDbContext)
+    public OpManagerViewModel(GenericGPDbContext gpDbContext)
     {
         _context = gpDbContext;
         

@@ -14,12 +14,12 @@ public class AllSensorsViewModel
 {
     public ObservableCollection<SensorViewModel> AllSensors { get; set; }
 
-    private GpDbContext _context;
+    private GenericGPDbContext _context;
     
     public ICommand SelectSensorCommand { get; }
 
 
-    public AllSensorsViewModel(GpDbContext context)
+    public AllSensorsViewModel(GenericGPDbContext context)
     {
         _context = context;
         AllSensors = new ObservableCollection<SensorViewModel>(_context.Sensors.ToList().Select(s => new SensorViewModel(_context, s)));
