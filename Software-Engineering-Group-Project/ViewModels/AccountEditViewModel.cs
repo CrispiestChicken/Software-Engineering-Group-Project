@@ -5,6 +5,7 @@ using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace SftEngGP.ViewModels;
 
@@ -64,8 +65,6 @@ internal partial class AccountEditViewModel : ObservableObject
 
     private string ValidateData()
     {
-        if (Account.Email is null or "") return "ERROR:Please Insert an Email";
-
         if (Account.Password is null or "") return "ERROR:Please Insert a Password";
 
         if (Account.Password.Length < 8) return "ERROR:Password Must Be Atleast 8 Characters Long";
@@ -77,8 +76,6 @@ internal partial class AccountEditViewModel : ObservableObject
         if (Account.Address is null or "") return "ERROR:Please Insert an Address";
 
         if (Account.RoleId == 0) return "ERROR:Please Select a Role";
-
-
 
         return "Success";
     }

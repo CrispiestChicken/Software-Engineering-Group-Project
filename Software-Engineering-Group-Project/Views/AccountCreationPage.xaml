@@ -12,7 +12,7 @@
         <viewModels:AccountCreationViewModel/>
     </ContentPage.BindingContext>
 
-    <custom_components:AccountAddAndEditInputs CreatingAccount="{Binding CreatingAccount}" CreateOrUpdate="{Binding CreateOrUpdate}"/>
+    <custom_components:AccountAddAndEditInputs Account="{Binding Account, Mode=TwoWay}" CreatingAccount="{Binding CreatingAccount}" CreateOrUpdateCommand="{Binding CreateCommand}" CreateOrUpdate="{Binding CreateOrUpdate}" ErrorMessage="{Binding ErrorMessage}"/>
     
 
 </ContentPage>
