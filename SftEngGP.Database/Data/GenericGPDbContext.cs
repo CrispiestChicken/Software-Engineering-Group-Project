@@ -30,7 +30,7 @@ public abstract class GenericGPDbContext: DbContext {
             .Build();
     
         optionsBuilder.UseSqlServer(
-            config.GetConnectionString("DevelopmentConnection"),
+            config.GetConnectionString(connectionName),
             m => m.MigrationsAssembly("SftEngGP.Migrations")
         );
 

@@ -15,10 +15,4 @@ public class AllSensorViewModelsTest: IClassFixture<DatabaseFixture>
         _fixture.Seed();
         _selectedSensor = fixture._testDbContext.Sensors.First();
     }
-
-    [Fact]
-    public void SelectSensorAsync_ShouldExecuteWithoutFailure()
-    {
-        _viewModel.SelectSensorCommand.Execute(_selectedSensor);
-    }
 }

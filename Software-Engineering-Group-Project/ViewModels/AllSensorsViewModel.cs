@@ -26,7 +26,7 @@ public class AllSensorsViewModel
         SelectSensorCommand = new AsyncRelayCommand<SensorViewModel>(SelectSensorAsync);
     }
 
-    private async Task SelectSensorAsync(SensorViewModel sensor)
+    internal async Task SelectSensorAsync(SensorViewModel sensor)
     {
         if (sensor != null)
         {
