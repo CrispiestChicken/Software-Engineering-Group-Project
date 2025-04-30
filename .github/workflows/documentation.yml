@@ -19,7 +19,7 @@ jobs:
       run: sudo apt-get install doxygen -y
        
     - name: Generate Doxyfile
-      run: doxygen -g
+      run: doxygen
        
     - name: Generate Doxygen Documentation
       run: doxygen .
