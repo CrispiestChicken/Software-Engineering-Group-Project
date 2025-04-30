@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SftEngGP.Database.Data;
 
@@ -11,9 +12,11 @@ using SftEngGP.Database.Data;
 namespace SftEngGP.Database.Migrations
 {
     [DbContext(typeof(GpDbContext))]
-    partial class GpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424211619_fixFrequencyOffset2")]
+    partial class fixFrequencyOffset2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,9 +110,8 @@ namespace SftEngGP.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MeasurandId"));
 
-                    b.Property<string>("Frequency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MeasurmentFrequencyFrequencyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Quantity")
                         .IsRequired()
@@ -131,6 +133,8 @@ namespace SftEngGP.Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MeasurandId");
+
+                    b.HasIndex("MeasurmentFrequencyFrequencyId");
 
                     b.ToTable("Measurand");
                 });
@@ -163,8 +167,9 @@ namespace SftEngGP.Database.Migrations
                     b.Property<float>("Latitude")
                         .HasColumnType("real");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SensorType")
                         .IsRequired()
@@ -257,6 +262,17 @@ namespace SftEngGP.Database.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SftEngGP.Database.Models.Measurand", b =>
+                {
+                    b.HasOne("SftEngGP.Database.Models.FrequencyOffset", "MeasurmentFrequency")
+                        .WithMany()
+                        .HasForeignKey("MeasurmentFrequencyFrequencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MeasurmentFrequency");
                 });
 #pragma warning restore 612, 618
         }

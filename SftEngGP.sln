@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SftEngGP.Database", "SftEng
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SftEngGP.Migrations", "SftEngGP.Migrations\SftEngGP.Migrations.csproj", "{4379CF00-FCBE-4DC1-BBEF-975EB33319E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SftEngGP.Test", "SftEngGP.Test\SftEngGP.Test.csproj", "{7C79FAB2-B55A-46AB-B498-E88F1AA4E611}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{4379CF00-FCBE-4DC1-BBEF-975EB33319E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4379CF00-FCBE-4DC1-BBEF-975EB33319E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4379CF00-FCBE-4DC1-BBEF-975EB33319E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C79FAB2-B55A-46AB-B498-E88F1AA4E611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C79FAB2-B55A-46AB-B498-E88F1AA4E611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C79FAB2-B55A-46AB-B498-E88F1AA4E611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C79FAB2-B55A-46AB-B498-E88F1AA4E611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

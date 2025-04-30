@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SftEngGP.Database.Data;
 
@@ -11,9 +12,11 @@ using SftEngGP.Database.Data;
 namespace SftEngGP.Database.Migrations
 {
     [DbContext(typeof(GpDbContext))]
-    partial class GpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250425184702_fixFrequencyOffset3")]
+    partial class fixFrequencyOffset3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,8 +166,9 @@ namespace SftEngGP.Database.Migrations
                     b.Property<float>("Latitude")
                         .HasColumnType("real");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SensorType")
                         .IsRequired()
