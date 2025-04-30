@@ -8,28 +8,9 @@
     Shell.FlyoutBehavior="Disabled"
     Title="SftEngGP">
 
-    <TabBar>
-        <Tab Title="Admin"
-             Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:AdminDashboard}" />
-        </Tab>
-        <Tab Title="Map"
-            Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:MapPage}" />
-        </Tab>
-        <Tab Title="Maintenance"
-            Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:MaintenanceOverviewPage}" />
-        </Tab>
-        <Tab Title="Temporary"
-            Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
-        </Tab>
-        <Tab Title="Sensors"
-             Icon="dotnet_bot.png">
-            <ShellContent ContentTemplate="{DataTemplate views:AllSensorsPage}"></ShellContent>
-        </Tab>
-    </TabBar>
-   
+    <ShellContent
+        Route="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Shell.NavBarIsVisible="False"/>
 
 </Shell>

@@ -11,7 +11,7 @@ namespace SftEngGP.Models
     sealed internal class LoggedInUser
     {
 
-        private static LoggedInUser? _instance;
+        private static LoggedInUser? _instance = null;
         public string Email { get; set; }
         public int Role { get; set; }
 
@@ -19,33 +19,29 @@ namespace SftEngGP.Models
         {
         }
 
-        public static LoggedInUser Instance
+        public static LoggedInUser GetInstance()
         {
-            get
+            if (_instance == null)
             {
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new LoggedInUser();
-                    }
-                    return _instance;
-                }
+                _instance = new LoggedInUser();
             }
+
+            return _instance;
         }
 
 
         public string Login(string email, int roleID)
         {
-            _instance.Email = email;
-            _instance.Role = roleID;
-
+            Email = email;
+            Role = roleID;
+            
             return "Logged in";
         }
 
 
         public string Logout()
         {
-            _instance = null;
+             _instance = null;
             return "Logged out";
         }
 
