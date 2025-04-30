@@ -6,11 +6,13 @@ namespace SftEngGP.Database.Models
 {
     [Table(("Users"))]
     [PrimaryKey(nameof(UserId))]
+    [Index(nameof(Email), IsUnique=true)]
     public class User
     {
         [Required]
         public int UserId { get; set; }
         [Required]
+        
         public string Email { get; set; }
         public string Password { get; set; }
         public string FName { get; set; }

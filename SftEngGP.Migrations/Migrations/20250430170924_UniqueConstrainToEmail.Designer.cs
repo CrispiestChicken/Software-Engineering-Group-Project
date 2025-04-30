@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SftEngGP.Database.Data;
 
@@ -11,9 +12,11 @@ using SftEngGP.Database.Data;
 namespace SftEngGP.Database.Migrations
 {
     [DbContext(typeof(GpDbContext))]
-    partial class GpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250430170924_UniqueConstrainToEmail")]
+    partial class UniqueConstrainToEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
