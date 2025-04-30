@@ -1,0 +1,31 @@
+name: Documentation 
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  generate:
+    runs-on: ubuntu-latest 
+
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+       
+    - name: Install Doxygen
+      run: sudo apt-get install doxygen -y
+       
+    - name: Generate Doxyfile
+      run: doxygen -g
+       
+    - name: Generate Doxygen Documentation
+      run: doxygen .
+
+    - name: Upload static files as artifact
+      uses: actions/upload-pages-artifact@v3 
+      with:
+        path: html
+
