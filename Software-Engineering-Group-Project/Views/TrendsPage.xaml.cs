@@ -11,47 +11,51 @@ using Syncfusion.Maui.Charts;
 
 
 
-namespace SftEngGP.Views;
-
-public partial class TrendsPage : ContentView
+namespace SftEngGP.Views
 {
-    
-    public TrendsPage(SensorViewModel viewModel)
+    /// <summary>
+    /// Displays a line graph for every reading of a selected sensor that contains the reading values for the Y axis and the timestamp of the readings for the X axis 
+    /// </summary>
+    public partial class TrendsPage : ContentView
     {
-        SfCartesianChart chart = new SfCartesianChart();
-        
-        chart.BindingContext = viewModel;
-        
-        DateTimeAxis primaryAxis = new DateTimeAxis();
-
-        chart.XAxes.Add(primaryAxis);
-
-        NumericalAxis secondaryAxis = new NumericalAxis();
-        
-
-        chart.YAxes.Add(secondaryAxis);
-        
-        
-        var binding = new Binding() { Path = "SensorReadings" };
-        LineSeries lineSeries = new LineSeries()
+    
+        public TrendsPage(SensorViewModel viewModel)
         {
-            XBindingPath = "Timestamp",
-            YBindingPath = "SensorValue",
-            Fill = new SolidColorBrush(Color.FromArgb("#314A6E")),
-        };
-        lineSeries.SetBinding(ChartSeries.ItemsSourceProperty, binding);
-        chart.Series.Add(lineSeries);
-        var grid = new Grid() 
-        { 
-            HorizontalOptions = LayoutOptions.Fill,
-            VerticalOptions = LayoutOptions.Fill,
-            Padding = new Microsoft.Maui.Thickness(20),
-        };
+            SfCartesianChart chart = new SfCartesianChart();
         
+            chart.BindingContext = viewModel;
         
-        grid.Children.Add(chart);
+            DateTimeAxis primaryAxis = new DateTimeAxis();
 
-        this.Content = grid;
+            chart.XAxes.Add(primaryAxis);
+
+            NumericalAxis secondaryAxis = new NumericalAxis();
+        
+
+            chart.YAxes.Add(secondaryAxis);
+        
+        
+            var binding = new Binding() { Path = "SensorReadings" };
+            LineSeries lineSeries = new LineSeries()
+            {
+                XBindingPath = "Timestamp",
+                YBindingPath = "SensorValue",
+                Fill = new SolidColorBrush(Color.FromArgb("#314A6E")),
+            };
+            lineSeries.SetBinding(ChartSeries.ItemsSourceProperty, binding);
+            chart.Series.Add(lineSeries);
+            var grid = new Grid() 
+            { 
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill,
+                Padding = new Microsoft.Maui.Thickness(20),
+            };
+        
+        
+            grid.Children.Add(chart);
+
+            this.Content = grid;
+        }
+
     }
-
 }

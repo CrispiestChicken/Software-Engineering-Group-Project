@@ -1,16 +1,19 @@
 using System;
 using SftEngGP.ViewModels;
 
-namespace SftEngGP.Views;
-
-public partial class SensorPage : ContentPage
+namespace SftEngGP.Views
 {
-    
-    public SensorPage(SensorViewModel viewModel)
+    /// <summary>
+    /// Displays a selected sensor along with a trend graph of readings recorded by sensor as well as information on the accuracy and integrity of the sensor
+    /// </summary>
+    public partial class SensorPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = viewModel;
-        Trends.Content = new TrendsPage(viewModel);
+        public SensorPage(SensorViewModel viewModel)
+        {
+            InitializeComponent();
+            BindingContext = viewModel;
+            Trends.Content = new TrendsPage(viewModel);
 
+        }
     }
 }

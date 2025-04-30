@@ -3,46 +3,47 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SftEngGP.Database.Models;
 
-namespace SftEngGP.Database.Data;
-
-public abstract class GenericGPDbContext: DbContext {
+namespace SftEngGP.Database.Data
+{
+    public abstract class GenericGPDbContext: DbContext {
     
-    internal abstract string connectionName { get; set; }
+        internal abstract string connectionName { get; set; }
     
-    public GenericGPDbContext()
-    {
+        public GenericGPDbContext()
+        {
 
-    }
+        }
 
-    public GenericGPDbContext(DbContextOptions<GpDbContext> options) : base(options)
-    {
+        public GenericGPDbContext(DbContextOptions<GpDbContext> options) : base(options)
+        {
         
-    }
+        }
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var a = Assembly.GetExecutingAssembly();
-        var resources = a.GetManifestResourceNames();
-        using var stream = a.GetManifestResourceStream("SftEngGP.Database.appsettings.json");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var a = Assembly.GetExecutingAssembly();
+            var resources = a.GetManifestResourceNames();
+            using var stream = a.GetManifestResourceStream("SftEngGP.Database.appsettings.json");
     
-        var config = new ConfigurationBuilder()
-            .AddJsonStream(stream)
-            .Build();
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(stream)
+                .Build();
     
-        optionsBuilder.UseSqlServer(
-            config.GetConnectionString(connectionName),
-            m => m.MigrationsAssembly("SftEngGP.Migrations")
-        );
+            optionsBuilder.UseSqlServer(
+                config.GetConnectionString(connectionName),
+                m => m.MigrationsAssembly("SftEngGP.Migrations")
+            );
 
-    }
+        }
 
-    public DbSet<SensorReading> Readings { get; set; }
-    public DbSet<Role> Roles { get; set; }
-    public DbSet<Configuration> Configurations { get; set; }
-    public DbSet<Incidence> Incidences { get; set; }
-    public DbSet<Measurand> Measurands { get; set; }
-    public DbSet<Sensor> Sensors { get; set; }
-    public DbSet<Update> Updates { get; set; }
-    public DbSet<User> Users { get; set; }
-    public DbSet<FrequencyOffset> FrequencyOffsets { get; set; }
+        public DbSet<SensorReading> Readings { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<Incidence> Incidences { get; set; }
+        public DbSet<Measurand> Measurands { get; set; }
+        public DbSet<Sensor> Sensors { get; set; }
+        public DbSet<Update> Updates { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<FrequencyOffset> FrequencyOffsets { get; set; }
+    }
 }
