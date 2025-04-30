@@ -1,7 +1,7 @@
  name: Build & Test Workflow
 
- on: 
-       [pull_request]
+ on: push
+ 
  jobs:
    build:
 
