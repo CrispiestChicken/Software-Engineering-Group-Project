@@ -29,17 +29,17 @@
 
         <VerticalStackLayout Grid.Column="1" Grid.Row="1">
             <Label Text="Email:" TextColor="White" FontSize="Body"/>
-            <Entry x:Name="EmailInput" Keyboard="Email" Placeholder="Email" FontSize="Body" TextColor="White"/>
+            <Entry x:Name="EmailInput" Text="{Binding Email, Mode=TwoWay}" Keyboard="Email" Placeholder="Email" FontSize="Body" TextColor="White"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout Grid.Column="1" Grid.Row="2">
             <Label Text="Password:" TextColor="White" FontSize="Body"/>
-            <Entry x:Name="PasswordInput" IsPassword="True" Placeholder="Password" FontSize="Body" TextColor="White"/>
+            <Entry x:Name="PasswordInput" Text="{Binding Password, Mode=TwoWay}" IsPassword="True" Placeholder="Password" FontSize="Body" TextColor="White"/>
         </VerticalStackLayout>
 
         <HorizontalStackLayout Grid.Column="1" Grid.Row="3">
-            <Label Text="" FontSize="Body" WidthRequest="210" TextColor="Red"/>
-            <Button x:Name="LoginButton" Text="Login" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
+            <Label Text="{Binding ErrorMessage}" FontSize="Body" WidthRequest="210" TextColor="Red"/>
+            <Button x:Name="LoginButton" Command="{Binding LoginCommand}" Text="Login" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
         </HorizontalStackLayout>
 
     </Grid>

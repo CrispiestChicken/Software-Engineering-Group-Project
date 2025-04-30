@@ -4,6 +4,7 @@ using SftEngGP.Views;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 using System.Text.RegularExpressions;
+using BCrypt.Net;
 
 namespace SftEngGP.ViewModels;
 
@@ -51,6 +52,7 @@ internal partial class AccountCreationViewModel : ObservableObject
             return;
         }
 
+        Account.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(Account.Password);
 
         await _context.AddAsync(Account);
         await _context.SaveChangesAsync();

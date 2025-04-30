@@ -14,7 +14,7 @@ internal partial class AccountsOverviewViewModel : ObservableObject
 
     private GpDbContext _context;
 
-    public int UserId { get; set; }
+    public string Email { get; set; }
     public string FName { get; set; }
     public int RoleId { get; set; }
 
