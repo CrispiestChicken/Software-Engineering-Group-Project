@@ -24,6 +24,11 @@ public partial class MaintenanceAddAndEditInputs : ContentView
     public static readonly BindableProperty MaintenanceRecordProperty =
     BindableProperty.Create(nameof(MaintenanceRecord), typeof(Maintenance), typeof(MaintenanceAddAndEditInputs), null, propertyChanged: OnMaintenanceRecordChanged);
 
+    public static readonly BindableProperty SelectedAccountProperty =
+    BindableProperty.Create(nameof(SelectedAccount), typeof(User), typeof(MaintenanceAddAndEditInputs), null, propertyChanged: OnSelectedAccountChanged);
+
+    public static readonly BindableProperty SelectedSensorProperty =
+    BindableProperty.Create(nameof(SelectedSensor), typeof(Sensor), typeof(MaintenanceAddAndEditInputs), null, propertyChanged: OnSelectedSensorChanged);
 
 
     public string CreateOrUpdate
@@ -60,6 +65,18 @@ public partial class MaintenanceAddAndEditInputs : ContentView
     {
         get => (Maintenance)GetValue(MaintenanceRecordProperty);
         set => SetValue(MaintenanceRecordProperty, value);
+    }
+
+    public User SelectedAccount
+    {
+        get => (User)GetValue(SelectedAccountProperty);
+        set => SetValue(SelectedAccountProperty, value);
+    }
+
+    public Sensor SelectedSensor
+    {
+        get => (Sensor)GetValue(SelectedSensorProperty);
+        set => SetValue(SelectedSensorProperty, value);
     }
 
 
@@ -119,6 +136,22 @@ public partial class MaintenanceAddAndEditInputs : ContentView
         control.MaintainerInput.SelectedItem = newData.UserEmail;
         control.SensorSelect.SelectedItem = newData.SensorId;
         control.CommentsInput.Text = newData.Comments;
+    }
+
+    private static void OnSelectedAccountChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (MaintenanceAddAndEditInputs)bindable;
+        var newData = (User)newValue;
+
+        control.MaintainerInput.SelectedItem = newData;
+
+    }
+
+    private static void OnSelectedSensorChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (MaintenanceAddAndEditInputs)bindable;
+        var newData = (Sensor)newValue;
+        control.SensorSelect.SelectedItem = newData;
     }
 
 

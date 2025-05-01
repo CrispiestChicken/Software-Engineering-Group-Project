@@ -14,18 +14,6 @@ internal partial class AccountEditViewModel : ObservableObject
     public User Account { get; set; }
     private GpDbContext _context;
 
-
-
-
-    // These are specified here so the app builds before data is given to them.
-    public int UserId { get; set; }
-    public string FName { get; set; }
-    public string LName { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public int RoleId { get; set; }
-
-
     public AccountEditViewModel(User account)
     {
         _context = new GpDbContext();

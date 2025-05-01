@@ -7,10 +7,14 @@
              x:DataType="viewModels:MaintenanceEditViewModel"
              Title="Editing Maintenance">
 
-    <ContentPage.BindingContext>
-        <viewModels:MaintenanceEditViewModel/>
-    </ContentPage.BindingContext>
-
-    <custom_components:MaintenanceAddAndEditInputs CreateOrUpdate="{Binding CreateOrUpdate}"/>
+    <custom_components:MaintenanceAddAndEditInputs 
+        MaintenanceRecord="{Binding MaintenanceRecord}" 
+        CreateOrUpdateCommand="{Binding UpdateCommand}"
+        ErrorMessage="{Binding ErrorMessage}" 
+        AllAccounts="{Binding AllAccounts}"  
+        AllSensors="{Binding AllSensors}"  
+        CreateOrUpdate="{Binding CreateOrUpdate}"
+        SelectedAccount="{Binding SelectedAccount}"
+        SelectedSensor="{Binding SelectedSensor}"/>
 
 </ContentPage>

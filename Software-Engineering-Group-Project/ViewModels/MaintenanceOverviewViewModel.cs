@@ -26,8 +26,8 @@ namespace SftEngGP.ViewModels
 
 
         [RelayCommand]
-        private async Task EditMaintenanceButtonClicked() =>
-            await App.Current.MainPage.Navigation.PushAsync(new MaintenanceEditPage());
+        private async Task EditMaintenanceButtonClicked(Maintenance maintenanceRecord) =>
+            await App.Current.MainPage.Navigation.PushAsync(new MaintenanceEditPage(maintenanceRecord));
 
         [RelayCommand]
         private async Task NewMaintenanceButtonClicked() =>
