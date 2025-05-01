@@ -13,7 +13,8 @@ public partial class MaintenanceAddAndEditInputs : ContentView
     public static readonly BindableProperty AllAccountsProperty =
     BindableProperty.Create(nameof(AllAccounts), typeof(List<User>), typeof(MaintenanceAddAndEditInputs), null, propertyChanged: OnAllAccountsChanged);
 
-
+    public static readonly BindableProperty ErrorMessageProperty =
+    BindableProperty.Create(nameof(ErrorMessage), typeof(string), typeof(MaintenanceAddAndEditInputs), String.Empty, propertyChanged: OnErrorMessageChanged);
 
     public string CreateOrUpdate
     {
@@ -32,6 +33,14 @@ public partial class MaintenanceAddAndEditInputs : ContentView
         get => (List<User>)GetValue(AllAccountsProperty);
         set => SetValue(AllAccountsProperty, value);
     }
+
+    public string ErrorMessage
+    {
+        get => (string)GetValue(ErrorMessageProperty);
+        set => SetValue(ErrorMessageProperty, value);
+    }
+
+
 
     private static void OnCreateOrUpdateChanged(BindableObject bindable, object oldValue, object newValue)
     {
@@ -57,6 +66,15 @@ public partial class MaintenanceAddAndEditInputs : ContentView
         var newData = (List<User>)newValue;
 
         control.MaintainerInput.ItemsSource = newData;
+
+    }
+
+    private static void OnErrorMessageChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (MaintenanceAddAndEditInputs)bindable;
+        var newData = (string)newValue;
+
+        control.ErrorBox.Text = newData;
 
     }
 

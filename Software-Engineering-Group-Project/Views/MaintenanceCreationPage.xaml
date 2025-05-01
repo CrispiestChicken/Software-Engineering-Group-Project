@@ -11,6 +11,6 @@
         <viewModels:MaintenanceCreationViewModel/>
     </ContentPage.BindingContext>
 
-    <custom_components:MaintenanceAddAndEditInputs AllAccounts="{Binding AllAccounts}"  AllSensors="{Binding AllSensors}"  CreateOrUpdate="{Binding CreateOrUpdate}"/>
+    <custom_components:MaintenanceAddAndEditInputs  ErrorMessage="{Binding ErrorMessage}" AllAccounts="{Binding AllAccounts}"  AllSensors="{Binding AllSensors}"  CreateOrUpdate="{Binding CreateOrUpdate}"/>
 
 </ContentPage>
