@@ -9,22 +9,12 @@
         <DatePicker x:Name="DateInput" Format="d/M/y" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Maintainer:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Picker x:Name="MaintainerInput" Title="Select Maintainers Email" FontSize="Body" TextColor="White" Margin="50,0,50,0">
-            <Picker.Items>
-                <x:String>email1@email.com</x:String>
-                <x:String>email2@email.com</x:String>
-                <x:String>email3@email.com</x:String>
-            </Picker.Items>
+        <Picker x:Name="MaintainerInput" Title="Select Maintainers Email" ItemsSource="{Binding AllAccounts}" ItemDisplayBinding="{Binding Email}" FontSize="Body" TextColor="White" Margin="50,0,50,0">
+
         </Picker>
 
         <Label Text="Sensor:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Picker x:Name="SensorInput" Title="Select Sensor" FontSize="Body" TextColor="White" Margin="50,0,50,0">
-            <Picker.Items>
-                <x:String>1</x:String>
-                <x:String>2</x:String>
-                <x:String>3</x:String>
-            </Picker.Items>
-        </Picker>
+        <Picker x:Name="SensorSelect" Title="Select Sensor" ItemsSource="{Binding AllSensors}" ItemDisplayBinding="{Binding SensorId}" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Comments" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
         <Entry x:Name="CommentsInput" Placeholder="Comments" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
