@@ -44,7 +44,7 @@
                             </Grid.RowDefinitions>
                             <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="0" Margin="10,5" CornerRadius="5"/>
                             <Label Text="{Binding UserEmail}" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="15,0"/>
-                            <Label Text="{Binding Date}" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+                            <Label Text="{Binding Date, StringFormat='{0:d}'}" FontSize="20" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
                             <!--Have to do all the stuff in command because the binding in this part is linked to AllMaintenance not the view model.-->
                             <ImageButton 
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MaintenanceOverviewViewModel}}, Path=EditMaintenanceButtonClickedCommand}"

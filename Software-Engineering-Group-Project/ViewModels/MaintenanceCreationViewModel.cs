@@ -13,6 +13,8 @@ namespace SftEngGP.ViewModels
         public List<Sensor> AllSensors { get; set; }
         public List<User> AllAccounts { get; set; }
         public Maintenance MaintenanceRecord { get; set; }
+        public User SelectedAccount { get; set; }
+        public Sensor SelectedSensor { get; set; }
 
 
         [ObservableProperty]

@@ -132,7 +132,7 @@ public partial class MaintenanceAddAndEditInputs : ContentView
         var newData = (Maintenance)newValue;
 
         // Have to convert from date only to date time.
-        control.DateInput.Date = newData.Date.ToDateTime(new TimeOnly());
+        control.DateInput.Date = newData.Date;
         control.MaintainerInput.SelectedItem = newData.UserEmail;
         control.SensorSelect.SelectedItem = newData.SensorId;
         control.CommentsInput.Text = newData.Comments;

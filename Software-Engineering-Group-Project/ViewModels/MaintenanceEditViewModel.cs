@@ -28,7 +28,7 @@ namespace SftEngGP.ViewModels
         {
             _context = new GpDbContext();
 
-            MaintenanceRecord = maintenance;
+            MaintenanceRecord = _context.Maintenance.Find(maintenance.MaintenanceId);
             AllSensors = _context.Sensors.ToList();
             AllAccounts = _context.Users.ToList();
 
@@ -39,7 +39,25 @@ namespace SftEngGP.ViewModels
         [RelayCommand]
         private async Task Update()
         {
+            // Setting the inputs to the database record.
+            MaintenanceRecord.UserEmail = SelectedAccount.Email;
+            MaintenanceRecord.SensorId = SelectedSensor.SensorId;
 
+
+            string result = ValidateData();
+
+            if (result != "Success")
+            {
+                ErrorMessage = result;
+                return;
+            }
+
+            Debug.WriteLine(MaintenanceRecord.Date);
+
+            // Saves the changes made in the input boxes to the database.
+            await _context.SaveChangesAsync();
+
+            await App.Current.MainPage.Navigation.PopAsync();
 
 
         }
@@ -47,7 +65,11 @@ namespace SftEngGP.ViewModels
 
         private string ValidateData()
         {
+            if(MaintenanceRecord.UserEmail is null or "") return "ERROR: Please Select a Maintainer";
 
+            if (MaintenanceRecord.SensorId == 0) return "ERROR: Please Select a Sensor";
+
+            if (MaintenanceRecord.Comments is null or "") return "ERROR: Please Enter Comments";
 
             return "Success";
         }

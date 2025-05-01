@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SftEngGP.ViewComponents.MaintenanceAddAndEditInputs">
+             x:Class="SftEngGP.ViewComponents.MaintenanceAddAndEditInputs"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime">
     
     <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="SlateBlue" Margin="20,100">
 
         <Label Text="Date:" FontSize="Body" TextColor="White" Margin="50,40,0,0"/>
-        <DatePicker x:Name="DateInput" Date="{Binding MaintenanceRecord.Date, Mode=TwoWay}" Format="d/M/y" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <DatePicker x:Name="DateInput" Date="{Binding MaintenanceRecord.Date, Mode=TwoWay}" Format="d/M/y" MinimumDate="{x:Static sys:DateTime.Today}" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Maintainer:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
         <Picker x:Name="MaintainerInput" Title="Select Maintainers Email" SelectedItem="{Binding SelectedAccount, Mode=TwoWay}" ItemsSource="{Binding AllAccounts}" ItemDisplayBinding="{Binding Email}" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>

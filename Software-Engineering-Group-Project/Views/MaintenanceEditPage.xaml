@@ -8,13 +8,13 @@
              Title="Editing Maintenance">
 
     <custom_components:MaintenanceAddAndEditInputs 
-        MaintenanceRecord="{Binding MaintenanceRecord}" 
+        MaintenanceRecord="{Binding MaintenanceRecord, Mode=TwoWay}" 
         CreateOrUpdateCommand="{Binding UpdateCommand}"
         ErrorMessage="{Binding ErrorMessage}" 
         AllAccounts="{Binding AllAccounts}"  
         AllSensors="{Binding AllSensors}"  
         CreateOrUpdate="{Binding CreateOrUpdate}"
-        SelectedAccount="{Binding SelectedAccount}"
-        SelectedSensor="{Binding SelectedSensor}"/>
+        SelectedAccount="{Binding SelectedAccount, Mode=TwoWay}"
+        SelectedSensor="{Binding SelectedSensor, Mode=TwoWay}"/>
 
 </ContentPage>
