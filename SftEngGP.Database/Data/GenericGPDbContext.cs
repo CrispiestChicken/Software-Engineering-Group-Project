@@ -41,6 +41,7 @@ namespace SftEngGP.Database.Data
         public DbSet<Configuration> Configurations { get; set; }
         public DbSet<Incidence> Incidences { get; set; }
         public DbSet<Measurand> Measurands { get; set; }
+        public DbSet<Maintenance> Maintenance { get; set; }
         public DbSet<Sensor> Sensors { get; set; }
         public DbSet<Update> Updates { get; set; }
         public DbSet<User> Users { get; set; }

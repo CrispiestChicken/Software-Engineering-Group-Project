@@ -4,7 +4,6 @@ using SftEngGP.Views;
 using SftEngGP.Database.Data;
 using System.Collections.ObjectModel;
 using SftEngGP.Database.Models;
-using System.Diagnostics;
 
 namespace SftEngGP.ViewModels;
 

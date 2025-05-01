@@ -13,45 +13,48 @@
     <ScrollView>
         <Grid BackgroundColor="SlateBlue" ColumnSpacing="15" Margin="20,50">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="14*"/>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="29*"/>
-                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="36*"/>
+                <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="0" Margin="10,5" CornerRadius="5"/>
-            <Label Text="ID" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-            <Label Text="Maintainer" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-            <Label Text="Sensor" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0"/>
+            <Label Text="Maintainer" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <Label Text="Date" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
             <ImageButton Command="{Binding NewMaintenanceButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
 
-            <!-- Need database to link up so I can add the data as its comes -->
-            <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,5" CornerRadius="5"/>
-            <Label Text="1" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-            <Label Text="Bob" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
-            <Label Text="13" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="1"/>
-            <ImageButton Command="{Binding EditMaintenanceButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="1"/>
+        
 
+            <CollectionView x:Name="MaintenanceOverview" BackgroundColor="SlateBlue" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding AllMaintenance}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60*"/>
+                                <ColumnDefinition Width="36*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="0" Margin="10,5" CornerRadius="5"/>
+                            <Label Text="{Binding UserEmail}" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="15,0"/>
+                            <Label Text="{Binding Date}" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+                            <!--Have to do all the stuff in command because the binding in this part is linked to AllMaintenance not the view model.-->
+                            <ImageButton 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MaintenanceOverviewViewModel}}, Path=EditMaintenanceButtonClickedCommand}"
+                                CommandParameter="{Binding .}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="0"/>
 
-            <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.Row="2" Margin="10,5" CornerRadius="5"/>
-            <Label Text="2" FontSize="20" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2"/>
-            <Label Text="Bob" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2"/>
-            <Label Text="216" FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="2"/>
-            <ImageButton Command="{Binding EditMaintenanceButtonClickedCommand}" Source="dotnet_bot.png" Scale="0.75" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Grid.Row="2"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-
+            </CollectionView>
         </Grid>
 
     </ScrollView>
