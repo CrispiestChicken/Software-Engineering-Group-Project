@@ -12,6 +12,7 @@ namespace SftEngGP.Database.Models
         public int MaintenanceId { get; set; }
         public string UserEmail { get; set; }
         public string MaintenanceType { get; set; }
+        public int SensorId { get; set; }
         public DateOnly Date { get; set; }
         public string CallLog { get; set; }
         public string Comments { get; set; }

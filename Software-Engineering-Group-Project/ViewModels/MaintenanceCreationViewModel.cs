@@ -12,7 +12,7 @@ namespace SftEngGP.ViewModels
         private GpDbContext _context;
         public List<Sensor> AllSensors { get; set; }
         public List<User> AllAccounts { get; set; }
-
+        public Maintenance MaintenanceRecord { get; set; }
 
 
         [ObservableProperty]
@@ -26,8 +26,26 @@ namespace SftEngGP.ViewModels
         {
             _context = new GpDbContext();
 
+            MaintenanceRecord = new Maintenance();
             AllSensors = _context.Sensors.ToList();
             AllAccounts = _context.Users.ToList();
+        }
+
+
+        [RelayCommand]
+        private async Task Create()
+        {
+            
+
+
+        }
+
+
+        private string ValidateData()
+        {
+            
+
+            return "Success";
         }
 
     }

@@ -6,22 +6,20 @@
     <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="SlateBlue" Margin="20,100">
 
         <Label Text="Date:" FontSize="Body" TextColor="White" Margin="50,40,0,0"/>
-        <DatePicker x:Name="DateInput" Format="d/M/y" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <DatePicker x:Name="DateInput" Date="{Binding MaintenanceRecord.Date}" Format="d/M/y" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Maintainer:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Picker x:Name="MaintainerInput" Title="Select Maintainers Email" ItemsSource="{Binding AllAccounts}" ItemDisplayBinding="{Binding Email}" FontSize="Body" TextColor="White" Margin="50,0,50,0">
-
-        </Picker>
+        <Picker x:Name="MaintainerInput" Title="Select Maintainers Email" SelectedItem="{Binding MaintenanceRecord.UserEmail}" ItemsSource="{Binding AllAccounts}" ItemDisplayBinding="{Binding Email}" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Sensor:" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Picker x:Name="SensorSelect" Title="Select Sensor" ItemsSource="{Binding AllSensors}" ItemDisplayBinding="{Binding SensorId}" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <Picker x:Name="SensorSelect" Title="Select Sensor" SelectedItem="{Binding MaintenanceRecord.SensorId}" ItemsSource="{Binding AllSensors}" ItemDisplayBinding="{Binding SensorId}" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <Label Text="Comments" FontSize="Body" TextColor="White" Margin="50,10,0,0"/>
-        <Entry x:Name="CommentsInput" Placeholder="Comments" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
+        <Entry x:Name="CommentsInput" Text="{Binding MaintenanceRecord.Comments}" Placeholder="Comments" FontSize="Body" TextColor="White" Margin="50,0,50,0"/>
 
         <HorizontalStackLayout HorizontalOptions="Fill" Margin="20,20,0,0">
             <Label x:Name="ErrorBox" Text="{Binding ErrorMessage}" FontSize="Body" WidthRequest="210" TextColor="Red"/>
-            <Button x:Name="SubmitButton" Text="{Binding CreateOrUpdate}" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
+            <Button x:Name="SubmitButton" Text="{Binding CreateOrUpdate}" Command="{Binding CreateOrUpdateCommand}" TextColor="Black" FontSize="Body" BackgroundColor="White" Margin="10,0,0,0" />
         </HorizontalStackLayout>
 
     </VerticalStackLayout>
