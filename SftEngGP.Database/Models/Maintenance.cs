@@ -8,13 +8,12 @@ namespace SftEngGP.Database.Models
     [PrimaryKey(nameof(MaintenanceId))]
     public class Maintenance
     {
-        [Required]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaintenanceId { get; set; }
         public string UserEmail { get; set; }
-        public string MaintenanceType { get; set; }
         public int SensorId { get; set; }
         public DateTime Date { get; set; }
-        public string CallLog { get; set; }
         public string Comments { get; set; }
     }
 }

@@ -52,8 +52,6 @@ namespace SftEngGP.ViewModels
                 return;
             }
 
-            Debug.WriteLine(MaintenanceRecord.Date);
-
             // Saves the changes made in the input boxes to the database.
             await _context.SaveChangesAsync();
 
