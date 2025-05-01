@@ -80,9 +80,9 @@
                                 
                                 <RoundRectangle BackgroundColor="White" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="10,5" CornerRadius="5"/>
                                 <Label Text="{Binding Longitude}" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="15,0"/>
-                                <Label Text="{Binding Lattitude}" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+                                <Label Text="{Binding Latitude}" FontSize="20" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="15,0"/>
                                 <Label Text="{Binding IncidenceType}" FontSize="20" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" Grid.Column="1" Grid.RowSpan="2"/>
-                                <Label Text="{Binding DateOfEvent, StringFormat='{0:d}'}" FontSize="20" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" Grid.Column="1" Grid.RowSpan="2"/>
+                                <Label Text="{Binding DateOfEvent, StringFormat='{0:d}'}" FontSize="20" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" Grid.Column="2" Grid.RowSpan="2"/>
 
 
                             </Grid>
