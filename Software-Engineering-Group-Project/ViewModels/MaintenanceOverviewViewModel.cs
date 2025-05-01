@@ -6,11 +6,11 @@ namespace SftEngGP.ViewModels
     internal partial class MaintenanceOverviewViewModel : ObservableObject
     {
         [RelayCommand]
-        private async void EditMaintenanceButtonClicked() =>
+        private async Task EditMaintenanceButtonClicked() =>
             await App.Current.MainPage.Navigation.PushAsync(new MaintenanceEditPage());
 
         [RelayCommand]
-        private async void NewMaintenanceButtonClicked() =>
+        private async Task NewMaintenanceButtonClicked() =>
             await App.Current.MainPage.Navigation.PushAsync(new MaintenanceCreationPage());
     }
 }
