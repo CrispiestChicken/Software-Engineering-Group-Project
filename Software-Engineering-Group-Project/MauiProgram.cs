@@ -19,7 +19,7 @@ namespace SftEngGP
             var builder = MauiApp.CreateBuilder();
             var a = Assembly.GetExecutingAssembly();
 
-            builder.Services.AddDbContext<GpDbContext>();
+            builder.Services.AddDbContext<GenericGPDbContext,GpDbContext>();
 
             builder.Services.AddSingleton<AdminDashboardViewModel>();
             builder.Services.AddSingleton<AdminDashboard>();
@@ -36,7 +36,11 @@ namespace SftEngGP
             builder.Services.AddTransient<SensorViewModel>();
             builder.Services.AddTransient<TrendsPage>();
             builder.Services.AddTransient<SensorPage>();
-
+            
+            builder.Services.AddSingleton<AllTablesViewModel>();
+            builder.Services.AddSingleton<AllTablesPage>();
+            builder.Services.AddTransient<TableViewModel>();
+            builder.Services.AddTransient<TableRowViewModel>();
 
             builder
                 .UseMauiApp<App>()

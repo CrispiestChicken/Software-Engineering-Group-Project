@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SftEngGP.Views.TablePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <CollectionView x:Name="properties"
+                            ItemsSource="{Binding TableColumns}"
+                            ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding}"></Label>
+                                <Label Text=",    "></Label>
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView x:Name="rows"
+                                ItemsSource="{Binding TableRows}"
+                                ItemsLayout="VerticalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <CollectionView x:Name="cells"
+                                            ItemsSource="{Binding RowCells}"
+                                            ItemsLayout="HorizontalList">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding }"></Label>
+                                            <Label Text=",    "></Label>
+                                        </HorizontalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
