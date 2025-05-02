@@ -21,6 +21,9 @@
         <Tab Title="Sensors" Route="Sensors" Icon="dotnet_bot.png">
             <ShellContent ContentTemplate="{DataTemplate views:AllSensorsPage}" />
         </Tab>
+        <Tab Title="Tables" Route="Tables" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AllTablesPage}" />
+        </Tab>
     </TabBar>
 
 
