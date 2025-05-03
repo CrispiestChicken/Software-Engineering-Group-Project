@@ -9,28 +9,58 @@ using System.Text.RegularExpressions;
 
 namespace SftEngGP.ViewModels;
 
+/// <summary>
+/// ViewModel for the AccountEditPage.
+/// </summary>
 internal partial class AccountEditViewModel : ObservableObject
 {
+
+    /// <summary>
+    /// The account that is being edited.
+    /// </summary>
     public User Account { get; set; }
+
+    /// <summary>
+    /// The database context used to access the database.
+    /// </summary>
     private GpDbContext _context;
 
+
+    /// <summary>
+    /// Constructor for the AccountEditViewModel that initializes the account to be edited.
+    /// </summary>
+    /// <param name="account"></param>
     public AccountEditViewModel(User account)
     {
         _context = new GpDbContext();
+        // Have to use the Find method to get the account from the database not just one thats passed in.
         Account = _context.Users.Find(account.UserId);
     }
 
-
+    /// <summary>
+    /// A bool that is used to enable or disable editing of the email field.
+    /// </summary>
     [ObservableProperty]
     public bool creatingAccount = false;
 
+    /// <summary>
+    /// The text that is displayed on the button.
+    /// </summary>
     [ObservableProperty]
     public string createOrUpdate = "Update";
 
+
+    /// <summary>
+    /// The error message that is displayed.
+    /// </summary>
     [ObservableProperty]
     public string errorMessage = "";
 
 
+    /// <summary>
+    /// Saves a user account to the database if valid.
+    /// </summary>
+    /// <returns></returns>
     [RelayCommand]
     public async Task Update()
     {
@@ -43,14 +73,16 @@ internal partial class AccountEditViewModel : ObservableObject
             return;
         }
 
-        // Saves the changes made in the input boxes to the database.
+        // Saves the changes made in the input boxes to the database and returns to the previous page.
         await _context.SaveChangesAsync();
-
         await App.Current.MainPage.Navigation.PopAsync();
-
     }
 
 
+    /// <summary>
+    /// Validates the data in the Account object.
+    /// </summary>
+    /// <returns></returns>
     private string ValidateData()
     {
         if (Account.Password is null or "") return "ERROR:Please Insert a Password";

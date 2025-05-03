@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace SftEngGP.ViewComponents;
 
+// All of this code is databinding for the component.
 public partial class MaintenanceAddAndEditInputs : ContentView
 {
     public static readonly BindableProperty CreateOrUpdateProperty =

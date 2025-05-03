@@ -7,24 +7,58 @@ using System.Diagnostics;
 
 namespace SftEngGP.ViewModels
 {
+    /// <summary>
+    /// ViewModel for the Maintenance Creation page.
+    /// </summary>
     internal partial class MaintenanceCreationViewModel : ObservableObject
     {
-
+        /// <summary>
+        /// The database context used to access the database.
+        /// </summary>
         private GpDbContext _context;
+
+        /// <summary>
+        /// List of all sensors in the database.
+        /// </summary>
         public List<Sensor> AllSensors { get; set; }
+
+        /// <summary>
+        /// List of all users in the database.
+        /// </summary>
         public List<User> AllAccounts { get; set; }
+
+        /// <summary>
+        /// The maintenance record being created.
+        /// </summary>
         public Maintenance MaintenanceRecord { get; set; }
+
+        /// <summary>
+        /// The selected account assigned the maintenance.
+        /// </summary>
         public User SelectedAccount { get; set; }
+
+        /// <summary>
+        /// The sensor that needs maintenance.
+        /// </summary>
         public Sensor SelectedSensor { get; set; }
 
 
+        /// <summary>
+        /// Sets the button to say Create.
+        /// </summary>
         [ObservableProperty]
         public string createOrUpdate = "Create";
 
+        /// <summary>
+        /// The error message to be displayed.
+        /// </summary>
         [ObservableProperty]
         public string errorMessage = "";
 
 
+        /// <summary>
+        /// Constructor for the MaintenanceCreationViewModel.
+        /// </summary>
         public MaintenanceCreationViewModel()
         {
             _context = new GpDbContext();
@@ -35,6 +69,10 @@ namespace SftEngGP.ViewModels
         }
 
 
+        /// <summary>
+        /// Command to create a new maintenance record.
+        /// </summary>
+        /// <returns></returns>
         [RelayCommand]
         private async Task Create()
         {
@@ -51,15 +89,8 @@ namespace SftEngGP.ViewModels
                 return;
             }
 
-            Debug.WriteLine(MaintenanceRecord.Date);
-            Debug.WriteLine(MaintenanceRecord.UserEmail);
-            Debug.WriteLine(MaintenanceRecord.SensorId);
-            Debug.WriteLine(MaintenanceRecord.Comments);
-
             // Saves the changes made in the input boxes to the database.
             await _context.Maintenance.AddAsync(MaintenanceRecord);
-
-
 
             try
             {
@@ -77,6 +108,10 @@ namespace SftEngGP.ViewModels
         }
 
 
+        /// <summary>
+        /// Validates the data entered by the user.
+        /// </summary>
+        /// <returns></returns>
         private string ValidateData()
         {
             if (MaintenanceRecord.UserEmail is null or "") return "ERROR: Please Select a Maintainer";

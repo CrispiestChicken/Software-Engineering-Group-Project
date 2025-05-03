@@ -7,35 +7,79 @@ using System.Diagnostics;
 
 namespace SftEngGP.ViewModels
 {
+    /// <summary>
+    /// ViewModel for the Maintenance Edit page.
+    /// </summary>
     internal partial class MaintenanceEditViewModel : ObservableObject
     {
+
+        /// <summary>
+        /// The database context used to access the database.
+        /// </summary>
         private GpDbContext _context;
+
+        /// <summary>
+        /// List of all sensors in the database.
+        /// </summary>
         public List<Sensor> AllSensors { get; set; }
+
+        /// <summary>
+        /// List of all users in the database.
+        /// </summary>
         public List<User> AllAccounts { get; set; }
+
+        /// <summary>
+        /// The maintenance record being edited.
+        /// </summary>
         public Maintenance MaintenanceRecord { get; set; }
+
+        /// <summary>
+        /// The account assigned the maintenance.
+        /// </summary>
         public User SelectedAccount { get; set; }
+
+        /// <summary>
+        /// The sensor that needs maintenance.
+        /// </summary>
         public Sensor SelectedSensor { get; set; }
 
 
+        /// <summary>
+        /// Sets the button to say Update.
+        /// </summary>
         [ObservableProperty]
         public string createOrUpdate = "Update";
 
+        /// <summary>
+        /// The error message to be displayed.
+        /// </summary>
         [ObservableProperty]
         public string errorMessage = "";
 
 
+        /// <summary>
+        /// Constructor for the MaintenanceEditViewModel.
+        /// </summary>
+        /// <param name="maintenance"></param>
         public MaintenanceEditViewModel(Maintenance maintenance)
         {
             _context = new GpDbContext();
 
+            // Uses find to get the maintenance object thats tied to the database.
             MaintenanceRecord = _context.Maintenance.Find(maintenance.MaintenanceId);
             AllSensors = _context.Sensors.ToList();
             AllAccounts = _context.Users.ToList();
 
+            // Sets the selected account and sensor to the ones tied to the maintenance object to display to user.
             SelectedAccount = AllAccounts.FirstOrDefault(x => x.Email == maintenance.UserEmail);
             SelectedSensor = AllSensors.FirstOrDefault(x => x.SensorId == maintenance.SensorId);
         }
 
+
+        /// <summary>
+        /// Command to update the maintenance record in the database.
+        /// </summary>
+        /// <returns></returns>
         [RelayCommand]
         private async Task Update()
         {
@@ -61,6 +105,10 @@ namespace SftEngGP.ViewModels
         }
 
 
+        /// <summary>
+        /// Validates the data entered by the user.
+        /// </summary>
+        /// <returns></returns>
         private string ValidateData()
         {
             if(MaintenanceRecord.UserEmail is null or "") return "ERROR: Please Select a Maintainer";
