@@ -16,12 +16,11 @@ namespace SftEngGP
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            var a = Assembly.GetExecutingAssembly();
             
             builder.Services.AddDbContext<GpDbContext>(options =>
                 options.UseSqlite("Server=192.168.0.13,1433;Database=gpdb;User Id=gpapp;Password=gp4pp$00;TrustServerCertificate=True;Encrypt=True;"));
             
-            builder.Services.AddSingleton<SimulatedTimeService>();
+            builder.Services.AddSingleton(new SimulatedTimeService(DateTime.Parse("2025-01-31 23:50:00")));
             builder.Services.AddSingleton<SensorDataService>();
 
             builder.Services.AddSingleton<AdminDashboardViewModel>();
@@ -44,11 +43,12 @@ namespace SftEngGP
             builder.Services.AddTransient<TrendsPage>();
             builder.Services.AddTransient<SensorPage>();
             
-            builder.Services.AddSingleton(new SimulatedTimeService(DateTime.Parse("2025-02-01 00:00:00")));
+            builder.Services.AddSingleton<AppShell>();
+            builder.Services.AddSingleton<App>();
             
             builder
-                .UseMauiApp<App>().ConfigureSyncfusionCore()
                 .UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
                 .UseMauiMaps()
                 .ConfigureFonts(fonts =>
                 {
