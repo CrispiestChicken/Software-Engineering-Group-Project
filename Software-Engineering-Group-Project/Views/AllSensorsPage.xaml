@@ -22,6 +22,11 @@
 
             <!-- Water Quality -->
             <Frame BorderColor="Purple" CornerRadius="0" HasShadow="False">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding WaterSensorStatus}" Value="Offline">
+                        <Setter Property="BorderColor" Value="Red" />
+                    </DataTrigger>
+                </Frame.Triggers>
                 <VerticalStackLayout Padding="10">
                     <Label Text="Water Quality" FontAttributes="Bold" FontSize="20"/>
                     <Label Text="{Binding WaterSensorStatus}" FontAttributes="Italic"/>
@@ -36,6 +41,11 @@
 
             <!-- Air Quality -->
             <Frame BorderColor="Purple" CornerRadius="0" HasShadow="False">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding AirSensorStatus}" Value="Offline">
+                        <Setter Property="BorderColor" Value="Red" />
+                    </DataTrigger>
+                </Frame.Triggers>
                 <VerticalStackLayout Padding="10">
                     <Label Text="Air Quality" FontAttributes="Bold" FontSize="20"/>
                     <Label Text="{Binding AirSensorStatus}" FontAttributes="Italic"/>
@@ -50,6 +60,11 @@
 
             <!-- Weather -->
             <Frame BorderColor="Purple" CornerRadius="0" HasShadow="False">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding WeatherSensorStatus}" Value="Offline">
+                        <Setter Property="BorderColor" Value="Red" />
+                    </DataTrigger>
+                </Frame.Triggers>
                 <VerticalStackLayout Padding="10">
                     <Label Text="Weather" FontAttributes="Bold" FontSize="20"/>
                     <Label Text="{Binding WeatherSensorStatus}" FontAttributes="Italic"/>
