@@ -14,6 +14,11 @@ public class SensorDataService
 
     public event Action? OnDataUpdated;
 
+
+    /// <summary>
+    /// A service to manage and retrieve sensor data for water quality, air quality, and weather.
+    /// Integrates with a database context and a simulated time service to fetch and update sensor data.
+    /// </summary>
     public SensorDataService(GpDbContext context, SimulatedTimeService timeService)
     {
         _context = context;
@@ -23,7 +28,8 @@ public class SensorDataService
         {
             if (time.Minute == 0)
             {
-                LoadSensorReadings(time);
+                Console.WriteLine("Checking sensors...");
+                _ = Task.Run(() => LoadSensorReadings(time));
             }
         };
     }
