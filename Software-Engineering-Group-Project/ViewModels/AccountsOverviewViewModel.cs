@@ -4,6 +4,8 @@ using SftEngGP.Views;
 using SftEngGP.Database.Data;
 using System.Collections.ObjectModel;
 using SftEngGP.Database.Models;
+using System.Diagnostics;
+using CommunityToolkit.Maui.Core.Extensions;
 
 namespace SftEngGP.ViewModels;
 
@@ -25,6 +27,8 @@ internal partial class AccountsOverviewViewModel : ObservableObject
 
     private GpDbContext _context;
 
+    public System.Timers.Timer UpdateTimer { get; set; }
+
 
 
     // These have to be here for the XAML to bind to them or it throws an error.
@@ -40,6 +44,11 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     {
         _context = new GpDbContext();
         AllAccounts = new ObservableCollection<User>(_context.Users.ToList());
+
+        // Setting up the timer to update the view every X seconds.
+        UpdateTimer = new System.Timers.Timer(10000);
+        UpdateTimer.Elapsed += async (sender, e) => await UpdateAccounts();
+        UpdateTimer.Start();
     }
 
 
@@ -59,4 +68,22 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     [RelayCommand]
     private static async Task NewAccountButtonClicked() =>
         await App.Current.MainPage.Navigation.PushAsync(new AccountCreationPage());
+
+
+    private async Task UpdateAccounts()
+    {
+        ObservableCollection<User> newAccounts = _context.Users.ToObservableCollection();
+
+        if(newAccounts.Count == AllAccounts.Count)
+        {
+            return;
+        }
+
+        // Gets all accounts from the database and updates the view.
+        AllAccounts.Clear();
+        foreach(User Account in _context.Users)
+        {
+            AllAccounts.Add(Account);
+        }
+    }
 }

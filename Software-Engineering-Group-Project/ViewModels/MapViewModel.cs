@@ -37,7 +37,7 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Timer for updating the map every X seconds.
         /// </summary>
-        private System.Timers.Timer _mapUpdateTimer { get; set; }
+        public System.Timers.Timer MapUpdateTimer { get; set; }
 
 
 
@@ -74,12 +74,12 @@ namespace SftEngGP.ViewModels
 
 
             // Timer for updating the map that runs UpdateMap every X seconds (number in timer milliseconds).
-            _mapUpdateTimer = new System.Timers.Timer(5000);
-            _mapUpdateTimer.Elapsed += async (sender, e) =>
+            MapUpdateTimer = new System.Timers.Timer(5000);
+            MapUpdateTimer.Elapsed += async (sender, e) =>
             {
                 await UpdateMap();
             };
-            _mapUpdateTimer.Start();
+            MapUpdateTimer.Start();
         }
 
 

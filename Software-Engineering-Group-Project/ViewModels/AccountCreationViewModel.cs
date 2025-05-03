@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using SftEngGP.Views;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
-using System.Text.RegularExpressions;
 using BCrypt.Net;
 using System.Net.Mail;
 

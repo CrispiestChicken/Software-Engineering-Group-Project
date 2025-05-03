@@ -14,11 +14,10 @@
 
     <ScrollView>
         <VerticalStackLayout BackgroundColor="SlateBlue" Margin="10,50">
-            <maps:Map x:Name="map" ItemsSource="{Binding AllBreaches}" IsShowingUser="true" HorizontalOptions="Center" HeightRequest="500" Margin="10,10,10,0">
+            <maps:Map x:Name="map" ItemsSource="{Binding AllBreaches}" HorizontalOptions="Center" HeightRequest="500" Margin="10,10,10,0">
                 <maps:Map.ItemTemplate>
                     <DataTemplate>
                         <maps:Pin Label="{Binding Alert}" Location="{Binding Location}"/>
-
                     </DataTemplate>
                     
                 </maps:Map.ItemTemplate>
