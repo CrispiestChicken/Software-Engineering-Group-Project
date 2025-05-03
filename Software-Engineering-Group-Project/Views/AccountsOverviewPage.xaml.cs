@@ -6,9 +6,9 @@ namespace SftEngGP.Views;
 
 public partial class AccountsOverviewPage : ContentPage
 {
-	public AccountsOverviewPage()
+	public AccountsOverviewPage(GpDbContext context)
 	{
-		this.BindingContext = new AccountsOverviewViewModel();
+		this.BindingContext = new AccountsOverviewViewModel(context);
 		InitializeComponent();
 	}
 }

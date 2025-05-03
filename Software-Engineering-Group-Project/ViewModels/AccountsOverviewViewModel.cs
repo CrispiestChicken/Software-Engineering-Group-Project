@@ -5,6 +5,7 @@ using SftEngGP.Database.Data;
 using System.Collections.ObjectModel;
 using SftEngGP.Database.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace SftEngGP.ViewModels;
 
@@ -15,13 +16,12 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     private GpDbContext _context;
 
     public int UserId { get; set; }
-    public string FName { get; set; }
     public int RoleId { get; set; }
+    public string FName { get; set; }
 
-
-    public AccountsOverviewViewModel()
+    public AccountsOverviewViewModel(GpDbContext context)
     {
-        _context = new GpDbContext();
+        _context = context;
         AllAccounts = new ObservableCollection<User>(_context.Users.ToList());
     }
 

@@ -6,10 +6,6 @@
              x:DataType="viewModels:AccountsOverviewViewModel"
              Title="Accounts">
 
-    <ContentPage.BindingContext>
-        <viewModels:AccountsOverviewViewModel/>
-    </ContentPage.BindingContext>
-
     <ScrollView>
 
         <Grid BackgroundColor="SlateBlue" ColumnSpacing="15" Margin="20,50">
