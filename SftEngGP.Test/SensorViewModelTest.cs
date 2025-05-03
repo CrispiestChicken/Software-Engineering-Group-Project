@@ -46,9 +46,19 @@ public class SensorViewModelTest
         }
 
         [Fact]
-        public void GetAllReadingsForSensor_ShouldReturnNotNulll()
+        public void GetAllReadingsForSensor_TestTableRow_AllReadingsBelongToSensorAndNoReadingsBelongingToSensorMissed()
         {
-            Assert.NotNull(_hourly.SensorReadings);
+            List<int> readingIds = new List<int>();
+            foreach (var reading in _hourly.SensorReadings)
+            {
+                Assert.Equal(reading.SensorId, _hourly.SensorId);
+                readingIds.Add(reading.ReadingId);
+            }
+
+            foreach (var reading in _fixture._testDbContext.Readings.Where(s => !readingIds.Contains(s.ReadingId)))
+            {
+                Assert.NotEqual(reading.SensorId, _hourly.SensorId);                
+            }
         }
 
 }
