@@ -5,6 +5,7 @@ using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 using System.Text.RegularExpressions;
 using BCrypt.Net;
+using System.Net.Mail;
 
 namespace SftEngGP.ViewModels;
 
@@ -88,9 +89,16 @@ internal partial class AccountCreationViewModel : ObservableObject
     {
         if (Account.Email is null or "") return "ERROR:Please Insert an Email";
 
-        // Regex from https://regex101.com/r/nen2SZ/1
-        string emailRegex = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$";
-        if (Regex.IsMatch(Account.Email, emailRegex) == false) return "ERROR:Please Enter a Valid Email";
+        // Checking if the email is a valid email.
+        // Doing it like this because it is much faster than a regex.
+        try
+        {
+            new MailAddress(Account.Email);
+        }
+        catch (Exception)
+        {
+            return "ERROR:Please Enter a Valid Email";
+        }
 
         if (Account.Password is null or "") return "ERROR:Please Insert a Password";
 

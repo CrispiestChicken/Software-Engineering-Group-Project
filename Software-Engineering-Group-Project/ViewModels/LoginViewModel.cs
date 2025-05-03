@@ -115,7 +115,6 @@ namespace SftEngGP.ViewModels
 
             // Checking if email exists in the database.
             Account = _context.Users.FirstOrDefault(x => x.Email == Email);
-            //Account = _context.Users.FindAsync(Email).Result;
             if (Account == null) return "ERROR:Email or Password Incorrect";
 
 
