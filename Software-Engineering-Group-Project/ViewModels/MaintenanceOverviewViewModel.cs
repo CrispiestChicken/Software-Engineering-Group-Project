@@ -4,6 +4,7 @@ using SftEngGP.Views;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Maui.Core.Extensions;
 namespace SftEngGP.ViewModels
 {
     /// <summary>
@@ -21,6 +22,8 @@ namespace SftEngGP.ViewModels
         /// </summary>
         private GpDbContext _context;
 
+        public System.Timers.Timer UpdateTimer { get; set; }
+
 
         // Here so that the XAML can bind to them.
         public int MaintenanceId { get; set; }
@@ -35,6 +38,12 @@ namespace SftEngGP.ViewModels
         {
             _context = new GpDbContext();
             AllMaintenance = new ObservableCollection<Maintenance>(_context.Maintenance.ToList());
+
+
+            // Set up a timer to refresh the data every X seconds.
+            UpdateTimer = new System.Timers.Timer(10000);
+            UpdateTimer.Elapsed += (sender, e) => UpdateMaintenance();
+            UpdateTimer.Start();
         }
 
 
@@ -55,5 +64,24 @@ namespace SftEngGP.ViewModels
         [RelayCommand]
         private async Task NewMaintenanceButtonClicked() =>
             await App.Current.MainPage.Navigation.PushAsync(new MaintenanceCreationPage());
+
+
+        private async Task UpdateMaintenance()
+        {
+            // Fetch the latest data from the database.
+            ObservableCollection<Maintenance> newMaintenance = _context.Maintenance.ToObservableCollection();
+
+            if(newMaintenance.Count == AllMaintenance.Count)
+            {
+                return;
+            }
+
+            // Clear the existing collection and add the updated data.
+            AllMaintenance.Clear();
+            foreach (var maintenance in newMaintenance)
+            {
+                AllMaintenance.Add(maintenance);
+            }
+        }
     }
 }
