@@ -52,7 +52,7 @@ public class SensorDataServiceTests
         bool eventFired = false;
         service.OnDataUpdated += () => eventFired = true;
         
-        simulatedTimeService.TriggerTimeChange(new DateTime(2023, 1, 1, 12, 0, 0));
+        simulatedTimeService.TriggerTimeUpdate();
         
         Assert.True(eventFired);
         Assert.NotNull(service.LatestWaterQuality);
@@ -71,7 +71,7 @@ public class SensorDataServiceTests
 
         var offHourTime = new DateTime(2023, 1, 1, 12, 30, 0);
         
-        simulatedTimeService.TriggerTimeChange(offHourTime);
+        simulatedTimeService.TriggerTimeUpdate();
         
         Assert.False(eventFired);
         Assert.Null(service.LatestWaterQuality);

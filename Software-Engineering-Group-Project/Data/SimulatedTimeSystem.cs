@@ -20,7 +20,12 @@ public class SimulatedTimeService
             }
         }
     }
-    
+
+    /// <summary>
+    /// Provides a service to simulate the passage of time, allowing a customizable
+    /// DateTime for use in scenarios such as testing or simulations. The time
+    /// automatically advances at a fixed interval to mimic real-time progression.
+    /// </summary>
     public SimulatedTimeService(DateTime dateTime)
     {
         _simulatedTime = dateTime;

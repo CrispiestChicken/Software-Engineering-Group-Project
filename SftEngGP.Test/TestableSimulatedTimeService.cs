@@ -14,10 +14,10 @@ public class TestableSimulatedTimeService : SimulatedTimeService
             .SetValue(this, null);
     }
 
-    public void TriggerTimeChange(DateTime newTime)
+    public void TriggerTimeUpdate()
     {
         typeof(SimulatedTimeService)
-            .GetProperty("SimulatedTime", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?
-            .SetValue(this, newTime);
+            .GetMethod("UpdateTime", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.Invoke(this, null);
     }
 }
