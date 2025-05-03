@@ -2,6 +2,13 @@
 using System.Timers;
 using Timer = System.Timers.Timer;
 
+
+/// <summary>
+/// Represents a service for simulating time progression. This class allows managing
+/// a simulated DateTime, which can be advanced automatically or manipulated for scenarios
+/// like testing, simulation environments, or applications requiring a controllable time source.
+/// The simulated time is updated regularly at a fixed interval to mock real-time advancement.
+/// </summary>
 public class SimulatedTimeService
 {
     public event Action<DateTime>? OnTimeChanged;

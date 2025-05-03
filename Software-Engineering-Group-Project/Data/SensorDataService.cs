@@ -3,6 +3,11 @@ using SftEngGP.Database.Models;
 
 namespace SftEngGP.Data;
 
+/// <summary>
+/// A service responsible for managing and retrieving sensor data, specifically water quality, air quality,
+/// and weather information. This class integrates with the database context and simulated time service
+/// to ensure data is updated and loaded appropriately when time changes occur.
+/// </summary>
 public class SensorDataService
 {
     private readonly GpDbContext _context;
