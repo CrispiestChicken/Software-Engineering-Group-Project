@@ -6,6 +6,7 @@ using SftEngGP.Database.Models;
 using System.Collections.ObjectModel;
 using SftEngGP.Models;
 
+
 namespace SftEngGP.ViewModels
 {
     internal class MapViewModel
@@ -14,9 +15,13 @@ namespace SftEngGP.ViewModels
         public ObservableCollection<Breach> AllBreaches { get; set; }
         private List<Sensor> _allSensors { get; set; }
         private List<Incidence> _allIncidents { get; set; }
+        private System.Timers.Timer _mapUpdateTimer { get; set; }
 
-        public float Longitude { get; set; }
-        public float Latitude { get; set; }
+
+        public Location Location { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string Alert { get; set; }
         public string IncidenceType { get; set; }
         public DateTime DateOfEvent { get; set; }
 
@@ -26,18 +31,59 @@ namespace SftEngGP.ViewModels
             _allIncidents = _context.Incidences.ToList();
             _allSensors = _context.Sensors.ToList();
 
-
-            List<Breach> breaches = new List<Breach>();
+            AllBreaches = new ObservableCollection<Breach>();
             foreach (var incident in _allIncidents)
             {
                 var sensor = _allSensors.FirstOrDefault(s => s.SensorId == incident.SensorId);
                 if (sensor != null)
                 {
-                    breaches.Add(new Breach(incident, sensor));
+                    AllBreaches.Add(new Breach(incident, sensor));
                 }
             }
 
-            AllBreaches = new ObservableCollection<Breach>(breaches);
+            // Timer for updating the map.
+            _mapUpdateTimer = new System.Timers.Timer(5000);
+            _mapUpdateTimer.Elapsed += async (sender, e) =>
+            {
+                await UpdateMap();
+            };
+            _mapUpdateTimer.Start();
+        }
+
+
+
+        private async Task UpdateMap()
+        {
+            // Checking for new incidents.
+            List<Incidence> newIncidenceList = _context.Incidences.ToList();
+            
+            if (newIncidenceList.Count == _allIncidents.Count)
+            {
+                return;
+            }
+
+            // If there's new incidents add them to the incidents list.
+            _allIncidents = newIncidenceList;
+
+            // Can't make UI changes on a second thread.
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                AllBreaches.Clear();
+            });
+
+
+            foreach (var incident in _allIncidents)
+            {
+                var sensor = _allSensors.FirstOrDefault(s => s.SensorId == incident.SensorId);
+                if (sensor != null)
+                {
+                    // Can't make UI changes on a second thread.
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        AllBreaches.Add(new Breach(incident, sensor));
+                    });
+                }
+            }
 
 
         }
