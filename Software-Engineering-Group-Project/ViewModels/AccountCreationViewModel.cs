@@ -71,7 +71,7 @@ internal partial class AccountCreationViewModel : ObservableObject
         }
 
         // Hashing password for security.
-        Account.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(Account.Password);
+        Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
 
         // Adding to database then returning to the previous page.
         await _context.AddAsync(Account);

@@ -6,6 +6,7 @@ using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Net.Mail;
 using BCrypt.Net;
 using System.Diagnostics;
 
@@ -101,23 +102,28 @@ namespace SftEngGP.ViewModels
             // Checking email is valid.
             if(Email is null or "") return "ERROR:Please Insert an Email";
 
-
-            // Regex from https://regex101.com/r/nen2SZ/1
-            string emailRegex = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$";
-            if (Regex.IsMatch(Email, emailRegex) == false) return "ERROR:Please Enter a Valid Email";
-
+            // Checking if the email is a valid email.
+            // Doing it like this because it is much faster than a regex.
+            try
+            {
+                new MailAddress(Email);
+            }
+            catch(Exception)
+            {
+                return "ERROR:Please Enter a Valid Email";
+            }
 
             // Checking if email exists in the database.
             Account = _context.Users.FirstOrDefault(x => x.Email == Email);
+            //Account = _context.Users.FindAsync(Email).Result;
             if (Account == null) return "ERROR:Email or Password Incorrect";
-            Debug.WriteLine(Account.Email);
-            
 
 
             // Checking password is valid.
             if (Password is null or "") return "ERROR:Please Insert a Password";
 
-            if (BCrypt.Net.BCrypt.EnhancedVerify(Password, Account.Password) == false)
+
+            if (BCrypt.Net.BCrypt.Verify(Password, Account.Password) == false)
             {
                 return "ERROR:Email or Password Incorrect";
             }

@@ -73,6 +73,9 @@ internal partial class AccountEditViewModel : ObservableObject
             return;
         }
 
+        // Hashing password for security.
+        Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
+
         // Saves the changes made in the input boxes to the database and returns to the previous page.
         await _context.SaveChangesAsync();
         await App.Current.MainPage.Navigation.PopAsync();
