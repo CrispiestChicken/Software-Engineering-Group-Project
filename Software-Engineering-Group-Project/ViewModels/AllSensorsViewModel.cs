@@ -1,37 +1,68 @@
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+using System;
+using CommunityToolkit.Mvvm.ComponentModel;
+using SftEngGP.Data;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
-using SftEngGP.Views;
 
 namespace SftEngGP.ViewModels;
 
-/// <summary>
-/// Holds an observable collection of all Sensor view models for all the sensors
-/// </summary>
-public class AllSensorsViewModel
+public partial class AllSensorsViewModel : ObservableObject
 {
-    public ObservableCollection<SensorViewModel> AllSensors { get; set; }
+    private readonly GpDbContext _context;
+    private readonly SimulatedTimeService _timeService;
 
-    private GenericGPDbContext _context;
-    
-    public ICommand SelectSensorCommand { get; }
+    [ObservableProperty]
+    private WaterQuality? currentWaterQuality;
 
+    [ObservableProperty]
+    private AirQuality? currentAirQuality;
 
-    public AllSensorsViewModel(GenericGPDbContext context)
+    [ObservableProperty]
+    private Weather? currentWeather;
+
+    [ObservableProperty] 
+    private DateTime simulatedTime;
+
+    public string WaterSensorStatus => CurrentWaterQuality != null ? "Online" : "Offline";
+    public string AirSensorStatus => CurrentAirQuality != null ? "Online" : "Offline";
+    public string WeatherSensorStatus => CurrentWeather != null ? "Online" : "Offline";
+
+    public string WaterLastUpdated => CurrentWaterQuality != null ? $"{CurrentWaterQuality.date} {CurrentWaterQuality.time}" : "N/A";
+    public string AirLastUpdated => CurrentAirQuality != null ? $"{CurrentAirQuality.date} {CurrentAirQuality.time}" : "N/A";
+    public string WeatherLastUpdated => CurrentWeather != null ? CurrentWeather.datetime.ToString("yyyy-MM-dd HH:mm") : "N/A";
+
+    public AllSensorsViewModel(SensorDataService dataService, SimulatedTimeService timeService, GpDbContext context)
     {
+        _timeService = timeService;
         _context = context;
-        AllSensors = new ObservableCollection<SensorViewModel>(_context.Sensors.ToList().Select(s => new SensorViewModel(_context, s)));
-        SelectSensorCommand = new AsyncRelayCommand<SensorViewModel>(SelectSensorAsync);
-    }
 
-    internal async Task SelectSensorAsync(SensorViewModel sensor)
-    {
-        if (sensor != null)
+        SimulatedTime = _timeService.SimulatedTime;
+
+        CurrentWaterQuality = dataService.LatestWaterQuality;
+        CurrentAirQuality = dataService.LatestAirQuality;
+        CurrentWeather = dataService.LatestWeather;
+
+        dataService.OnDataUpdated += () =>
         {
-            await App.Current.MainPage.Navigation.PushAsync(new SensorPage(sensor));
-        }
+            CurrentWaterQuality = dataService.LatestWaterQuality;
+            CurrentAirQuality = dataService.LatestAirQuality;
+            CurrentWeather = dataService.LatestWeather;
+            NotifySensorPropertiesChanged();
+        };
+
+        _timeService.OnTimeChanged += async time =>
+        {
+            await MainThread.InvokeOnMainThreadAsync(() => SimulatedTime = time);
+        };
     }
     
+    private void NotifySensorPropertiesChanged()
+    {
+        OnPropertyChanged(nameof(WaterSensorStatus));
+        OnPropertyChanged(nameof(AirSensorStatus));
+        OnPropertyChanged(nameof(WeatherSensorStatus));
+        OnPropertyChanged(nameof(WaterLastUpdated));
+        OnPropertyChanged(nameof(AirLastUpdated));
+        OnPropertyChanged(nameof(WeatherLastUpdated));
+    }
 }

@@ -2,26 +2,65 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SftEngGP.Views.AllSensorsPage"
-             >
-    <ContentPage.Content>
-        <CollectionView x:Name="SensorCollection"
-                        ItemsSource="{Binding AllSensors}"
-                        Margin="20"
-                        SelectionMode="Single"
-                        SelectionChangedCommand="{Binding SelectSensorCommand}"
-                        SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
-            
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding QuantityType}" FontSize="22"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ContentPage.Content>
+             xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
+             x:DataType="viewModels:AllSensorsViewModel"
+             x:Class="SftEngGP.Views.AllSensorsPage">
+             
+
+<ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Simulated Time -->
+            <HorizontalStackLayout HorizontalOptions="End">
+                <Label Text="Simulated Time:"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+                <Label Text="{Binding SimulatedTime, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
+                       VerticalOptions="Center"
+                       Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
+
+            <!-- Water Quality -->
+            <Frame BorderColor="Purple" CornerRadius="0" HasShadow="False">
+                <VerticalStackLayout Padding="10">
+                    <Label Text="Water Quality" FontAttributes="Bold" FontSize="20"/>
+                    <Label Text="{Binding WaterSensorStatus}" FontAttributes="Italic"/>
+                    <Label Text="{Binding WaterLastUpdated, StringFormat='Last updated: {0}'}" FontSize="12"/>
+                    
+                    <Label Text="{Binding CurrentWaterQuality.nitrate, StringFormat='Nitrate: {0:F1}', TargetNullValue='Nitrate: -'}"/>
+                    <Label Text="{Binding CurrentWaterQuality.nitrite, StringFormat='Nitrite: {0:F1}', TargetNullValue='Nitrite: -'}"/>
+                    <Label Text="{Binding CurrentWaterQuality.phosphate, StringFormat='Phosphate: {0:F1}', TargetNullValue='Phosphate: -'}"/>
+                    <Label Text="{Binding CurrentWaterQuality.EC, StringFormat='EC: {0}', TargetNullValue='EC: -'}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Air Quality -->
+            <Frame BorderColor="Purple" CornerRadius="0" HasShadow="False">
+                <VerticalStackLayout Padding="10">
+                    <Label Text="Air Quality" FontAttributes="Bold" FontSize="20"/>
+                    <Label Text="{Binding AirSensorStatus}" FontAttributes="Italic"/>
+                    <Label Text="{Binding AirLastUpdated, StringFormat='Last updated: {0}'}" FontSize="12"/>
+                    
+                    <Label Text="{Binding CurrentAirQuality.nitrogen_dioxide, StringFormat='NO₂: {0:F1}', TargetNullValue='NO₂: -'}"/>
+                    <Label Text="{Binding CurrentAirQuality.sulphur_dioxide, StringFormat='SO₂: {0:F1}', TargetNullValue='SO₂: -'}"/>
+                    <Label Text="{Binding CurrentAirQuality.PM2_5, StringFormat='PM2.5: {0:F1}', TargetNullValue='PM2.5: -'}"/>
+                    <Label Text="{Binding CurrentAirQuality.PM10, StringFormat='PM10: {0:F1}', TargetNullValue='PM10: -'}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Weather -->
+            <Frame BorderColor="Purple" CornerRadius="0" HasShadow="False">
+                <VerticalStackLayout Padding="10">
+                    <Label Text="Weather" FontAttributes="Bold" FontSize="20"/>
+                    <Label Text="{Binding WeatherSensorStatus}" FontAttributes="Italic"/>
+                    <Label Text="{Binding WeatherLastUpdated, StringFormat='Last updated: {0}'}" FontSize="12"/>
+                    <Label Text="{Binding CurrentWeather.temperature, StringFormat='Temp: {0:F1}°C', TargetNullValue='Temp: -'}"/>
+                    <Label Text="{Binding CurrentWeather.relative_humidity, StringFormat='Humidity: {0}%', TargetNullValue='Humidity: -'}"/>
+                    <Label Text="{Binding CurrentWeather.wind_speed, StringFormat='Speed: {0:F1} m/s', TargetNullValue='Speed: -'}"/>
+                    <Label Text="{Binding CurrentWeather.wind_direction, StringFormat='Direction: {0}°', TargetNullValue='Direction: -'}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
