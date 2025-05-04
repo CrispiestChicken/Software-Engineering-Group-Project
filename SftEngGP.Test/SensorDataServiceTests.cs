@@ -29,7 +29,6 @@ public class SensorDataServiceTests
             SensorId = sensor.SensorId,
             Timestamp = fakeTime,
             SensorValue = 3.5f,
-            SensorSetpoint = 4.0f,
             Sensor = sensor,
             MeasurementType = "Nitrate"
         };

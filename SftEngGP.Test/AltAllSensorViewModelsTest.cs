@@ -30,7 +30,6 @@ public class AltAllSensorsViewModelTests
             SensorId = sensor.SensorId,
             Timestamp = fakeTime,
             SensorValue = 42.0f,
-            SensorSetpoint = 50.0f,
             Sensor = sensor
         };
 
