@@ -47,8 +47,28 @@ namespace SftEngGP.ViewModels
         {
             _context = gpDbContext;
             _sensor = sensor;
-            _measurand = _context.Measurands.Single(m => m.SensorId == _sensor.SensorId);
-            _frequencyOffset = _context.FrequencyOffsets.Single(f => f.Frequency == _measurand.Frequency);
+            try
+            {
+                _measurand = _context.Measurands.Single(m => m.SensorId == _sensor.SensorId);
+            }
+            catch
+            {
+                _measurand = new Measurand();
+                _measurand.QuantityType = "Sensor ID: " + _sensor.SensorId;
+            }
+
+            try
+            {
+                _frequencyOffset = _context.FrequencyOffsets.Single(f => f.Frequency == _measurand.Frequency);
+            }
+            catch (Exception e)
+            {
+                _frequencyOffset = new FrequencyOffset();
+                // Place holder if the table is empty
+                _frequencyOffset.Frequency = "Hourly";
+                _frequencyOffset.TimeDifference = new TimeSpan(0, 0, 0);
+                _frequencyOffset.DateDifference = 0;
+            }
             SensorReadings = new ObservableCollection<SensorReading>(_context.Readings.Where(r => r.SensorId == _sensor.SensorId));
         }
 
