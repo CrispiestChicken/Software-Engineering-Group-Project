@@ -60,7 +60,7 @@ public class SensorDataServiceTests
     }
 
     [Fact]
-    public void LoadSensorReadings_DoesNotFire_OffTheHour()
+    public void LoadSensorReadings_DoesNot_Fire_Off_The_Hour()
     {
         var context = GetMockedContext();
         var simulatedTimeService = new TestableSimulatedTimeService(new DateTime(2023, 1, 1, 12, 0, 0));
