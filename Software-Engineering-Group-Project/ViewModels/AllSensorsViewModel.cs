@@ -56,11 +56,24 @@ public partial class AllSensorsViewModel : ObservableObject
         };
     }
 
+    /// <summary>
+    /// Determines the status of a sensor based on its type by evaluating the most recent sensor readings.
+    /// </summary>
+    /// <param name="sensorType">The type of the sensor whose status is to be checked.</param>
+    /// <returns>A string indicating whether the sensor is "Online" if a recent reading exists, or "Offline" otherwise.</returns>
     public string GetSensorStatus(string sensorType)
     {
         return LatestReadings.Any(r => r.Sensor.SensorType == sensorType) ? "Online" : "Offline";
     }
 
+    /// <summary>
+    /// Retrieves the most recent update timestamp for a specified sensor type.
+    /// </summary>
+    /// <param name="sensorType">The type of the sensor whose last updated timestamp is to be retrieved.</param>
+    /// <returns>
+    /// A string representing the timestamp of the latest reading for the specified sensor type
+    /// in the "yyyy-MM-dd HH:mm" format, or "N/A" if no readings are available.
+    /// </returns>
     public string GetLastUpdated(string sensorType)
     {
         var last = LatestReadings

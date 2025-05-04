@@ -12,7 +12,6 @@ public class TestableSimulatedTimeService : SimulatedTimeService
     public void SetTime(DateTime newTime)
         {
             SimulatedTime = newTime;
-            Console.WriteLine($"SimulatedTime set to: {SimulatedTime}");
         }
     
     private void StopAutoAdvance()
