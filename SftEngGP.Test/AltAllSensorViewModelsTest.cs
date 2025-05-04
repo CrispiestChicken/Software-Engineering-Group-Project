@@ -20,18 +20,27 @@ public class AltAllSensorsViewModelTests
         var fakeTime = new DateTime(2025, 1, 1, 12, 0, 0);
         var timeService = new SimulatedTimeService(fakeTime);
 
-        var expectedWater = new WaterQuality { date = DateOnly.FromDateTime(fakeTime), time = TimeOnly.FromDateTime(fakeTime) };
-        var expectedAir = new AirQuality { date = DateOnly.FromDateTime(fakeTime), time = TimeOnly.FromDateTime(fakeTime) };
-        var expectedWeather = new Weather { datetime = fakeTime };
+        var sensor = new Sensor { SensorId = 1, Latitude = 0, Longitude = 0, SensorType = "Air" };
+        context.Sensors.Add(sensor);
+        context.SaveChanges();
+
+        var reading = new SensorReading
+        {
+            ReadingId = 1,
+            SensorId = sensor.SensorId,
+            Timestamp = fakeTime,
+            SensorValue = 42.0f,
+            SensorSetpoint = 50.0f,
+            Sensor = sensor
+        };
 
         var fakeDataService = new FakeSensorDataService(context, timeService);
-        fakeDataService.SetLatestData(expectedWater, expectedAir, expectedWeather);
+        fakeDataService.SetLatestData(new List<SensorReading> { reading });
 
-        var viewModel = new AllSensorsViewModel(fakeDataService, timeService, context);
+        var viewModel = new AllSensorsViewModel(fakeDataService, timeService);
 
         Assert.Equal(fakeTime, viewModel.SimulatedTime);
-        Assert.Equal(expectedWater, viewModel.CurrentWaterQuality);
-        Assert.Equal(expectedAir, viewModel.CurrentAirQuality);
-        Assert.Equal(expectedWeather, viewModel.CurrentWeather);
+        Assert.Single(viewModel.LatestReadings);
+        Assert.Equal("Air", viewModel.LatestReadings.First().Sensor.SensorType);
     }
 }

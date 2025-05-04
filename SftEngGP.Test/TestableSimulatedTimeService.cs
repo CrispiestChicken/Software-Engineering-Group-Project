@@ -1,4 +1,6 @@
-﻿namespace SftEngGP.Test;
+﻿using System.Reflection;
+
+namespace SftEngGP.Test;
 
 public class TestableSimulatedTimeService : SimulatedTimeService
 {
@@ -7,17 +9,23 @@ public class TestableSimulatedTimeService : SimulatedTimeService
         StopAutoAdvance();
     }
     
+    public void SetTime(DateTime newTime)
+        {
+            SimulatedTime = newTime;
+            Console.WriteLine($"SimulatedTime set to: {SimulatedTime}");
+        }
+    
     private void StopAutoAdvance()
     {
         typeof(SimulatedTimeService)
-            .GetField("_timer", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?
+            .GetField("_timer", BindingFlags.NonPublic | BindingFlags.Instance)?
             .SetValue(this, null);
     }
 
     public void TriggerTimeUpdate()
     {
         typeof(SimulatedTimeService)
-            .GetMethod("UpdateTime", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            ?.Invoke(this, null);
+            .GetMethod("UpdateTime", BindingFlags.NonPublic | BindingFlags.Instance)?
+            .Invoke(this, null);
     }
 }

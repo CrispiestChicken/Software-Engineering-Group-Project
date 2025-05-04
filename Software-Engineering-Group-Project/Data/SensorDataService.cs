@@ -1,4 +1,5 @@
-﻿using SftEngGP.Database.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 
 namespace SftEngGP.Data;
@@ -13,9 +14,7 @@ public class SensorDataService
     private readonly GpDbContext _context;
     private readonly SimulatedTimeService _timeService;
 
-    public WaterQuality? LatestWaterQuality { get; private set; }
-    public AirQuality? LatestAirQuality { get; private set; }
-    public Weather? LatestWeather { get; private set; }
+    public List<SensorReading> LatestSensorReadings { get; private set; } = new();
 
     public event Action? OnDataUpdated;
 
@@ -41,13 +40,14 @@ public class SensorDataService
 
     private void LoadSensorReadings(DateTime time)
     {
-        var date = DateOnly.FromDateTime(time);
-        var t = TimeOnly.FromDateTime(time);
-
-        LatestWaterQuality = _context.WaterQuality.FirstOrDefault(w => w.date == date && w.time == t);
-        LatestAirQuality = _context.AirQuality.FirstOrDefault(a => a.date == date && a.time == t);
-        LatestWeather = _context.Weather.FirstOrDefault(w => w.datetime == time);
-
+        
+        List<SensorReading> latest = _context.SensorReadings
+            .GroupBy(r => new { r.SensorId, r.MeasurementType })
+            .Select(g => g.OrderByDescending(r => r.Timestamp).FirstOrDefault())
+            .Include(r => r!.Sensor)
+            .ToList();
+        
+        LatestSensorReadings = latest;
         OnDataUpdated?.Invoke();
     }
 }

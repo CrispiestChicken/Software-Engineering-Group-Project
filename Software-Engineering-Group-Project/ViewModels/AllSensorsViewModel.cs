@@ -1,5 +1,7 @@
 using System;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using SftEngGP.Data;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
@@ -14,46 +16,39 @@ namespace SftEngGP.ViewModels;
 /// </summary>
 public partial class AllSensorsViewModel : ObservableObject
 {
-    private readonly GpDbContext _context;
     private readonly SimulatedTimeService _timeService;
 
     [ObservableProperty]
-    private WaterQuality? currentWaterQuality;
-
-    [ObservableProperty]
-    private AirQuality? currentAirQuality;
-
-    [ObservableProperty]
-    private Weather? currentWeather;
+    private ObservableCollection<SensorReading> latestReadings;
 
     [ObservableProperty] 
     private DateTime simulatedTime;
-
-    public string WaterSensorStatus => CurrentWaterQuality != null ? "Online" : "Offline";
-    public string AirSensorStatus => CurrentAirQuality != null ? "Online" : "Offline";
-    public string WeatherSensorStatus => CurrentWeather != null ? "Online" : "Offline";
-
-    public string WaterLastUpdated => CurrentWaterQuality != null ? $"{CurrentWaterQuality.date} {CurrentWaterQuality.time}" : "N/A";
-    public string AirLastUpdated => CurrentAirQuality != null ? $"{CurrentAirQuality.date} {CurrentAirQuality.time}" : "N/A";
-    public string WeatherLastUpdated => CurrentWeather != null ? CurrentWeather.datetime.ToString("yyyy-MM-dd HH:mm") : "N/A";
 
 
     /// <summary>
     /// Represents the ViewModel for managing and displaying the status and updates
     /// of various sensors including water, air, and weather sensors.
     /// </summary>
-    public AllSensorsViewModel(SensorDataService dataService, SimulatedTimeService timeService, GpDbContext context)
+    public AllSensorsViewModel(SensorDataService dataService, SimulatedTimeService timeService)
     {
         _timeService = timeService;
-        _context = context;
-
         SimulatedTime = _timeService.SimulatedTime;
-
-        CurrentWaterQuality = dataService.LatestWaterQuality;
-        CurrentAirQuality = dataService.LatestAirQuality;
-        CurrentWeather = dataService.LatestWeather;
         
-        dataService.OnDataUpdated += () => UpdateData(dataService);
+        LatestReadings = new ObservableCollection<SensorReading>(dataService.LatestSensorReadings);
+        
+        dataService.OnDataUpdated += () =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                LatestReadings.Clear();
+                foreach (var reading in dataService.LatestSensorReadings)
+                {
+                    LatestReadings.Add(reading);
+                }
+
+                NotifySensorPropertiesChanged();
+            });
+        };
 
         _timeService.OnTimeChanged += async time =>
         {
@@ -61,22 +56,24 @@ public partial class AllSensorsViewModel : ObservableObject
         };
     }
 
-    private void UpdateData(SensorDataService dataService)
+    public string GetSensorStatus(string sensorType)
     {
-        Console.WriteLine("Data updating...");
-        CurrentWaterQuality = dataService.LatestWaterQuality;
-        CurrentAirQuality = dataService.LatestAirQuality;
-        CurrentWeather = dataService.LatestWeather;
-        NotifySensorPropertiesChanged();
+        return LatestReadings.Any(r => r.Sensor.SensorType == sensorType) ? "Online" : "Offline";
+    }
+
+    public string GetLastUpdated(string sensorType)
+    {
+        var last = LatestReadings
+            .Where(r => r.Sensor.SensorType == sensorType)
+            .OrderByDescending(r => r.Timestamp)
+            .FirstOrDefault();;
+        
+        return last != null ? last.Timestamp.ToString("yyyy-MM-dd HH:mm") : "N/A";
     }
     
     private void NotifySensorPropertiesChanged()
     {
-        OnPropertyChanged(nameof(WaterSensorStatus));
-        OnPropertyChanged(nameof(AirSensorStatus));
-        OnPropertyChanged(nameof(WeatherSensorStatus));
-        OnPropertyChanged(nameof(WaterLastUpdated));
-        OnPropertyChanged(nameof(AirLastUpdated));
-        OnPropertyChanged(nameof(WeatherLastUpdated));
+        OnPropertyChanged(nameof(GetSensorStatus));
+        OnPropertyChanged(nameof(GetLastUpdated));
     }
 }

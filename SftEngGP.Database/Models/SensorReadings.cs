@@ -9,11 +9,18 @@ namespace SftEngGP.Database.Models;
 public class SensorReading
 {
     public float SensorValue { get; set; }
+    public float SensorSetpoint { get; set; }
     public DateTime Timestamp { get; set; }
     
     [Required]
     public int ReadingId { get; set; }
     
     public int SensorId { get; set; }
-    public float SensorSetpoint { get; set; }
+    
+    [ForeignKey(nameof(SensorId))]
+    public Sensor Sensor { get; set; }
+    
+    [Required]
+    public string MeasurementType { get; set; }
+    
 }

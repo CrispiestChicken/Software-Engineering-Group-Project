@@ -18,7 +18,7 @@ public class SimulatedTimeService
     public DateTime SimulatedTime
     {
         get => _simulatedTime;
-        private set
+        internal set
         {
             if (_simulatedTime != value)
             {

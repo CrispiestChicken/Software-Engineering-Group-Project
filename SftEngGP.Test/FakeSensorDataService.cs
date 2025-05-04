@@ -9,18 +9,10 @@ public class FakeSensorDataService : SensorDataService
     public FakeSensorDataService(GpDbContext context, SimulatedTimeService timeService)
         : base(context, timeService) { }
 
-    public void SetLatestData(WaterQuality water, AirQuality air, Weather weather)
+    public void SetLatestData(List<SensorReading> readings)
     {
         typeof(SensorDataService)
-            .GetProperty(nameof(LatestWaterQuality))!
-            .SetValue(this, water);
-
-        typeof(SensorDataService)
-            .GetProperty(nameof(LatestAirQuality))!
-            .SetValue(this, air);
-
-        typeof(SensorDataService)
-            .GetProperty(nameof(LatestWeather))!
-            .SetValue(this, weather);
+            .GetProperty(nameof(LatestSensorReadings))!
+            .SetValue(this, readings);
     }
 }

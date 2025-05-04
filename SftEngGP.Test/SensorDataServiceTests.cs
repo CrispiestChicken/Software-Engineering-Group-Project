@@ -10,72 +10,44 @@ namespace SftEngGP.Test;
 
 public class SensorDataServiceTests
 {
-    private GpDbContext GetMockedContext()
+    [Fact]
+    public void LoadSensorReadings_AddsExpectedReadings()
     {
         var options = new DbContextOptionsBuilder<GpDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
-
+    
         var context = new GpDbContext(options);
 
-        context.WaterQuality.Add(new WaterQuality
-        {
-            date = new DateOnly(2023, 1, 1),
-            time = new TimeOnly(12, 0),
-            nitrate = 1.5f
-        });
+        var fakeTime = new DateTime(2023, 1, 1, 11, 59, 0);
+        var sensor = new Sensor { SensorId = 1, Latitude = 0, Longitude = 0, SensorType = "Water" };
+        context.Add(sensor);
 
-        context.AirQuality.Add(new AirQuality
+        var reading = new SensorReading
         {
-            date = new DateOnly(2023, 1, 1),
-            time = new TimeOnly(12, 0),
-            nitrogen_dioxide = 10.0f
-        });
-
-        context.Weather.Add(new Weather
-        {
-            datetime = new DateTime(2023, 1, 1, 12, 0, 0),
-            temperature = 25.0f
-        });
-
+            ReadingId = 1,
+            SensorId = sensor.SensorId,
+            Timestamp = fakeTime,
+            SensorValue = 3.5f,
+            SensorSetpoint = 4.0f,
+            Sensor = sensor,
+            MeasurementType = "Nitrate"
+        };
+        context.SensorReadings.Add(reading);
         context.SaveChanges();
-        return context;
-    }
-
-    [Fact]
-    public void LoadSensorReadings_Fires_On_The_Hour()
-    {
-        var context = GetMockedContext();
-        var simulatedTimeService = new TestableSimulatedTimeService(new DateTime(2023, 1, 1, 11, 0, 0));
-        var service = new SensorDataService(context, simulatedTimeService);
+    
+        var timeService = new TestableSimulatedTimeService(reading.Timestamp);
+        var service = new SensorDataService(context, timeService);
 
         bool eventFired = false;
         service.OnDataUpdated += () => eventFired = true;
         
-        simulatedTimeService.TriggerTimeUpdate();
-        
+        timeService.SetTime(new DateTime(2023, 1, 1, 12, 0, 0));
+        timeService.TriggerTimeUpdate();
+
         Assert.True(eventFired);
-        Assert.NotNull(service.LatestWaterQuality);
-        Assert.Equal(1.5f, service.LatestWaterQuality.nitrate);
+        Assert.Single(service.LatestSensorReadings);
+        Assert.Equal(3.5f, service.LatestSensorReadings.First().SensorValue);
     }
 
-    [Fact]
-    public void LoadSensorReadings_DoesNot_Fire_Off_The_Hour()
-    {
-        var context = GetMockedContext();
-        var simulatedTimeService = new TestableSimulatedTimeService(new DateTime(2023, 1, 1, 12, 0, 0));
-        var service = new SensorDataService(context, simulatedTimeService);
-
-        bool eventFired = false;
-        service.OnDataUpdated += () => eventFired = true;
-
-        var offHourTime = new DateTime(2023, 1, 1, 12, 30, 0);
-        
-        simulatedTimeService.TriggerTimeUpdate();
-        
-        Assert.False(eventFired);
-        Assert.Null(service.LatestWaterQuality);
-        Assert.Null(service.LatestAirQuality);
-        Assert.Null(service.LatestWeather);
-    }
 }

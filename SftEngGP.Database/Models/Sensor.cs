@@ -12,5 +12,9 @@ public class Sensor
     public int SensorId { get; set; }
     public float Latitude { get; set; }
     public float Longitude { get; set; }
+    
+    [Required]
     public string SensorType { get; set; }
+    public ICollection<SensorReading> Readings { get; set; } = new List<SensorReading>();
+    
 }
