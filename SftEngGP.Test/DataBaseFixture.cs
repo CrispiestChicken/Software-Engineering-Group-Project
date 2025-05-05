@@ -55,6 +55,22 @@ public class DatabaseFixture
             AddSensorReading(DailySensor.Entity.SensorId, 1f, 53.2f, new DateTime(2025, 3, 3, 0, 0, 0));
             AddSensorReading(DailySensor.Entity.SensorId, 1f, 21.2f, new DateTime(2025, 3, 5, 0, 0, 0));
             AddSensorReading(DailySensor.Entity.SensorId, 1f, 13.4f, new DateTime(2025, 3, 7, 0, 0, 0));
+
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+
+
+
+
+
             seeded = true;
         }
     }
@@ -79,6 +95,7 @@ public class DatabaseFixture
         sensorReading.SensorSetpoint = sensorSetpoint;
         sensorReading.SensorValue = sensorValue;
         sensorReading.Timestamp = timeStamp;
+        sensorReading.MeasurementType = "type";
 
         EntityEntry<SensorReading> sensorEntity = _testDbContext.Add(sensorReading);
         _testDbContext.SaveChanges();
@@ -104,6 +121,21 @@ public class DatabaseFixture
         EntityEntry<Measurand> measurandEntity = _testDbContext.Add(measurand);
         _testDbContext.SaveChanges();
         return new Tuple<EntityEntry<Sensor>, EntityEntry<Measurand>>(sensorEntity, measurandEntity);
+    }
+
+    private void AddIncidents(int sensorID, string type, string alert, DateTime eventDate)
+    {
+        var incident = new Incidence
+        {
+            SensorId = sensorID,
+            IncidenceType = type,
+            Alert = alert,
+            DateOfEvent = eventDate
+        };
+
+
+        _testDbContext.Add(incident);
+        _testDbContext.SaveChanges();
     }
 
 }
