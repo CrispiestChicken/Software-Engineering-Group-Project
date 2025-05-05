@@ -100,7 +100,14 @@ namespace SftEngGP.ViewModels
             // Saves the changes made in the input boxes to the database.
             await _context.SaveChangesAsync();
 
-            await App.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch
+            {
+                return;
+            }
 
 
         }
