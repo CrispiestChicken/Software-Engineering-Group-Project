@@ -5,6 +5,7 @@ using SftEngGP.Database.Data;
 using System.Collections.ObjectModel;
 using SftEngGP.Database.Models;
 using System.Diagnostics;
+using CommunityToolkit.Maui.Core.Extensions;
 
 namespace SftEngGP.ViewModels;
 
@@ -30,7 +31,8 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     public int UserId { get; set; }
     public int RoleId { get; set; }
     public string FName { get; set; }
-    
+    public string Email { get; set; }
+
     /// <summary>
     /// Constructor for the AccountsOverviewViewModel that gets all accounts from the database.
     /// </summary>
@@ -52,17 +54,25 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     /// <param name="account"></param>
     /// <returns></returns>
     [RelayCommand]
-    private static async Task EditAccountButtonClicked(User account) =>
-        await App.Current.MainPage.Navigation.PushAsync(new AccountEditPage(account));
+    private static async Task EditAccountButtonClicked(User account)
+    {
+        var context = (GpDbContext)App.Current.Handler.MauiContext.Services.GetService(typeof(GpDbContext));
+        var page = new AccountEditPage(context, account);
+        await App.Current.MainPage.Navigation.PushAsync(page);
+    }
+
 
     /// <summary>
     /// Command to navigate the user to the account creation page.
     /// </summary>
     /// <returns></returns>
     [RelayCommand]
-    private static async Task NewAccountButtonClicked() =>
-        await App.Current.MainPage.Navigation.PushAsync(new AccountCreationPage());
-
+    private static async Task NewAccountButtonClicked()
+    {
+        var viewModel = (AccountCreationViewModel)App.Current.Handler.MauiContext.Services.GetService(typeof(AccountCreationViewModel));
+        var page = new AccountCreationPage(viewModel);
+        await App.Current.MainPage.Navigation.PushAsync(page);
+    }
 
     private async Task UpdateAccounts()
     {

@@ -5,9 +5,9 @@ namespace SftEngGP.Views;
 
 public partial class MaintenanceEditPage : ContentPage
 {
-	public MaintenanceEditPage(Maintenance maintenanceRecord)
+	public MaintenanceEditPage(MaintenanceEditViewModel viewModel)
 	{
-		this.BindingContext = new MaintenanceEditViewModel(maintenanceRecord);
+		this.BindingContext = viewModel;
 		InitializeComponent();
 	}
 }

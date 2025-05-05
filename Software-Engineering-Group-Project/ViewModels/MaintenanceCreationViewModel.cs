@@ -10,7 +10,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Maintenance Creation page.
     /// </summary>
-    internal partial class MaintenanceCreationViewModel : ObservableObject
+    public partial class MaintenanceCreationViewModel : ObservableObject
     {
         /// <summary>
         /// The database context used to access the database.
@@ -59,9 +59,9 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the MaintenanceCreationViewModel.
         /// </summary>
-        public MaintenanceCreationViewModel()
+        public MaintenanceCreationViewModel(GpDbContext context)
         {
-            _context = new GpDbContext();
+            _context = context;
 
             MaintenanceRecord = new Maintenance();
             AllSensors = _context.Sensors.ToList();

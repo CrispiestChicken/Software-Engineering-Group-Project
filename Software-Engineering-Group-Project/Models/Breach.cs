@@ -10,7 +10,7 @@ namespace SftEngGP.Models
     /// <summary>
     /// Represents a breach of the system.
     /// </summary>
-    internal class Breach
+    public class Breach
     {
         /// <summary>
         /// The location of the breach.

@@ -7,9 +7,9 @@ namespace SftEngGP.Views;
 
 public partial class MapPage : ContentPage
 {
-	public MapPage()
+	public MapPage(MapViewModel context)
 	{
-        this.BindingContext = new MapViewModel();
+        this.BindingContext = context;
 		InitializeComponent();
 
     }

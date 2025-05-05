@@ -4,9 +4,9 @@ namespace SftEngGP.Views;
 
 public partial class MaintenanceCreationPage : ContentPage
 {
-	public MaintenanceCreationPage()
+	public MaintenanceCreationPage(MaintenanceCreationViewModel viewModel)
 	{
-		this.BindingContext = new MaintenanceCreationViewModel();
+		this.BindingContext = viewModel;
 		InitializeComponent();
 	}
 }

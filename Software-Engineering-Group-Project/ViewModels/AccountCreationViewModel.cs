@@ -11,7 +11,7 @@ namespace SftEngGP.ViewModels;
 /// <summary>
 /// ViewModel for the Account Creation page.
 /// </summary>
-internal partial class AccountCreationViewModel : ObservableObject
+public partial class AccountCreationViewModel : ObservableObject
 {
     /// <summary>
     /// The database context used to interact with the database.
@@ -27,9 +27,9 @@ internal partial class AccountCreationViewModel : ObservableObject
     /// <summary>
     /// Constructor for the AccountCreationViewModel.
     /// </summary>
-    public AccountCreationViewModel()
+    public AccountCreationViewModel(GpDbContext context)
     {
-        _context = new GpDbContext();
+        _context = context;
         Account = new User();
     }
 

@@ -15,7 +15,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Login page.
     /// </summary>
-    internal partial class LoginViewModel : ObservableObject
+    public partial class LoginViewModel : ObservableObject
     {
         /// <summary>
         /// Database context for accessing the database.
@@ -47,9 +47,9 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the LoginViewModel.
         /// </summary>
-        public LoginViewModel()
+        public LoginViewModel(GpDbContext context)
         {
-            _context = new GpDbContext();
+            _context = context;
         }
 
 
