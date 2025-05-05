@@ -40,7 +40,7 @@ namespace SftEngGP
             builder.Services.AddTransient<AllSensorsViewModel>();
             builder.Services.AddTransient<AllSensorsPage>();
 
-            builder.Services.AddSingleton<AccountsOverviewViewModel>(); // You may want to reconsider Singleton here if this view model holds state tied to specific pages
+            builder.Services.AddTransient<AccountsOverviewViewModel>();
             builder.Services.AddTransient<AllTablesViewModel>();
             builder.Services.AddTransient<AllTablesPage>();
 
