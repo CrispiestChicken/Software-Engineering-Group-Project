@@ -68,7 +68,7 @@ public class DatabaseFixture
             AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
 
             // Passwords are all "Password123"
-            AddAccount("email@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 1);
+            AddAccount("admin@gmail.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 1);
             AddAccount("email1@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
             AddAccount("email2@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
             AddAccount("email3@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);

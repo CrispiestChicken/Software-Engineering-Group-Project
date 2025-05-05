@@ -3,44 +3,28 @@ using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 using SftEngGP.ViewModels;
 using SftEngGP.Models;
+using System.Diagnostics;
 
 namespace SftEngGP.Test
 {
-    public class AccountCreationViewModelTests
+    public class AccountEditViewModelTests
     {
-        private AccountCreationViewModel _viewModel;
-        public AccountCreationViewModelTests()
+        private AccountEditViewModel _viewModel;
+        public AccountEditViewModelTests()
         {
             var options = new DbContextOptionsBuilder<GpDbContext>()
             .UseInMemoryDatabase("testgpdb")
             .Options;
 
             var context = new GpDbContext(options);
+            var user = new User();
 
-            _viewModel = new AccountCreationViewModel(context);
-        }
-
-        [Fact]
-        public void AccountCreationViewModelConstructorTest()
-        {
-            var options = new DbContextOptionsBuilder<GpDbContext>()
-            .UseInMemoryDatabase("testgpdb")
-            .Options;
-
-            var context = new GpDbContext(options);
-
-            var viewModel = new AccountCreationViewModel(context);
-
-            Assert.NotNull(viewModel);
-            Assert.NotNull(viewModel.Account);
-            Assert.Equal("Create", viewModel.CreateOrUpdate);
-            Assert.True(viewModel.CreatingAccount);
-            Assert.Equal("", viewModel.ErrorMessage);
+            _viewModel = new AccountEditViewModel(context, user);
         }
 
 
         [Fact]
-        public void TestCreateNormalData()
+        public void TestUpdateNormalData()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "Test";
@@ -50,14 +34,14 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 2;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             // Blank because there is no error.
             Assert.Empty(_viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreateExtremeData()
+        public void TestUpdateExtremeData()
         {
             _viewModel.Account.Email = "a@a";
             _viewModel.Account.FName = "a";
@@ -67,46 +51,14 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 1;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             // Blank because there is no error.
             Assert.Empty(_viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreateEmailEmpty()
-        {
-            _viewModel.Account.Email = "";
-            _viewModel.Account.FName = "Test";
-            _viewModel.Account.LName = "Test";
-            _viewModel.Account.Address = "Test";
-            _viewModel.Account.Password = "123456789";
-            _viewModel.Account.RoleId = 2;
-
-
-            _viewModel.CreateCommand.Execute(null);
-
-            Assert.Equal("ERROR:Please Insert an Email", _viewModel.ErrorMessage);
-        }
-
-        [Fact]
-        public void TestCreateEmailInvalid()
-        {
-            _viewModel.Account.Email = "a@";
-            _viewModel.Account.FName = "Test";
-            _viewModel.Account.LName = "Test";
-            _viewModel.Account.Address = "Test";
-            _viewModel.Account.Password = "123456789";
-            _viewModel.Account.RoleId = 2;
-
-
-            _viewModel.CreateCommand.Execute(null);
-
-            Assert.Equal("ERROR:Please Enter a Valid Email", _viewModel.ErrorMessage);
-        }
-
-        [Fact]
-        public void TestCreateFNameEmpty()
+        public void TestUpdateFNameEmpty()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "";
@@ -116,13 +68,13 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 2;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             Assert.Equal("ERROR:Please Insert a First Name", _viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreateLNameEmpty()
+        public void TestUpdateLNameEmpty()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "Test";
@@ -132,13 +84,13 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 2;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             Assert.Equal("ERROR:Please Insert a Surname", _viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreateAddressEmpty()
+        public void TestUpdateAddressEmpty()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "Test";
@@ -148,13 +100,13 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 2;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             Assert.Equal("ERROR:Please Insert an Address", _viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreatePasswordEmpty()
+        public void TestUpdatePasswordEmpty()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "Test";
@@ -164,13 +116,13 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 2;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             Assert.Equal("ERROR:Please Insert a Password", _viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreatePasswordOneTooShort()
+        public void TestUpdatePasswordOneTooShort()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "Test";
@@ -180,13 +132,13 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 2;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             Assert.Equal("ERROR:Password Must Be Atleast 8 Characters Long", _viewModel.ErrorMessage);
         }
 
         [Fact]
-        public void TestCreateRoleNotSelected()
+        public void TestUpdateRoleNotSelected()
         {
             _viewModel.Account.Email = "Test@Test.com";
             _viewModel.Account.FName = "Test";
@@ -196,7 +148,7 @@ namespace SftEngGP.Test
             _viewModel.Account.RoleId = 0;
 
 
-            _viewModel.CreateCommand.Execute(null);
+            _viewModel.UpdateCommand.Execute(null);
 
             Assert.Equal("ERROR:Please Select a Role", _viewModel.ErrorMessage);
         }
