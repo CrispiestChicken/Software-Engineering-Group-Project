@@ -10,7 +10,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Maintenance Overview page.
     /// </summary>
-    internal partial class MaintenanceOverviewViewModel : ObservableObject
+    public partial class MaintenanceOverviewViewModel : ObservableObject
     {
         /// <summary>
         /// Collection of all maintenance records.

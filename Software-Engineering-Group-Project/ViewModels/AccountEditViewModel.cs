@@ -12,7 +12,7 @@ namespace SftEngGP.ViewModels;
 /// <summary>
 /// ViewModel for the AccountEditPage.
 /// </summary>
-internal partial class AccountEditViewModel : ObservableObject
+public partial class AccountEditViewModel : ObservableObject
 {
 
     /// <summary>

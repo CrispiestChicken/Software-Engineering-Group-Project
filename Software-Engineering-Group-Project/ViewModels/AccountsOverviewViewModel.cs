@@ -13,7 +13,7 @@ namespace SftEngGP.ViewModels;
 /// <summary>
 /// ViewModel for the AccountsOverviewPage.
 /// </summary>
-internal partial class AccountsOverviewViewModel : ObservableObject
+public partial class AccountsOverviewViewModel : ObservableObject
 {
 
     /// <summary>

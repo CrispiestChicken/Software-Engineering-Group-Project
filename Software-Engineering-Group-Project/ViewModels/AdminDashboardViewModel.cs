@@ -8,7 +8,7 @@ namespace SftEngGP.ViewModels;
 /// <summary>
 /// ViewModel for the Admin Dashboard.
 /// </summary>
-internal partial class AdminDashboardViewModel : ObservableObject
+public partial class AdminDashboardViewModel : ObservableObject
 {
     private GpDbContext _context;
     public AdminDashboardViewModel(GpDbContext context)

@@ -11,7 +11,7 @@ namespace SftEngGP.Models
     /// <summary>
     /// Singleton class to store the logged in users information.
     /// </summary>
-    sealed internal class LoggedInUser
+    sealed public class LoggedInUser
     {
 
         /// <summary>
