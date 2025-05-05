@@ -15,9 +15,8 @@ public class SensorReading
     [Required]
     public int ReadingId { get; set; }
     
-    public int SensorId { get; set; }
-    
     [ForeignKey(nameof(SensorId))]
+    public int SensorId { get; set; }
     public Sensor Sensor { get; set; }
     
     [Required]

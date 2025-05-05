@@ -7,6 +7,7 @@ using SftEngGP.Database.Data;
 using SftEngGP.ViewModels;
 using SftEngGP.Views;
 using Syncfusion.Maui.Core.Hosting;
+using CommunityToolkit.Maui;
 
 
 namespace SftEngGP
@@ -18,7 +19,7 @@ namespace SftEngGP
             var builder = MauiApp.CreateBuilder();
             
             builder.Services.AddDbContext<GpDbContext>(options =>
-                options.UseSqlite("Server=192.168.0.13,1433;Database=gpdb;User Id=gpapp;Password=gp4pp$00;TrustServerCertificate=True;Encrypt=True;"));
+                options.UseSqlite("Server=ip,port;Database=gpdb;User Id=gpapp;Password=gp4pp$00;TrustServerCertificate=True;Encrypt=True;"));
             
             builder.Services.AddSingleton(new SimulatedTimeService(DateTime.Parse("2025-01-31 23:50:00")));
             builder.Services.AddSingleton<SensorDataService>();
@@ -42,6 +43,11 @@ namespace SftEngGP
             builder.Services.AddTransient<SensorViewModel>();
             builder.Services.AddTransient<TrendsPage>();
             builder.Services.AddTransient<SensorPage>();
+            
+            builder.Services.AddSingleton<AllTablesViewModel>();
+            builder.Services.AddSingleton<AllTablesPage>();
+            builder.Services.AddTransient<TableViewModel>();
+            builder.Services.AddTransient<TableRowViewModel>();
             
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<App>();

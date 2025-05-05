@@ -112,16 +112,46 @@ namespace SftEngGP.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("DateOfEvent")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfEvent")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("IncidenceType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SensorId")
+                        .HasColumnType("int");
+
                     b.HasKey("IncidenceId");
 
                     b.ToTable("Incidence");
+                });
+
+            modelBuilder.Entity("SftEngGP.Database.Models.Maintenance", b =>
+                {
+                    b.Property<int>("MaintenanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaintenanceId"));
+
+                    b.Property<string>("Comments")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SensorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaintenanceId");
+
+                    b.ToTable("Maintenance");
                 });
 
             modelBuilder.Entity("SftEngGP.Database.Models.Measurand", b =>
@@ -259,7 +289,7 @@ namespace SftEngGP.Database.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FName")
                         .IsRequired()
@@ -280,6 +310,9 @@ namespace SftEngGP.Database.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

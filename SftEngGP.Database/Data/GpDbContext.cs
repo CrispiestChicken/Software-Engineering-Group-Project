@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SftEngGP.Database.Models;
 
-namespace SftEngGP.Database.Data;
-
-public class GpDbContext(DbContextOptions<GpDbContext> options) : GenericGPDbContext(options)
+namespace SftEngGP.Database.Data
 {
-    public DbSet<Sensor> Sensors { get; set; }
-    public DbSet<SensorReading> SensorReadings { get; set; }
-    internal override String connectionName {get; set;} = "DevelopmentConnection";
+    public class GpDbContext(DbContextOptions<GpDbContext> options) : GenericGPDbContext(options)
+    {
+        public DbSet<Sensor> Sensors { get; set; }
+        public DbSet<SensorReading> SensorReadings { get; set; }
+        internal override String connectionName { get; set; } = "DevelopmentConnection";
+    }
 }

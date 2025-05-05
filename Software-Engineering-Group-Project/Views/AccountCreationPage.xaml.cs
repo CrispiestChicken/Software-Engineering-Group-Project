@@ -1,12 +1,17 @@
+using CommunityToolkit.Mvvm.Input;
+using SftEngGP.Database.Data;
 using SftEngGP.ViewModels;
+
 
 namespace SftEngGP.Views;
 
 public partial class AccountCreationPage : ContentPage
 {
-	public AccountCreationPage()
+    public AccountCreationPage()
 	{
 		this.BindingContext = new AccountCreationViewModel();
 		InitializeComponent();
 	}
+
+
 }

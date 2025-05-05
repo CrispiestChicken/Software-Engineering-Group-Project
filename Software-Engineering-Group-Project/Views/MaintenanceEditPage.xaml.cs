@@ -1,12 +1,13 @@
+using SftEngGP.Database.Models;
 using SftEngGP.ViewModels;
 
 namespace SftEngGP.Views;
 
 public partial class MaintenanceEditPage : ContentPage
 {
-	public MaintenanceEditPage()
+	public MaintenanceEditPage(Maintenance maintenanceRecord)
 	{
-		this.BindingContext = new MaintenanceEditViewModel();
+		this.BindingContext = new MaintenanceEditViewModel(maintenanceRecord);
 		InitializeComponent();
 	}
 }

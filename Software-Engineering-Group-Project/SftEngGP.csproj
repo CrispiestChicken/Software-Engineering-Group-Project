@@ -62,12 +62,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+<<<<<<< HEAD
 		<!-- SQLite and EF Core Native Libraries -->
 		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.10" /> <!-- Bundles native SQLite libraries -->
 		<PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.10" /> <!-- SQLite native provider -->
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.10" /> <!-- SQLite core library -->
 
 		<!-- Entity Framework Core -->
+=======
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+>>>>>>> origin/master
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
@@ -113,6 +119,12 @@
 		<Compile Update="Views\AdminDashboard.xaml.cs">
 		  <DependentUpon>AdminDashboard.xaml</DependentUpon>
 		</Compile>
+		<MauiXaml Update="AdminAppShell.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="MainUserShell.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="ViewComponents\AccountAddAndEditInputs.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -157,5 +169,54 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Documentation\" />
+		<!-- SQLite and EF Core Native Libraries -->
+		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.10" /> <!-- Bundles native SQLite libraries -->
+		<PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.10" /> <!-- SQLite native provider -->
+		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.10" /> <!-- SQLite core library -->
+
+		<!-- Entity Framework Core -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
+		
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.4" />
+
+		<!-- Microsoft.Extensions libraries -->
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+
+		<!-- CommunityToolkit -->
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
+
+		<!-- System.Linq (to include missing queryable references) -->
+		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+
+		<PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.4" />
+		
+		<!-- MAUI Libraries -->
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.100" />
+
+		<!-- Syncfusion Charts (already included) -->
+
+		<!-- Moq for testing (already included) -->
+		<PackageReference Include="Moq" Version="4.20.72" />
+
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+	</ItemGroup>
+
+	<!-- Ensure SQLite native dependencies are copied properly -->
+	<ItemGroup>
+		<None Update="sqlite3.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="e_sqlite3.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<MauiXaml Update="AdminAppShell.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="MainUserShell.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 </Project>

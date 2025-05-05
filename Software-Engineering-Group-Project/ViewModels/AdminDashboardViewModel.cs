@@ -5,6 +5,9 @@ using SftEngGP.Database.Data;
 
 namespace SftEngGP.ViewModels;
 
+/// <summary>
+/// ViewModel for the Admin Dashboard.
+/// </summary>
 internal partial class AdminDashboardViewModel : ObservableObject
 {
     private GpDbContext _context;
@@ -13,10 +16,16 @@ internal partial class AdminDashboardViewModel : ObservableObject
         _context = context;
     }
 
+    /// <summary>
+    /// Command to navigate to the Accounts Overview page.
+    /// </summary>
     [RelayCommand]
     private async void AccountsButtonClicked() =>
         await App.Current.MainPage.Navigation.PushAsync(new AccountsOverviewPage(_context));
 
+    /// <summary>
+    /// Command to navigate to the Sensors Overview page.
+    /// </summary>
     [RelayCommand]
     private async void SensorsButtonClicked() =>
         await App.Current.MainPage.Navigation.PushAsync(new SensorsOverviewPage());

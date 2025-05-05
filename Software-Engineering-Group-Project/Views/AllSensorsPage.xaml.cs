@@ -5,13 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using SftEngGP.ViewModels;
 
-namespace SftEngGP.Views;
-
-public partial class AllSensorsPage : ContentPage
+namespace SftEngGP.Views
 {
-    public AllSensorsPage(AllSensorsViewModel viewModel)
+    /// <summary>
+    /// Displays a list of all the sensors contained in the database, clicking on one will direct the user to a page containing detailed information regarding the selected sensor
+    /// </summary>
+    public partial class AllSensorsPage : ContentPage
     {
-        BindingContext = viewModel;
-        InitializeComponent();
+        public AllSensorsPage(AllSensorsViewModel viewModel)
+        {
+            BindingContext = viewModel;
+            InitializeComponent();
+        }
     }
 }

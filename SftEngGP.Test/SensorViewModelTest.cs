@@ -4,37 +4,61 @@ using SftEngGP.ViewModels;
 namespace SftEngGP.Test;
 
 
-public class SensorViewModelTest: IClassFixture<DatabaseFixture>
+public class SensorViewModelTest
 {
         DatabaseFixture _fixture;
-        private SensorViewModel _viewModel;
-        private Sensor _sensor;
+        private SensorViewModel _daily;
+        private SensorViewModel _hourly;
 
-        public SensorViewModelTest(DatabaseFixture fixture)
+        public SensorViewModelTest()
         {
-            _fixture = fixture;
-            _fixture.Seed();
-            _sensor = _fixture._testDbContext.Sensors.First();
-            _viewModel = new SensorViewModel(_fixture._testDbContext, _sensor);
+            _fixture = new DatabaseFixture();
+            _daily = new SensorViewModel(_fixture._testDbContext, _fixture.DailySensor.Entity);
+            _hourly = new SensorViewModel(_fixture._testDbContext, _fixture.HourlySensor.Entity);
         }
 
         [Fact]
-        public void GetMissingReadings_Returns6TimeStamps()
+        public void GetMissingReadingsForHourlySensor_Returns6TimeStamps()
         {
-            List<DateTime> missingReadings = _viewModel.GetMissingReadings();
-            Assert.Equal(6, _viewModel.MissingReadings.Count);
+            List<DateTime> missingReadings = _hourly.GetMissingReadings();
+            Assert.Equal(6, _hourly.MissingReadings.Count);
+            
+        }
+        
+        [Fact]
+        public void GetMissingReadingsForDailySensor_Returns3TimeStamps()
+        {
+            List<DateTime> missingReadings = _daily.GetMissingReadings();
+            Assert.Equal(3, _daily.MissingReadings.Count);
             
         }
 
         [Fact]
-        public void MissingReadingCount_Returns6()
+        public void MissingReadingCountForHourlySensor_Returns6()
         {
-            Assert.Equal(6, _viewModel.MissingReadingCount);
+            Assert.Equal(6, _hourly.MissingReadingCount);
+        }
+        
+        [Fact]
+        public void MissingReadingCountForDailySensor_Returns3()
+        {
+            Assert.Equal(3, _daily.MissingReadingCount);
         }
 
         [Fact]
-        public void GetAllReadingsForSensor_ShouldReturnNotNulll()
+        public void GetAllReadingsForSensor_TestTableRow_AllReadingsBelongToSensorAndNoReadingsBelongingToSensorMissed()
         {
-            Assert.NotNull(_viewModel.SensorReadings);
+            List<int> readingIds = new List<int>();
+            foreach (var reading in _hourly.SensorReadings)
+            {
+                Assert.Equal(reading.SensorId, _hourly.SensorId);
+                readingIds.Add(reading.ReadingId);
+            }
+
+            foreach (var reading in _fixture._testDbContext.Readings.Where(s => !readingIds.Contains(s.ReadingId)))
+            {
+                Assert.NotEqual(reading.SensorId, _hourly.SensorId);                
+            }
         }
+
 }

@@ -5,9 +5,6 @@
         public App()
         {
             InitializeComponent();
-            
-            Routing.RegisterRoute(nameof(Views.SensorPage), typeof(Views.SensorPage));
-
             MainPage = new AppShell();
         }
     }
