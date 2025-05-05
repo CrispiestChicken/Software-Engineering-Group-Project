@@ -76,7 +76,15 @@ public partial class AccountCreationViewModel : ObservableObject
         // Adding to database then returning to the previous page.
         await _context.AddAsync(Account);
         await _context.SaveChangesAsync();
-        await App.Current.MainPage.Navigation.PopAsync();
+
+        try
+        {
+            await App.Current.MainPage.Navigation.PopAsync();
+        }
+        catch
+        {
+            return;
+        }
     }
 
 
