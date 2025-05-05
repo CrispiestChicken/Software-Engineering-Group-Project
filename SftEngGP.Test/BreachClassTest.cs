@@ -42,6 +42,7 @@ public class BreachClassTest
                 Assert.Equal(sensor.Longitude, breach.Longitude);
                 Assert.Equal(incident.Alert, breach.Alert);
                 Assert.Equal(incident.DateOfEvent, breach.DateOfEvent);
+                Assert.Equal(new Location(sensor.Latitude, sensor.Longitude), breach.Location);
             }
         }
     }
