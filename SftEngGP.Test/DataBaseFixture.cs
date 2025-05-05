@@ -67,7 +67,15 @@ public class DatabaseFixture
             AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
             AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
 
-
+            // Passwords are all "Password123"
+            AddAccount("email@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 1);
+            AddAccount("email1@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
+            AddAccount("email2@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
+            AddAccount("email3@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
+            AddAccount("email4@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
+            AddAccount("email5@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
+            AddAccount("email6@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
+            AddAccount("email7@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 1);
 
 
 
@@ -135,6 +143,22 @@ public class DatabaseFixture
 
 
         _testDbContext.Add(incident);
+        _testDbContext.SaveChanges();
+    }
+
+
+    private void AddAccount(string email, string password, string firstName, string lastName, string address, int roleID)
+    {
+        var account = new User
+        {
+            Email = email,
+            Password = password,
+            FName = firstName,
+            LName = lastName,
+            Address = address,
+            RoleId = roleID
+        };
+        _testDbContext.Add(account);
         _testDbContext.SaveChanges();
     }
 
