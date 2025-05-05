@@ -4,15 +4,11 @@
              x:Class="SftEngGP.Views.AccountCreationPage"
              xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
              xmlns:custom_components="clr-namespace:SftEngGP.ViewComponents"
-             x:DataType="viewModels:AccountCreationViewModel"
-             
              Title="Create Account">
 
-    <ContentPage.BindingContext>
-        <viewModels:AccountCreationViewModel/>
-    </ContentPage.BindingContext>
-
-    <custom_components:AccountAddAndEditInputs Account="{Binding Account, Mode=TwoWay}" CreatingAccount="{Binding CreatingAccount}" CreateOrUpdateCommand="{Binding CreateCommand}" CreateOrUpdate="{Binding CreateOrUpdate}" ErrorMessage="{Binding ErrorMessage}"/>
-    
-
+    <custom_components:AccountAddAndEditInputs Account="{Binding Account, Mode=TwoWay}" 
+                                               CreatingAccount="{Binding CreatingAccount}" 
+                                               CreateOrUpdateCommand="{Binding CreateCommand}" 
+                                               CreateOrUpdate="{Binding CreateOrUpdate}" 
+                                               ErrorMessage="{Binding ErrorMessage}" />
 </ContentPage>

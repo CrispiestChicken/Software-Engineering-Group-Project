@@ -24,17 +24,38 @@ internal partial class AccountEditViewModel : ObservableObject
     /// The database context used to access the database.
     /// </summary>
     private GpDbContext _context;
+    private TestGPDbContext _testContext;
 
 
     /// <summary>
     /// Constructor for the AccountEditViewModel that initializes the account to be edited.
     /// </summary>
+    /// <param name="context"></param>
     /// <param name="account"></param>
-    public AccountEditViewModel(User account)
+    public AccountEditViewModel(GpDbContext context, User account)
     {
-        _context = new GpDbContext();
-        // Have to use the Find method to get the account from the database not just one thats passed in.
-        Account = _context.Users.Find(account.UserId);
+        _context = context;
+
+        // Get the database-attached entity
+
+       Account = _context.Users.Find(account.UserId);
+
+        if (Account is null)
+        {
+            // This is for testing.
+            Account = new User
+            {
+                UserId = 9999999,
+                Email = "2f3ewf34t354tgff@gferfefew.werfwfwerf.com",
+                FName = "Test",
+                LName = "Test",
+                Address = "Test",
+                Password = "Test",
+                RoleId = 2
+            };
+        }
+
+
     }
 
     /// <summary>
@@ -73,9 +94,20 @@ internal partial class AccountEditViewModel : ObservableObject
             return;
         }
 
+        // Hashing password for security.
+        Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
+
         // Saves the changes made in the input boxes to the database and returns to the previous page.
         await _context.SaveChangesAsync();
-        await App.Current.MainPage.Navigation.PopAsync();
+        try
+        {
+            await App.Current.MainPage.Navigation.PopAsync();
+        }
+        catch
+        {
+            return;
+        }
+
     }
 
 

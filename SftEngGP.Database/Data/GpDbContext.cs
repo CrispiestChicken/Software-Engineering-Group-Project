@@ -5,8 +5,10 @@ using SftEngGP.Database.Models;
 
 namespace SftEngGP.Database.Data
 {
-    public class GpDbContext : GenericGPDbContext
+    public class GpDbContext(DbContextOptions<GpDbContext> options) : GenericGPDbContext(options)
     {
-        internal override String connectionName {get; set;} = "DevelopmentConnection";
+        public DbSet<Sensor> Sensors { get; set; }
+        public DbSet<SensorReading> SensorReadings { get; set; }
+        internal override String connectionName { get; set; } = "DevelopmentConnection";
     }
 }

@@ -12,7 +12,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Map page.
     /// </summary>
-    internal class MapViewModel
+    public class MapViewModel
     {
         /// <summary>
         /// Database context for accessing the database.
@@ -37,7 +37,7 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Timer for updating the map every X seconds.
         /// </summary>
-        private System.Timers.Timer _mapUpdateTimer { get; set; }
+        public System.Timers.Timer MapUpdateTimer { get; set; }
 
 
 
@@ -53,10 +53,10 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the MapViewModel.
         /// </summary>
-        public MapViewModel()
+        public MapViewModel(GpDbContext context)
         {
 
-            _context = new GpDbContext();
+            _context = context;
             _allIncidents = _context.Incidences.ToList();
             _allSensors = _context.Sensors.ToList();
 
@@ -74,12 +74,12 @@ namespace SftEngGP.ViewModels
 
 
             // Timer for updating the map that runs UpdateMap every X seconds (number in timer milliseconds).
-            _mapUpdateTimer = new System.Timers.Timer(5000);
-            _mapUpdateTimer.Elapsed += async (sender, e) =>
+            MapUpdateTimer = new System.Timers.Timer(5000);
+            MapUpdateTimer.Elapsed += async (sender, e) =>
             {
                 await UpdateMap();
             };
-            _mapUpdateTimer.Start();
+            MapUpdateTimer.Start();
         }
 
 

@@ -6,12 +6,6 @@
              x:DataType="viewModels:AdminDashboardViewModel"
              x:Class="SftEngGP.Views.AdminDashboard">
     
-    
-    <ContentPage.BindingContext>
-        <viewModels:AdminDashboardViewModel/>
-    </ContentPage.BindingContext>
-
-    
     <VerticalStackLayout Margin="20,0">
             <Rectangle WidthRequest="1000" HeightRequest="75" BackgroundColor="SlateBlue" Margin="0,0,0,75"/>
             

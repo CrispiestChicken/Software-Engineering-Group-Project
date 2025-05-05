@@ -3,15 +3,15 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using SftEngGP.Views;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
-using System.Text.RegularExpressions;
 using BCrypt.Net;
+using System.Net.Mail;
 
 namespace SftEngGP.ViewModels;
 
 /// <summary>
 /// ViewModel for the Account Creation page.
 /// </summary>
-internal partial class AccountCreationViewModel : ObservableObject
+public partial class AccountCreationViewModel : ObservableObject
 {
     /// <summary>
     /// The database context used to interact with the database.
@@ -27,9 +27,9 @@ internal partial class AccountCreationViewModel : ObservableObject
     /// <summary>
     /// Constructor for the AccountCreationViewModel.
     /// </summary>
-    public AccountCreationViewModel()
+    public AccountCreationViewModel(GpDbContext context)
     {
-        _context = new GpDbContext();
+        _context = context;
         Account = new User();
     }
 
@@ -71,12 +71,20 @@ internal partial class AccountCreationViewModel : ObservableObject
         }
 
         // Hashing password for security.
-        Account.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(Account.Password);
+        Account.Password = BCrypt.Net.BCrypt.HashPassword(Account.Password);
 
         // Adding to database then returning to the previous page.
         await _context.AddAsync(Account);
         await _context.SaveChangesAsync();
-        await App.Current.MainPage.Navigation.PopAsync();
+
+        try
+        {
+            await App.Current.MainPage.Navigation.PopAsync();
+        }
+        catch
+        {
+            return;
+        }
     }
 
 
@@ -88,9 +96,16 @@ internal partial class AccountCreationViewModel : ObservableObject
     {
         if (Account.Email is null or "") return "ERROR:Please Insert an Email";
 
-        // Regex from https://regex101.com/r/nen2SZ/1
-        string emailRegex = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$";
-        if (Regex.IsMatch(Account.Email, emailRegex) == false) return "ERROR:Please Enter a Valid Email";
+        // Checking if the email is a valid email.
+        // Doing it like this because it is much faster than a regex.
+        try
+        {
+            new MailAddress(Account.Email);
+        }
+        catch (Exception)
+        {
+            return "ERROR:Please Enter a Valid Email";
+        }
 
         if (Account.Password is null or "") return "ERROR:Please Insert a Password";
 

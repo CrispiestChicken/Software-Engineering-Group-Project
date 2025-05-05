@@ -10,13 +10,18 @@ namespace SftEngGP.ViewModels;
 /// </summary>
 internal partial class AdminDashboardViewModel : ObservableObject
 {
+    private GpDbContext _context;
+    public AdminDashboardViewModel(GpDbContext context)
+    {
+        _context = context;
+    }
 
     /// <summary>
     /// Command to navigate to the Accounts Overview page.
     /// </summary>
     [RelayCommand]
     private async void AccountsButtonClicked() =>
-        await App.Current.MainPage.Navigation.PushAsync(new AccountsOverviewPage());
+        await App.Current.MainPage.Navigation.PushAsync(new AccountsOverviewPage(_context));
 
     /// <summary>
     /// Command to navigate to the Sensors Overview page.

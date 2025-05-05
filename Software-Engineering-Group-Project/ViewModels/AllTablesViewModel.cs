@@ -79,7 +79,7 @@ namespace SftEngGP.ViewModels
         /// Coverts a database dbset into a list of dictonaries with each property being stored as a generic object
         /// </summary>
         /// <typeparam name="T">The entity type that the dbset belongs to</typeparam>
-        private List<Dictionary<string, object?>> GetTableArray<T>() where T : class
+        public List<Dictionary<string, object?>> GetTableArray<T>() where T : class
         {
             List<string> properties = new List<string>(_context.Set<T>().EntityType.GetProperties().Select(p => p.Name));
 

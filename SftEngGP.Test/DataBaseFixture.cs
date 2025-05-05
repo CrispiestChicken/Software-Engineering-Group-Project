@@ -1,108 +1,165 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using SftEngGP.Database.Data;
 using SftEngGP.Database.Models;
 
 namespace SftEngGP.Test;
 
-public class DatabaseFixture 
+public class DatabaseFixture
 {
     internal TestGPDbContext? _testDbContext { get; private set; }
     private bool seeded;
+    public EntityEntry<Sensor> DailySensor { get; set; }
+    public EntityEntry<Sensor> HourlySensor { get; set; }
     
     
     public DatabaseFixture()
     {
         _testDbContext = new TestGPDbContext();
-
         _testDbContext.Database.EnsureDeleted();
         _testDbContext.Database.EnsureCreated();
         _testDbContext.Database.OpenConnection();
         _testDbContext.Database.Migrate();
+        Seed();
     }
     
     internal void Seed()
     {
         if (!seeded)
         {
-                Sensor sensor = new Sensor();
-            sensor.SensorType = "Air quality";
-            sensor.Latitude = 1.1F;
-            sensor.Longitude = 2.2F;
+            AddFrequencyOffset("Hourly", new TimeSpan(1, 0, 0), 0);
+            AddFrequencyOffset("Daily", new TimeSpan(0, 0, 0), 1);
+            
+            HourlySensor = AddSensorWithMeasurand("Air quality", 1.1F, 1.2f, "Hourly", "Nitrogen dioxide",
+                "microgrammes per cubic metre", "NO2", "ug/m3").Item1;
+            
+            DailySensor = AddSensorWithMeasurand("Water quality", 23.5F, 19.2f, "Daily", "Escherichia coli",
+                "Colony forming units (cfu) per 100ml", "EC", "cfu/100ml").Item1;
+            
+            AddSensorWithMeasurand("Air quality", 23.5F, 19.2f, "Hourly", "Sulphur dioxide",
+                "Colony forming units (cfu) per 100ml", "SO2", "ug/m3");
+            AddSensorWithMeasurand("Air quality", 23.5F, 19.2f, "Hourly", "Particulate matter <= 2.5 microns in diameter",
+                "Colony forming units (cfu) per 100ml", "PM2.5", "ug/m3");
+            AddSensorWithMeasurand("Air quality", 23.5F, 19.2f, "Hourly", "Particulate matter <= 10 microns in diameter",
+                "Colony forming units (cfu) per 100ml", "PM10", "ug/m3");
+            
+            AddSensorReading(HourlySensor.Entity.SensorId, 1f, 1.1f, new DateTime(2025, 2, 1, 0, 0, 0));
+            AddSensorReading(HourlySensor.Entity.SensorId, 1f, 1.2f, new DateTime(2025, 2, 1, 1, 0, 0));
+            AddSensorReading(HourlySensor.Entity.SensorId, 1f, 1.0f, new DateTime(2025, 2, 1, 2, 0, 0));
+            AddSensorReading(HourlySensor.Entity.SensorId, 1f, 1.4f, new DateTime(2025, 2, 1, 4, 0, 0));
+            AddSensorReading(HourlySensor.Entity.SensorId, 1f, 1.2f, new DateTime(2025, 2, 1, 7, 0, 0));
+            AddSensorReading(HourlySensor.Entity.SensorId, 1f, 2.3f, new DateTime(2025, 2, 1, 11, 0, 0));
+            
+            AddSensorReading(DailySensor.Entity.SensorId, 1f, 23.4f, new DateTime(2025, 3, 1, 0, 0, 0));
+            AddSensorReading(DailySensor.Entity.SensorId, 1f, 53.2f, new DateTime(2025, 3, 3, 0, 0, 0));
+            AddSensorReading(DailySensor.Entity.SensorId, 1f, 21.2f, new DateTime(2025, 3, 5, 0, 0, 0));
+            AddSensorReading(DailySensor.Entity.SensorId, 1f, 13.4f, new DateTime(2025, 3, 7, 0, 0, 0));
 
-                _testDbContext.Sensors.Add(sensor);
-            _testDbContext.SaveChanges();
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(HourlySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
 
-                Measurand measurand = new Measurand();
-            measurand.Frequency = "Hourly";
-            measurand.SensorId = _testDbContext.Sensors.First().SensorId;
-            measurand.QuantityType = "Nitrogen dioxide";
-            measurand.Quantity = "microgrammes per cubic metre";
-            measurand.Symbol = "NO2";
-            measurand.Unit = "ug/m3";
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
+            AddIncidents(DailySensor.Entity.SensorId, "Temp", "Test", new DateTime(2025, 5, 5));
 
-                _testDbContext.Measurands.Add(measurand);
-            _testDbContext.SaveChanges();
+            // Passwords are all "Password123"
+            AddAccount("admin@gmail.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 1);
+            AddAccount("email1@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
+            AddAccount("email2@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
+            AddAccount("email3@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
+            AddAccount("email4@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 2);
+            AddAccount("email5@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
+            AddAccount("email6@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 3);
+            AddAccount("email7@email.com", "$2a$11$ejKkFGFpIkGqWW4iO8xcMe8cdqmkytMcJWm1dMYoiqgu8fGRze1Wa", "bob", "billy", "123 Sesame Street", 1);
 
-                FrequencyOffset frequencyOffset = new FrequencyOffset();
-            
-            frequencyOffset.Frequency = "Hourly";
-            frequencyOffset.TimeDifference = new TimeSpan(1, 0, 0);
-            frequencyOffset.DateDifference = 0;
 
-                _testDbContext.FrequencyOffsets.Add(frequencyOffset);
-            _testDbContext.SaveChanges();
-            
-            SensorReading sensorReading = new SensorReading();
 
-                sensorReading.SensorId = _testDbContext.Sensors.First().SensorId;
-            sensorReading.SensorSetpoint = 1;
-            sensorReading.SensorValue = 1.1f;
-            sensorReading.Timestamp = new DateTime(2025, 2, 1, 0, 0, 0);
-            _testDbContext.Readings.Add(sensorReading);
-            _testDbContext.SaveChanges();
-            
-            SensorReading sensorReading1 = new SensorReading();
-            sensorReading1.SensorId = sensorReading.SensorId;
-            sensorReading1.SensorSetpoint = 1;
-            sensorReading1.SensorValue = 1.2f;
-            sensorReading1.Timestamp = new DateTime(2025, 2, 1, 1, 0, 0);
-            _testDbContext.Readings.Add(sensorReading1);
-            _testDbContext.SaveChanges();
-            
-            SensorReading sensorReading2 = new SensorReading();
-            sensorReading2.SensorId = sensorReading.SensorId;
-            sensorReading2.SensorSetpoint = 1;
-            sensorReading2.SensorValue = 1.0f;
-            sensorReading2.Timestamp = new DateTime(2025, 2, 1, 2, 0, 0);
-            _testDbContext.Readings.Add(sensorReading2);
-            _testDbContext.SaveChanges();
-            
-            SensorReading sensorReading3 = new SensorReading();
-            sensorReading3.SensorId = sensorReading.SensorId;
-            sensorReading3.SensorSetpoint = 1;
-            sensorReading3.SensorValue = 1.4f;
-            sensorReading3.Timestamp = new DateTime(2025, 2, 1, 4, 0, 0);
-            _testDbContext.Readings.Add(sensorReading3);
-            _testDbContext.SaveChanges();
-            
-            SensorReading sensorReading4 = new SensorReading();
-            sensorReading4.SensorId = sensorReading.SensorId;
-            sensorReading4.SensorSetpoint = 1;
-            sensorReading4.SensorValue = 1.2f;
-            sensorReading4.Timestamp = new DateTime(2025, 2, 1,7, 0, 0);
-            _testDbContext.Readings.Add(sensorReading4);
-            _testDbContext.SaveChanges();
-            
-            SensorReading sensorReading5 = new SensorReading();
-            sensorReading5.SensorId = sensorReading.SensorId;
-            sensorReading5.SensorSetpoint = 1;
-            sensorReading5.SensorValue = 1.2f;
-            sensorReading5.Timestamp = new DateTime(2025, 2, 1,11, 0, 0);
-            _testDbContext.Readings.Add(sensorReading5);
-            
-            _testDbContext.SaveChanges();
             seeded = true;
         }
+    }
+
+    private EntityEntry<FrequencyOffset> AddFrequencyOffset(string frequency, TimeSpan timeDifference, int dateDifference)
+    {
+        FrequencyOffset frequencyOffset = new FrequencyOffset();
+        frequencyOffset.Frequency = frequency;
+        frequencyOffset.DateDifference = dateDifference;
+        frequencyOffset.TimeDifference = timeDifference;
+        
+        EntityEntry<FrequencyOffset> frequencyOffsetEntity = _testDbContext.Add(frequencyOffset);
+        _testDbContext.SaveChanges();
+        return frequencyOffsetEntity;
+    }
+
+    private EntityEntry<SensorReading> AddSensorReading(int sensorId, float sensorSetpoint, float sensorValue, DateTime timeStamp)
+    {
+        SensorReading sensorReading = new SensorReading();
+
+        sensorReading.SensorId = sensorId;
+        sensorReading.SensorSetpoint = sensorSetpoint;
+        sensorReading.SensorValue = sensorValue;
+        sensorReading.Timestamp = timeStamp;
+        sensorReading.MeasurementType = "type";
+
+        EntityEntry<SensorReading> sensorEntity = _testDbContext.Add(sensorReading);
+        _testDbContext.SaveChanges();
+        return sensorEntity;
+    }
+
+    private Tuple<EntityEntry<Sensor>, EntityEntry<Measurand>> AddSensorWithMeasurand(string sensorType, float latitude, float longitude, string frequency, string quantityType, string quantity, string symbol, string unit)
+    {
+        Sensor sensor = new Sensor();
+        sensor.SensorType = sensorType;
+        sensor.Latitude = latitude;
+        sensor.Longitude = longitude;
+        EntityEntry<Sensor> sensorEntity = _testDbContext.Add(sensor);
+        _testDbContext.SaveChanges();
+        
+        Measurand measurand = new Measurand();
+        measurand.Frequency = frequency;
+        measurand.SensorId = sensorEntity.Entity.SensorId;
+        measurand.QuantityType = quantityType;
+        measurand.Quantity = quantity;
+        measurand.Symbol = symbol;
+        measurand.Unit = unit;
+        EntityEntry<Measurand> measurandEntity = _testDbContext.Add(measurand);
+        _testDbContext.SaveChanges();
+        return new Tuple<EntityEntry<Sensor>, EntityEntry<Measurand>>(sensorEntity, measurandEntity);
+    }
+
+    private void AddIncidents(int sensorID, string type, string alert, DateTime eventDate)
+    {
+        var incident = new Incidence
+        {
+            SensorId = sensorID,
+            IncidenceType = type,
+            Alert = alert,
+            DateOfEvent = eventDate
+        };
+
+
+        _testDbContext.Add(incident);
+        _testDbContext.SaveChanges();
+    }
+
+
+    private void AddAccount(string email, string password, string firstName, string lastName, string address, int roleID)
+    {
+        var account = new User
+        {
+            Email = email,
+            Password = password,
+            FName = firstName,
+            LName = lastName,
+            Address = address,
+            RoleId = roleID
+        };
+        _testDbContext.Add(account);
+        _testDbContext.SaveChanges();
     }
 
 }

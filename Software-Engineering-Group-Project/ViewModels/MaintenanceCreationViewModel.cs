@@ -10,7 +10,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Maintenance Creation page.
     /// </summary>
-    internal partial class MaintenanceCreationViewModel : ObservableObject
+    public partial class MaintenanceCreationViewModel : ObservableObject
     {
         /// <summary>
         /// The database context used to access the database.
@@ -59,9 +59,9 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the MaintenanceCreationViewModel.
         /// </summary>
-        public MaintenanceCreationViewModel()
+        public MaintenanceCreationViewModel(GpDbContext context)
         {
-            _context = new GpDbContext();
+            _context = context;
 
             MaintenanceRecord = new Maintenance();
             AllSensors = _context.Sensors.ToList();
@@ -101,7 +101,14 @@ namespace SftEngGP.ViewModels
                 await App.Current.MainPage.DisplayAlert("Failed To Record Maintenance", e.Message, "Ok");
             }
 
-            await App.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch
+            {
+                return;
+            }
 
 
 
@@ -119,6 +126,7 @@ namespace SftEngGP.ViewModels
             if (MaintenanceRecord.SensorId == 0) return "ERROR: Please Select a Sensor";
 
             if (MaintenanceRecord.Comments is null or "") return "ERROR: Please Enter Comments";
+
 
             return "Success";
         }

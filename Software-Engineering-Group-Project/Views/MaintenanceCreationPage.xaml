@@ -7,10 +7,6 @@
              x:DataType="viewModels:MaintenanceCreationViewModel"
              Title="Creating Maintenance Report">
 
-    <ContentPage.BindingContext>
-        <viewModels:MaintenanceCreationViewModel/>
-    </ContentPage.BindingContext>
-
     <custom_components:MaintenanceAddAndEditInputs 
         MaintenanceRecord="{Binding MaintenanceRecord, Mode=TwoWay}" 
         CreateOrUpdateCommand="{Binding CreateCommand}"

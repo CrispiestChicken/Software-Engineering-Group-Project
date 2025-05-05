@@ -1,14 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Reflection;
+using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using SftEngGP.Database;
+using SftEngGP.Data;
 using SftEngGP.Database.Data;
 using SftEngGP.ViewModels;
 using SftEngGP.Views;
 using Syncfusion.Maui.Core.Hosting;
-using CommunityToolkit.Maui;
-
 
 namespace SftEngGP
 {
@@ -17,36 +16,68 @@ namespace SftEngGP
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            var a = Assembly.GetExecutingAssembly();
-
-            builder.Services.AddDbContext<GenericGPDbContext,GpDbContext>();
-
-            builder.Services.AddSingleton<AdminDashboardViewModel>();
-            builder.Services.AddSingleton<AdminDashboard>();
-
-            builder.Services.AddSingleton<EnvScientistViewModel>();
-            builder.Services.AddSingleton<EnvScientistPage>();
             
-            builder.Services.AddSingleton<OpManagerViewModel>();
-            builder.Services.AddSingleton<OpManagerPage>();
+            // Add DbContext with SQLite configuration
+            builder.Services.AddDbContext<GpDbContext>(options =>
+                options.UseSqlite("Server=ip,port;Database=gpdb;User Id=gpapp;Password=gp4pp$00;TrustServerCertificate=True;Encrypt=True;"));
+            
+            // Add transient services for other classes
+            builder.Services.AddTransient<SimulatedTimeService>(_ => new SimulatedTimeService(DateTime.Parse("2025-01-31 23:50:00")));
+            builder.Services.AddTransient<SensorDataService>();
 
-            builder.Services.AddSingleton<SensorsOverviewPage>();
-            builder.Services.AddSingleton<AllSensorsViewModel>();
-            builder.Services.AddSingleton<AllSensorsPage>();
+            // Add view models and pages for dependency injection
+            builder.Services.AddTransient<AdminDashboardViewModel>();
+            builder.Services.AddTransient<AdminDashboard>();
+            
+            builder.Services.AddTransient<EnvScientistViewModel>();
+            builder.Services.AddTransient<EnvScientistPage>();
+            
+            builder.Services.AddTransient<OpManagerViewModel>();
+            builder.Services.AddTransient<OpManagerPage>();
+
+            builder.Services.AddTransient<SensorsOverviewPage>();
+            
+            builder.Services.AddTransient<AllSensorsViewModel>();
+            builder.Services.AddTransient<AllSensorsPage>();
+
+            builder.Services.AddTransient<AccountsOverviewViewModel>();
+            builder.Services.AddTransient<AllTablesViewModel>();
+            builder.Services.AddTransient<AllTablesPage>();
+
             builder.Services.AddTransient<SensorViewModel>();
             builder.Services.AddTransient<TrendsPage>();
             builder.Services.AddTransient<SensorPage>();
             
-            builder.Services.AddSingleton<AllTablesViewModel>();
-            builder.Services.AddSingleton<AllTablesPage>();
             builder.Services.AddTransient<TableViewModel>();
             builder.Services.AddTransient<TableRowViewModel>();
+            
+            builder.Services.AddTransient<AppShell>();
+            builder.Services.AddSingleton<App>();
+
+            // Add the Account Creation ViewModel and Page
+            builder.Services.AddTransient<AccountCreationViewModel>();
+            builder.Services.AddTransient<AccountCreationPage>();
+            
+            // Add the Login ViewModel and Page
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<LoginPage>();
+            
+            // Add the Maintenance Creation ViewModel and Page
+            builder.Services.AddTransient<MaintenanceCreationViewModel>();
+            builder.Services.AddTransient<MaintenanceCreationPage>();
+            
+            // Add the Maintenance Overview ViewModel and Page
+            builder.Services.AddTransient<MaintenanceOverviewViewModel>();
+            builder.Services.AddTransient<MaintenanceOverviewPage>();
+            
+            // Add the Map ViewModel and Page
+            builder.Services.AddTransient<MapViewModel>();
+            builder.Services.AddTransient<MapPage>();
 
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .ConfigureSyncfusionCore()
-                .UseMauiApp<App>()
                 .UseMauiMaps()
                 .ConfigureFonts(fonts =>
                 {
@@ -55,7 +86,7 @@ namespace SftEngGP
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

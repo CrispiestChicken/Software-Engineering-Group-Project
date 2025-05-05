@@ -3,7 +3,7 @@ using SftEngGP.ViewModels;
 
 namespace SftEngGP.Test;
 
-public class AllSensorViewModelsTest: IClassFixture<DatabaseFixture>
+public class AllSensorViewModelsTest: IClassFixture<DatabaseFixture>, IDisposable
 {
     DatabaseFixture _fixture;
     private AllSensorsViewModel _viewModel;
@@ -14,5 +14,10 @@ public class AllSensorViewModelsTest: IClassFixture<DatabaseFixture>
         _fixture = fixture;
         _fixture.Seed();
         _selectedSensor = fixture._testDbContext.Sensors.First();
+    }
+
+    public void Dispose()
+    {
+        _fixture._testDbContext.Database.EnsureDeleted();
     }
 }
