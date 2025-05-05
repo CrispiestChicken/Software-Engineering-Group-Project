@@ -1,14 +1,15 @@
 using SftEngGP.ViewModels;
 using SftEngGP.Models;
 using System.Diagnostics;
+using SftEngGP.Database.Data;
 
 namespace SftEngGP.Views;
 
 public partial class MaintenanceOverviewPage : ContentPage
 {
-	public MaintenanceOverviewPage()
+	public MaintenanceOverviewPage(GpDbContext context)
 	{
-		this.BindingContext = new MaintenanceOverviewViewModel();
+		this.BindingContext = context;
 		InitializeComponent();
 	}
 

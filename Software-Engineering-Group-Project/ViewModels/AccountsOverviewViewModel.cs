@@ -24,25 +24,21 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     /// <summary>
     /// Database context for accessing the database.
     /// </summary>
-
     private GpDbContext _context;
-
+    
     public System.Timers.Timer UpdateTimer { get; set; }
 
-
-
-    // These have to be here for the XAML to bind to them or it throws an error.
-    public string Email { get; set; }
-    public string FName { get; set; }
+    public int UserId { get; set; }
     public int RoleId { get; set; }
-
+    public string FName { get; set; }
+    public string Email { get; set; }
 
     /// <summary>
     /// Constructor for the AccountsOverviewViewModel that gets all accounts from the database.
     /// </summary>
-    public AccountsOverviewViewModel()
+    public AccountsOverviewViewModel(GpDbContext context)
     {
-        _context = new GpDbContext();
+        _context = context;
         AllAccounts = new ObservableCollection<User>(_context.Users.ToList());
 
         // Setting up the timer to update the view every X seconds.
@@ -58,17 +54,25 @@ internal partial class AccountsOverviewViewModel : ObservableObject
     /// <param name="account"></param>
     /// <returns></returns>
     [RelayCommand]
-    private static async Task EditAccountButtonClicked(User account) =>
-        await App.Current.MainPage.Navigation.PushAsync(new AccountEditPage(account));
+    private static async Task EditAccountButtonClicked(User account)
+    {
+        var context = (GpDbContext)App.Current.Handler.MauiContext.Services.GetService(typeof(GpDbContext));
+        var page = new AccountEditPage(context, account);
+        await App.Current.MainPage.Navigation.PushAsync(page);
+    }
+
 
     /// <summary>
     /// Command to navigate the user to the account creation page.
     /// </summary>
     /// <returns></returns>
     [RelayCommand]
-    private static async Task NewAccountButtonClicked() =>
-        await App.Current.MainPage.Navigation.PushAsync(new AccountCreationPage());
-
+    private static async Task NewAccountButtonClicked()
+    {
+        var viewModel = (AccountCreationViewModel)App.Current.Handler.MauiContext.Services.GetService(typeof(AccountCreationViewModel));
+        var page = new AccountCreationPage(viewModel);
+        await App.Current.MainPage.Navigation.PushAsync(page);
+    }
 
     private async Task UpdateAccounts()
     {

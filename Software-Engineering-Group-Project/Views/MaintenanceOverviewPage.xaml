@@ -6,10 +6,6 @@
              xmlns:custom_components="clr-namespace:SftEngGP.ViewComponents"
              x:DataType="viewModels:MaintenanceOverviewViewModel">
 
-    <ContentPage.BindingContext>
-        <viewModels:MaintenanceOverviewViewModel/>
-    </ContentPage.BindingContext>
-
     <ScrollView>
         <Grid BackgroundColor="SlateBlue" ColumnSpacing="15" Margin="20,50">
             <Grid.ColumnDefinitions>

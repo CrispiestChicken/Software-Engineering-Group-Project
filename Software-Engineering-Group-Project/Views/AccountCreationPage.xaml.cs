@@ -7,9 +7,9 @@ namespace SftEngGP.Views;
 
 public partial class AccountCreationPage : ContentPage
 {
-    public AccountCreationPage()
+    public AccountCreationPage(AccountCreationViewModel context)
 	{
-		this.BindingContext = new AccountCreationViewModel();
+		this.BindingContext = context;
 		InitializeComponent();
 	}
 

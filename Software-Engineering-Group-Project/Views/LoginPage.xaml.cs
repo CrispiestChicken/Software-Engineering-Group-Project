@@ -4,9 +4,9 @@ namespace SftEngGP.Views;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
+	public LoginPage(LoginViewModel viewModel)
 	{
-		this.BindingContext = new LoginViewModel();
+		this.BindingContext = viewModel;
 		InitializeComponent();
 	}
 }

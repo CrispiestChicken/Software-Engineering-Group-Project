@@ -34,9 +34,9 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the MaintenanceOverviewViewModel.
         /// </summary>
-        public MaintenanceOverviewViewModel()
+        public MaintenanceOverviewViewModel(GpDbContext context)
         {
-            _context = new GpDbContext();
+            _context = context;
             AllMaintenance = new ObservableCollection<Maintenance>(_context.Maintenance.ToList());
 
 
@@ -53,8 +53,12 @@ namespace SftEngGP.ViewModels
         /// <param name="maintenanceRecord"></param>
         /// <returns></returns>
         [RelayCommand]
-        private async Task EditMaintenanceButtonClicked(Maintenance maintenanceRecord) =>
-            await App.Current.MainPage.Navigation.PushAsync(new MaintenanceEditPage(maintenanceRecord));
+        private async Task EditMaintenanceButtonClicked(Maintenance maintenanceRecord)
+        {
+            var viewModel = new MaintenanceEditViewModel(_context, maintenanceRecord);
+            var editPage = new MaintenanceEditPage(viewModel);
+            await App.Current.MainPage.Navigation.PushAsync(editPage);
+        }
 
 
         /// <summary>
@@ -62,10 +66,14 @@ namespace SftEngGP.ViewModels
         /// </summary>
         /// <returns></returns>
         [RelayCommand]
-        private async Task NewMaintenanceButtonClicked() =>
-            await App.Current.MainPage.Navigation.PushAsync(new MaintenanceCreationPage());
-
-
+        private async Task NewMaintenanceButtonClicked()
+        {
+            var context = (GpDbContext)App.Current.Handler.MauiContext.Services.GetService(typeof(GpDbContext));
+            var viewModel = new MaintenanceCreationViewModel(context);
+            var page = new MaintenanceCreationPage(viewModel);
+            await App.Current.MainPage.Navigation.PushAsync(page);
+        }
+        
         private async Task UpdateMaintenance()
         {
             // Fetch the latest data from the database.

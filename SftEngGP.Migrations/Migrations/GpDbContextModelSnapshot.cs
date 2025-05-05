@@ -22,6 +22,31 @@ namespace SftEngGP.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SftEngGP.Database.Models.AirQuality", b =>
+                {
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("time");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<float>("NitrogenDioxide")
+                        .HasColumnType("real");
+
+                    b.Property<float>("PM10")
+                        .HasColumnType("real");
+
+                    b.Property<float>("PM25")
+                        .HasColumnType("real");
+
+                    b.Property<float>("SulphurDioxide")
+                        .HasColumnType("real");
+
+                    b.HasKey("Time");
+
+                    b.ToTable("Air_quality", "dbo");
+                });
+
             modelBuilder.Entity("SftEngGP.Database.Models.Configuration", b =>
                 {
                     b.Property<int>("ConfigId")
@@ -290,6 +315,53 @@ namespace SftEngGP.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SftEngGP.Database.Models.WaterQuality", b =>
+                {
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("time");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<byte>("EC")
+                        .HasColumnType("tinyint");
+
+                    b.Property<float>("Nitrate")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Nitrite")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Phosphate")
+                        .HasColumnType("real");
+
+                    b.HasKey("Time");
+
+                    b.ToTable("Water_quality", "dbo");
+                });
+
+            modelBuilder.Entity("SftEngGP.Database.Models.Weather", b =>
+                {
+                    b.Property<DateTime>("datetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("relative_humidity")
+                        .HasColumnType("tinyint");
+
+                    b.Property<float>("temperature")
+                        .HasColumnType("real");
+
+                    b.Property<short>("wind_direction")
+                        .HasColumnType("smallint");
+
+                    b.Property<float>("wind_speed")
+                        .HasColumnType("real");
+
+                    b.HasKey("datetime");
+
+                    b.ToTable("Weather", "dbo");
                 });
 #pragma warning restore 612, 618
         }

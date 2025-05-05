@@ -10,7 +10,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Maintenance Edit page.
     /// </summary>
-    internal partial class MaintenanceEditViewModel : ObservableObject
+    public partial class MaintenanceEditViewModel : ObservableObject
     {
 
         /// <summary>
@@ -60,10 +60,11 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the MaintenanceEditViewModel.
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="maintenance"></param>
-        public MaintenanceEditViewModel(Maintenance maintenance)
+        public MaintenanceEditViewModel(GpDbContext context, Maintenance maintenance)
         {
-            _context = new GpDbContext();
+            _context = context;
 
             // Uses find to get the maintenance object thats tied to the database.
             MaintenanceRecord = _context.Maintenance.Find(maintenance.MaintenanceId);

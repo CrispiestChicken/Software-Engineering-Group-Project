@@ -7,11 +7,6 @@
 			 xmlns:viewModels="clr-namespace:SftEngGP.ViewModels"
 			 x:DataType="viewModels:MapViewModel">
 
-
-  <ContentPage.BindingContext>
-	<viewModels:MapViewModel/>
-  </ContentPage.BindingContext>
-
     <ScrollView>
         <VerticalStackLayout BackgroundColor="SlateBlue" Margin="10,50">
             <maps:Map x:Name="map" ItemsSource="{Binding AllBreaches}" HorizontalOptions="Center" HeightRequest="500" Margin="10,10,10,0">

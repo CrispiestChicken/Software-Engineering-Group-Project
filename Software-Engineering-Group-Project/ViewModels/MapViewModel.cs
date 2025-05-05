@@ -12,7 +12,7 @@ namespace SftEngGP.ViewModels
     /// <summary>
     /// ViewModel for the Map page.
     /// </summary>
-    internal class MapViewModel
+    public class MapViewModel
     {
         /// <summary>
         /// Database context for accessing the database.
@@ -53,10 +53,10 @@ namespace SftEngGP.ViewModels
         /// <summary>
         /// Constructor for the MapViewModel.
         /// </summary>
-        public MapViewModel()
+        public MapViewModel(GpDbContext context)
         {
 
-            _context = new GpDbContext();
+            _context = context;
             _allIncidents = _context.Incidences.ToList();
             _allSensors = _context.Sensors.ToList();
 

@@ -29,11 +29,13 @@ internal partial class AccountEditViewModel : ObservableObject
     /// <summary>
     /// Constructor for the AccountEditViewModel that initializes the account to be edited.
     /// </summary>
+    /// <param name="context"></param>
     /// <param name="account"></param>
-    public AccountEditViewModel(User account)
+    public AccountEditViewModel(GpDbContext context, User account)
     {
-        _context = new GpDbContext();
-        // Have to use the Find method to get the account from the database not just one thats passed in.
+        _context = context;
+
+        // Get the database-attached entity
         Account = _context.Users.Find(account.UserId);
     }
 
