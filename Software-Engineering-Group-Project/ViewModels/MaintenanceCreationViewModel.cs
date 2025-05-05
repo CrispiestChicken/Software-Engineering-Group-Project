@@ -101,7 +101,14 @@ namespace SftEngGP.ViewModels
                 await App.Current.MainPage.DisplayAlert("Failed To Record Maintenance", e.Message, "Ok");
             }
 
-            await App.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch
+            {
+                return;
+            }
 
 
 
@@ -119,6 +126,7 @@ namespace SftEngGP.ViewModels
             if (MaintenanceRecord.SensorId == 0) return "ERROR: Please Select a Sensor";
 
             if (MaintenanceRecord.Comments is null or "") return "ERROR: Please Enter Comments";
+
 
             return "Success";
         }
