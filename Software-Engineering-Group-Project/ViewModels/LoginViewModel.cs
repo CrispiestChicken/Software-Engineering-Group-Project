@@ -23,7 +23,7 @@ namespace SftEngGP.ViewModels
         private GpDbContext _context;
 
         /// <summary>
-        /// User object representing the logged-in user.
+        /// User object representing the user logging in.
         /// </summary>
         public User Account { get; set; }
 
