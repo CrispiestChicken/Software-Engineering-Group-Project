@@ -16,7 +16,6 @@ public class SensorDataServiceTests
         var options = new DbContextOptionsBuilder<GpDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
-    
         var context = new GpDbContext(options);
 
         var fakeTime = new DateTime(2023, 1, 1, 11, 59, 0);
